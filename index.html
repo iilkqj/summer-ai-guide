@@ -1,158 +1,178 @@
 <script>
-const citiesData = {
-    muscat: {
-        nameAr: "مسقط",
-        nameEn: "Muscat",
-        nameZh: "马斯喀特",
+/* ==================== SAFE TRANSLATION ==================== */
+const dict = {
+    "الجامع الكبير": { en: "Grand Mosque", zh: "大清真寺" },
+    "دار الأوبرا السلطانية": { en: "Royal Opera House", zh: "皇家歌剧院" },
+    "سوق مطرح": { en: "Muttrah Souq", zh: "马特拉集市" },
+    "متحف عُمان": { en: "Oman Museum", zh: "阿曼博物馆" },
+    "كورنيش مطرح": { en: "Muttrah Corniche", zh: "马特拉海滨" },
 
-        descAr: "عاصمة عُمان النابضة بالحياة",
-        descEn: "The vibrant capital of Oman",
-        descZh: "充满活力的阿曼首都",
+    "الشواء العُماني": { en: "Omani Shuwa", zh: "阿曼烤肉" },
+    "المجبوس": { en: "Majboos", zh: "马吉布斯" },
+    "الخبيصة": { en: "Khabeesa", zh: "哈比萨甜点" },
+    "البلاليط": { en: "Balaleet", zh: "甜面条" },
+    "الحلوى العُمانية": { en: "Omani Halwa", zh: "阿曼甜点" },
 
-        highlightsAr: ["الجامع الكبير","دار الأوبرا","سوق مطرح"],
-        highlightsEn: ["Grand Mosque","Royal Opera House","Muttrah Souq"],
-        highlightsZh: ["大清真寺","皇家歌剧院","马特拉集市"],
+    "طرد البرتغاليين": { en: "Portuguese Expulsion", zh: "驱逐葡萄牙人" },
+    "أسطول البحار العُماني": { en: "Omani Navy Fleet", zh: "阿曼海军舰队" },
 
-        landmarksAr: [
-            "الجامع الكبير: تحفة معمارية إسلامية",
-            "دار الأوبرا: صرح ثقافي عالمي"
-        ],
-        landmarksEn: [
-            "Grand Mosque: Islamic architectural masterpiece",
-            "Royal Opera House: global cultural landmark"
-        ],
-        landmarksZh: [
-            "大清真寺：伊斯兰建筑杰作",
-            "皇家歌剧院：世界级文化地标"
-        ],
+    "الخنجر العُماني": { en: "Khanjar", zh: "阿曼匕首" },
+    "القهوة العُمانية": { en: "Omani Coffee", zh: "阿曼咖啡" },
 
-        foodAr: [
-            "الشواء العُماني: لحم يطبخ تحت الأرض",
-            "المجبوس: أرز باللحم"
-        ],
-        foodEn: [
-            "Omani Shuwa: slow-cooked underground meat",
-            "Majboos: spiced rice with meat"
-        ],
-        foodZh: [
-            "阿曼烤肉：地下慢烤肉",
-            "马吉布斯：香料米饭配肉"
-        ],
+    "فندق البستان": { en: "Al Bustan Hotel", zh: "阿尔布斯坦酒店" },
+    "شانغريلا": { en: "Shangri-La", zh: "香格里拉酒店" },
 
-        storiesAr: [
-            "طرد البرتغاليين عام 1650",
-            "ميناء مسقط طريق تجاري مهم"
-        ],
-        storiesEn: [
-            "Portuguese expelled in 1650",
-            "Muscat was a major trade port"
-        ],
-        storiesZh: [
-            "1650年驱逐葡萄牙人",
-            "马斯喀特是重要贸易港口"
-        ],
+    "مقهى عُمان للقهوة": { en: "Oman Coffee Cafe", zh: "阿曼咖啡馆" },
+    "ستاربكس": { en: "Starbucks", zh: "星巴克" }
+};
 
-        customsAr: [
-            "الخنجر رمز الرجولة",
-            "القهوة تقدم مع التمر"
-        ],
-        customsEn: [
-            "Khanjar symbolizes pride",
-            "Coffee served with dates"
-        ],
-        customsZh: [
-            "弯刀象征荣誉",
-            "咖啡配椰枣"
-        ],
+function translateItem(item, lang) {
+    const key = item.split(':')[0].trim();
+    if (dict[key] && dict[key][lang]) {
+        return item.replace(key, dict[key][lang]);
+    }
+    return item;
+}
 
-        hotelsAr: ["فندق البستان","شانغريلا"],
-        hotelsEn: ["Al Bustan Hotel","Shangri-La"],
-        hotelsZh: ["阿尔布斯坦酒店","香格里拉酒店"],
+function translateArray(arr, lang) {
+    if (lang === 'ar') return arr;
+    return arr.map(item => translateItem(item, lang));
+}
 
-        cafesAr: ["مقهى عمان","ستاربكس"],
-        cafesEn: ["Oman Cafe","Starbucks"],
-        cafesZh: ["阿曼咖啡馆","星巴克"],
+function getTranslated(arr) {
+    return translateArray(arr, currentLang);
+}
 
-        special: {
-            titleAr: "مهرجان مسقط",
-            titleEn: "Muscat Festival",
-            titleZh: "马斯喀特节",
+/* ==================== YOUR ORIGINAL CODE (FIXED) ==================== */
 
-            descAr: "مهرجان سنوي",
-            descEn: "Annual festival",
-            descZh: "年度节日",
+const cityKeys = ["muscat", "nizwa", "salalah"];
+let currentLang = 'ar';
+let currentCityId = null;
 
-            detailsAr: ["عروض","ألعاب نارية"],
-            detailsEn: ["Shows","Fireworks"],
-            detailsZh: ["表演","烟花"]
-        }
+const translations = {
+    ar: { 
+        backHome: "🏠 العودة للرئيسية",
+        sections: { landmarks: "🏛️ المعالم السياحية", food: "🍽️ الأكلات الشعبية", stories: "📖 القصص التاريخية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل الفنادق", cafes: "☕ أفضل المقاهي" } 
+    },
+    en: { 
+        backHome: "🏠 Back to Home",
+        sections: { landmarks: "🏛️ Landmarks", food: "🍽️ Food", stories: "📖 Stories", customs: "🎭 Customs", hotels: "🏨 Hotels", cafes: "☕ Cafes" } 
+    },
+    zh: { 
+        backHome: "🏠 返回首页",
+        sections: { landmarks: "🏛️ 地标", food: "🍽️ 美食", stories: "📖 故事", customs: "🎭 传统", hotels: "🏨 酒店", cafes: "☕ 咖啡馆" } 
     }
 };
 
-// ===== LANGUAGE HELPERS =====
-function getField(city, key){
-    if(currentLang === 'ar') return city[key+"Ar"];
-    if(currentLang === 'en') return city[key+"En"];
-    return city[key+"Zh"];
-}
+function getCityName(city) { return city[`name${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+function getCityDesc(city) { return city[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+function getSpecialTitle(city) { return city.special[`title${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+function getSpecialDesc(city) { return city.special[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
 
-function getSpecial(city, key){
-    if(currentLang === 'ar') return city.special[key+"Ar"];
-    if(currentLang === 'en') return city.special[key+"En"];
-    return city.special[key+"Zh"];
-}
-
-// ===== RENDER =====
+/* ==================== HOME ==================== */
 function renderHome() {
     const grid = document.getElementById('citiesGrid');
 
-    grid.innerHTML = Object.keys(citiesData).map(key => {
+    grid.innerHTML = cityKeys.map(key => {
         const city = citiesData[key];
-
         return `
-        <div class="city-card" onclick="openCity('${key}')">
-            <h3>${getField(city,'name')}</h3>
-            <p>${getField(city,'desc')}</p>
-            <div>
-                ${getField(city,'highlights').map(h=>`<span>${h}</span>`).join('')}
+            <div class="city-card" onclick="openCity('${key}')">
+                <div class="card-icon">${city.icon}</div>
+                <div class="card-content">
+                    <h3>${getCityName(city)}</h3>
+                    <p>${getCityDesc(city)}</p>
+                    <div class="city-tags">
+                        ${getTranslated(city.highlights).slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}
+                    </div>
+                </div>
             </div>
-        </div>`;
+        `;
     }).join('');
+
+    document.getElementById('mainPage').style.display = 'block';
+    document.getElementById('cityPagesContainer').innerHTML = '';
 }
 
-// ===== OPEN CITY =====
-function openCity(key){
-    const city = citiesData[key];
-
+/* ==================== CITY PAGE ==================== */
+function openCity(cityKey) {
+    currentCityId = cityKey;
+    const city = citiesData[cityKey];
     const t = translations[currentLang];
 
     document.getElementById('cityPagesContainer').innerHTML = `
-    <div>
-        <button onclick="renderHome()">${t.backHome}</button>
+        <div class="city-page active-page">
+            <div style="text-align:center">
+                <button class="home-btn" onclick="backHome()">${t.backHome}</button>
+            </div>
 
-        <h2>${getField(city,'name')}</h2>
+            <div class="city-header">
+                <h2>${getCityName(city)}</h2>
+            </div>
 
-        <h3>${getSpecial(city,'title')}</h3>
-        <p>${getSpecial(city,'desc')}</p>
+            <div class="section special-section">
+                <h3>✨ ${getSpecialTitle(city)}</h3>
+                <p>${getSpecialDesc(city)}</p>
+            </div>
 
-        <h3>${t.sections.landmarks}</h3>
-        ${getField(city,'landmarks').map(i=>`<p>${i}</p>`).join('')}
+            <div class="section">
+                <h3>${t.sections.landmarks}</h3>
+                <div class="items-grid">
+                    ${getTranslated(city.landmarks).map(l => `<div class="item-card"><p>${l}</p></div>`).join('')}
+                </div>
+            </div>
 
-        <h3>${t.sections.food}</h3>
-        ${getField(city,'food').map(i=>`<p>${i}</p>`).join('')}
+            <div class="section">
+                <h3>${t.sections.food}</h3>
+                <div class="items-grid">
+                    ${getTranslated(city.food).map(f => `<div class="item-card"><p>${f}</p></div>`).join('')}
+                </div>
+            </div>
 
-        <h3>${t.sections.stories}</h3>
-        ${getField(city,'stories').map(i=>`<p>${i}</p>`).join('')}
+            <div class="section">
+                <h3>${t.sections.stories}</h3>
+                <div class="items-grid">
+                    ${getTranslated(city.stories).map(s => `<div class="item-card"><p>${s}</p></div>`).join('')}
+                </div>
+            </div>
 
-        <h3>${t.sections.customs}</h3>
-        ${getField(city,'customs').map(i=>`<p>${i}</p>`).join('')}
+            <div class="section">
+                <h3>${t.sections.customs}</h3>
+                <div class="items-grid">
+                    ${getTranslated(city.customs).map(c => `<div class="item-card"><p>${c}</p></div>`).join('')}
+                </div>
+            </div>
 
-        <h3>${t.sections.hotels}</h3>
-        ${getField(city,'hotels').map(i=>`<p>${i}</p>`).join('')}
+            <div class="section">
+                <h3>${t.sections.hotels}</h3>
+                <div class="items-grid">
+                    ${getTranslated(city.hotels).map(h => `<div class="item-card"><p>${h}</p></div>`).join('')}
+                </div>
+            </div>
 
-        <h3>${t.sections.cafes}</h3>
-        ${getField(city,'cafes').map(i=>`<p>${i}</p>`).join('')}
-    </div>
+            <div class="section">
+                <h3>${t.sections.cafes}</h3>
+                <div class="items-grid">
+                    ${getTranslated(city.cafes).map(c => `<div class="item-card"><p>${c}</p></div>`).join('')}
+                </div>
+            </div>
+        </div>
     `;
+
+    document.getElementById('mainPage').style.display = 'none';
 }
+
+/* ==================== NAV ==================== */
+function backHome() { renderHome(); }
+
+function setLanguage(lang) {
+    currentLang = lang;
+    document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+    if (currentCityId) openCity(currentCityId);
+    else renderHome();
+}
+
+/* ==================== INIT ==================== */
+renderHome();
+
 </script>
