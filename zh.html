@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer | 您的阿曼智能旅游指南</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="language-bar">
+    <button class="lang-btn" onclick="window.location.href='index.html'">🇸🇦 العربية</button>
+    <button class="lang-btn" onclick="window.location.href='en.html'">🇬🇧 English</button>
+    <button class="lang-btn" onclick="window.location.href='zh.html'">🇨🇳 中文</button>
+</div>
+
+<div id="mainPage">
+    <div class="hero">
+        <h1>🌴 Summer | 您的AI智能导游</h1>
+        <p>智能旅游助手 | 探索阿曼最精彩的目的地</p>
+    </div>
+    <div class="cities-grid" id="citiesGrid"></div>
+</div>
+
+<div id="cityPagesContainer"></div>
+
+<div class="footer">
+    <p>© 2026 Summer | 阿曼智能旅游指南</p>
+</div>
+
+<script>
+    // Chinese page - using nameZh, descZh, etc.
+    const currentLang = 'zh';
+    
+    const sections = {
+        landmarks: "🏛️ 地标与景点",
+        food: "🍽️ 传统美食",
+        stories: "📖 历史与故事",
+        customs: "🎭 风俗与传统",
+        hotels: "🏨 精选酒店",
+        cafes: "☕ 精选咖啡馆"
+    };
+    
+    function getCityName(city) { return city.nameZh; }
+    function getCityDesc(city) { return city.descZh; }
+    function getSpecialTitle(city) { return city.special.titleZh; }
+    function getSpecialDesc(city) { return city.special.descZh; }
+    
+    function renderHome() {
+        const grid = document.getElementById('citiesGrid');
+        grid.innerHTML = cityKeys.map(key => {
+            const city = citiesData[key];
+            return `
+                <div class="city-card" onclick="openCity('${key}')">
+                    <div class="card-icon">${city.icon}</div>
+                    <div class="card-content">
+                        <h3>${city.nameZh}</h3>
+                        <p>${city.descZh}</p>
+                        <div class="city-tags">${city.highlights.slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        document.getElementById('mainPage').style.display = 'block';
+        document.getElementById('cityPagesContainer').innerHTML = '';
+    }
+    
+    function openCity(cityKey) {
+        const city = citiesData[cityKey];
+        const container = document.getElementById('cityPagesContainer');
+        container.innerHTML = `
+            <div class="city-page active-page">
+                <div style="text-align:center">
+                    <button class="home-btn" onclick="backHome()">🏠 返回首页</button>
+                </div>
+
+                <div class="city-header">
+                    <h2>${city.nameZh}</h2>
+                </div>
+
+                <div class="section special-section">
+                    <h3>✨ ${city.special.titleZh} <span class="animated-icon">${city.icon}</span></h3>
+                    <p>${city.special.descZh}</p>
+                    <div class="items-grid">
+                        ${city.special.details.map(d => `<div class="item-card"><h4>${d}</h4></div>`).join('')}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>${sections.landmarks}</h3>
+                    <div class="items-grid">
+                        ${city.landmarks.map(l => `<div class="item-card"><h4>${l.split(':')[0]}</h4><p>${l.split(':')[1] || ''}</p></div>`).join('')}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>${sections.food}</h3>
+                    <div class="items-grid">
+                        ${city.food.map(f => `<div class="item-card"><h4>${f.split(':')[0]}</h4><p>${f.split(':')[1] || ''}</p></div>`).join('')}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>${sections.stories}</h3>
+                    <div class="items-grid">
+                        ${city.stories.map(s => `<div class="item-card"><h4>${s.split(':')[0]}</h4><p>${s.split(':')[1] || ''}</p></div>`).join('')}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>${sections.customs}</h3>
+                    <div class="items-grid">
+                        ${city.customs.map(c => `<div class="item-card"><h4>${c.split(':')[0]}</h4><p>${c.split(':')[1] || ''}</p></div>`).join('')}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>${sections.hotels}</h3>
+                    <div class="items-grid">
+                        ${city.hotels.map(h => `<div class="item-card"><h4>${h.split(':')[0]}</h4><p>${h.split(':')[1] || ''}</p></div>`).join('')}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>${sections.cafes}</h3>
+                    <div class="items-grid">
+                        ${city.cafes.map(c => `<div class="item-card"><h4>${c.split(':')[0]}</h4><p>${c.split(':')[1] || ''}</p></div>`).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+        document.getElementById('mainPage').style.display = 'none';
+    }
+    
+    function backHome() { renderHome(); }
+    
+    renderHome();
+</script>
+
+<script src="data.js"></script>
+</body>
+</html>
