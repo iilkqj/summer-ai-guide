@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer | Your AI Smart Tourism Guide in Oman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="language-bar">
+    <button class="lang-btn" onclick="window.location.href='index.html'">🇸🇦 العربية</button>
+    <button class="lang-btn" onclick="window.location.href='en.html'">🇬🇧 English</button>
+    <button class="lang-btn" onclick="window.location.href='zh.html'">🇨🇳 中文</button>
+</div>
+
+<div id="mainPage">
+    <div class="hero">
+        <h1>🌴 Summer | Your AI Guide</h1>
+        <p>Your AI Smart Tourism Guide | Covers the best destinations in Oman</p>
+    </div>
+    <div class="cities-grid" id="citiesGrid"></div>
+</div>
+
+<div id="cityPagesContainer"></div>
+
+<div class="footer">
+    <p>© 2026 Summer | Your AI Smart Tourism Guide in Oman</p>
+</div>
+
+<script>
+    // English page - using nameEn, descEn, etc.
+    const currentLang = 'en';
+    
+    const sections = {
+        landmarks: "🏛️ Landmarks & Attractions",
+        food: "🍽️ Traditional Food",
+        stories: "📖 Historical Stories",
+        customs: "🎭 Customs & Traditions",
+        hotels: "🏨 Top 5 Star Hotels",
+        cafes: "☕ Top 5 Cafes"
+    };
+    
+    function getCityName(city) { return city.nameEn; }
+    function getCityDesc(city) { return city.descEn; }
+    function getSpecialTitle(city) { return city.special.titleEn; }
+    function getSpecialDesc(city) { return city.special.descEn; }
+    
+    function renderHome() {
+        const grid = document.getElementById('citiesGrid');
+        grid.innerHTML = cityKeys.map(key => {
+            const city = citiesData[key];
+            return `
+                <div class="city-card" onclick="openCity('${key}')">
+                    <div class="card-icon">${city.icon}</div>
+                    <div class="card-content">
+                        <h3>${city.nameEn}</h3>
+                        <p>${city.descEn}</p>
+                        <div class="city-tags">${city.highlights.slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        document.getElementById('mainPage').style.display = 'block';
+        document.getElementById('cityPagesContainer').innerHTML = '';
+    }
+    
+    function openCity(cityKey) {
+        const city = citiesData[cityKey];
+        const container = document.getElementById('cityPagesContainer');
+        container.innerHTML = `
+            <div class="city-page active-page">
+                <div style="text-align:center"><button class="home-btn" onclick="backHome()">🏠 Back to Home</button></div>
+                <div class="city-header"><h2>${city.nameEn}</h2></div>
+                <div class="section special-section"><h3>✨ ${city.special.titleEn} <span class="animated-icon">${city.icon}</span></h3><p>${city.special.descEn}</p>
+                    <div class="items-grid">${city.special.details.map(d => `<div class="item-card"><h4>${d}</h4></div>`).join('')}</div>
+                </div>
+                <div class="section"><h3>${sections.landmarks}</h3><div class="items-grid">${city.landmarks.map(l => `<div class="item-card"><h4>${l.split(':')[0]}</h4><p>${l.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${sections.food}</h3><div class="items-grid">${city.food.map(f => `<div class="item-card"><h4>${f.split(':')[0]}</h4><p>${f.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${sections.stories}</h3><div class="items-grid">${city.stories.map(s => `<div class="item-card"><h4>${s.split(':')[0]}</h4><p>${s.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${sections.customs}</h3><div class="items-grid">${city.customs.map(c => `<div class="item-card"><h4>${c.split(':')[0]}</h4><p>${c.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${sections.hotels}</h3><div class="items-grid">${city.hotels.map(h => `<div class="item-card"><h4>${h.split(':')[0]}</h4><p>${h.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${sections.cafes}</h3><div class="items-grid">${city.cafes.map(c => `<div class="item-card"><h4>${c.split(':')[0]}</h4><p>${c.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+            </div>
+        `;
+        document.getElementById('mainPage').style.display = 'none';
+    }
+    
+    function backHome() { renderHome(); }
+    
+    renderHome();
+</script>
+<script src="data.js"></script>
+</body>
+</html>
