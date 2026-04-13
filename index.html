@@ -1,178 +1,538 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سمر | Summer - دليلك السياحي الذكي في عُمان</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+            color: #1b5e20;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        body[dir="ltr"] { direction: ltr; text-align: left; }
+        body[dir="rtl"] { direction: rtl; text-align: right; }
+
+        /* Language Bar */
+        .language-bar {
+            background-color: #1a5c3e;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-bottom: 3px solid #d4af37;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .lang-btn {
+            background-color: #2e7d5e;
+            color: #f5e6d3;
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .lang-btn:hover { background-color: #d4af37; color: #1a5c3e; transform: scale(1.05); }
+
+        /* Hero Banner Slider */
+        .hero-slider {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .slide-content {
+            background: rgba(0,0,0,0.5);
+            padding: 2rem;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+        .slide-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .slide-content p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dot.active {
+            background: #d4af37;
+            transform: scale(1.3);
+        }
+
+        /* Cities Grid */
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .city-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        .city-card:nth-child(1) { animation-delay: 0.1s; }
+        .city-card:nth-child(2) { animation-delay: 0.2s; }
+        .city-card:nth-child(3) { animation-delay: 0.3s; }
+        .city-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .card-icon {
+            height: 200px;
+            background: linear-gradient(135deg, #a5d6a7, #81c784);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            transition: transform 0.3s ease;
+        }
+        .city-card:hover .card-icon {
+            transform: scale(1.05);
+        }
+        .card-content { padding: 1.5rem; }
+        .card-content h3 { color: #1a5c3e; font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .card-content p { color: #2e7d5e; margin-bottom: 1rem; }
+        .city-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .tag {
+            background: #e8f5e9;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #1a5c3e;
+            transition: all 0.3s;
+        }
+        .tag:hover {
+            background: #d4af37;
+            transform: translateY(-2px);
+        }
+
+        /* City Page */
+        .city-page {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        .active-page { display: block; }
+        .city-header { text-align: center; margin-bottom: 2rem; }
+        .city-header h2 { font-size: 2.5rem; color: #1a5c3e; border-bottom: 4px solid #d4af37; display: inline-block; }
+        .section {
+            background: #fef8ef;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .section h3 { color: #1a5c3e; font-size: 1.6rem; margin-bottom: 1rem; border-right: 5px solid #d4af37; padding-right: 1rem; }
+        body[dir="ltr"] .section h3 { border-right: none; border-left: 5px solid #d4af37; padding-right: 0; padding-left: 1rem; }
+        .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+        .item-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid #c8e6c9;
+            transition: all 0.3s;
+        }
+        .item-card:hover {
+            transform: translateY(-3px);
+            border-color: #d4af37;
+        }
+        .item-card h4 { color: #1a5c3e; margin-bottom: 0.5rem; }
+        .special-section { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border: 2px solid #d4af37; }
+        .animated-icon {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+            font-size: 1.5rem;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .home-btn {
+            background: #d4af37;
+            color: #1a5c3e;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 1rem auto;
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .home-btn:hover {
+            background: #1a5c3e;
+            color: #d4af37;
+            transform: scale(1.05);
+        }
+        .footer {
+            background: #1a5c3e;
+            color: #e8f5e9;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .slide-content h1 { font-size: 1.8rem; }
+            .cities-grid { padding: 1rem; }
+            .city-header h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body dir="rtl">
+
+<div class="language-bar">
+    <button class="lang-btn" onclick="setLanguage('ar')">🇸🇦 العربية</button>
+    <button class="lang-btn" onclick="setLanguage('en')">🇬🇧 English</button>
+    <button class="lang-btn" onclick="setLanguage('zh')">🇨🇳 中文</button>
+</div>
+
+<!-- Hero Banner Slider -->
+<div class="hero-slider" id="heroSlider">
+    <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548013146-72479768bada?w=1600')">
+        <div class="slide-content">
+            <h1 id="slide1Title">🌴 اكتشف جمال عُمان</h1>
+            <p id="slide1Desc">من جبالها الخضراء إلى شواطئها الذهبية</p>
+        </div>
+    </div>
+    <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548013146-72479768bada?w=1600')">
+        <div class="slide-content">
+            <h1 id="slide2Title">🏰 تاريخ وتراث عريق</h1>
+            <p id="slide2Desc">قلاع وحصون تحكي قصص المجد</p>
+        </div>
+    </div>
+    <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548013146-72479768bada?w=1600')">
+        <div class="slide-content">
+            <h1 id="slide3Title">🌊 طبيعة خلابة</h1>
+            <p id="slide3Desc">وديان وبحار تستحق الاستكشاف</p>
+        </div>
+    </div>
+    <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<div id="mainPage">
+    <div class="cities-grid" id="citiesGrid"></div>
+</div>
+
+<div id="cityPagesContainer"></div>
+
+<div class="footer">
+    <p id="footerText">© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان</p>
+</div>
+
 <script>
-/* ==================== SAFE TRANSLATION ==================== */
-const dict = {
-    "الجامع الكبير": { en: "Grand Mosque", zh: "大清真寺" },
-    "دار الأوبرا السلطانية": { en: "Royal Opera House", zh: "皇家歌剧院" },
-    "سوق مطرح": { en: "Muttrah Souq", zh: "马特拉集市" },
-    "متحف عُمان": { en: "Oman Museum", zh: "阿曼博物馆" },
-    "كورنيش مطرح": { en: "Muttrah Corniche", zh: "马特拉海滨" },
+    // ==================== CITY DATA (All languages) ====================
+    const citiesData = {
+        muscat: {
+            nameAr: "مسقط", nameEn: "Muscat", nameZh: "马斯喀特",
+            icon: "🎭", category: "culture",
+            descAr: "عاصمة عُمان النابضة بالحياة", descEn: "The vibrant capital of Oman", descZh: "充满活力的阿曼首都",
+            highlightsAr: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح", "متحف عُمان", "كورنيش مطرح"],
+            highlightsEn: ["Sultan Qaboos Grand Mosque", "Royal Opera House", "Muttrah Souq", "Oman Museum", "Muttrah Corniche"],
+            highlightsZh: ["苏丹卡布斯大清真寺", "皇家歌剧院", "马特拉集市", "阿曼博物馆", "马特拉滨海大道"],
+            landmarksAr: ["الجامع الكبير: تحفة معمارية إسلامية", "دار الأوبرا السلطانية: صرح ثقافي عالمي", "سوق مطرح: سوق تقليدي عريق", "متحف عُمان: يروي تاريخ عُمان", "كورنيش مطرح: إطلالة رائعة"],
+            landmarksEn: ["Grand Mosque: Islamic architectural masterpiece", "Royal Opera House: World-class cultural landmark", "Muttrah Souq: Historic traditional market", "Oman Museum: Tells Oman's history", "Muttrah Corniche: Beautiful waterfront"],
+            landmarksZh: ["大清真寺: 伊斯兰建筑杰作", "皇家歌剧院: 世界级文化地标", "马特拉集市: 历史悠久的传统市场", "阿曼博物馆: 讲述阿曼历史", "马特拉滨海大道: 美丽的海滨"],
+            foodAr: ["الشواء العُماني: لحم يدفن في تنور", "المجبوس: أرز باللحم", "الخبيصة: حلوى شعبية", "البلاليط: شعيرية محلاة", "الحلوى العُمانية: هدية تذكارية"],
+            foodEn: ["Omani Shuwa: Meat cooked underground", "Majboos: Spiced rice with meat", "Khabeesa: Traditional sweet", "Balaleet: Sweetened vermicelli", "Omani Halwa: Famous souvenir"],
+            foodZh: ["阿曼焖肉: 地下慢烤的肉", "马吉布斯: 香料肉饭", "哈比萨: 传统甜点", "巴拉利特: 甜味粉丝", "阿曼哈尔瓦: 著名伴手礼"],
+            storiesAr: ["طرد البرتغاليين عام 1650م", "أسطول البحار العُماني", "ميناء مسقط على طريق الحرير", "قصر العلم رمز النهضة", "قلعتي الجلالي والميراني"],
+            storiesEn: ["Expulsion of Portuguese in 1650", "Omani maritime fleet", "Muscat port on Silk Road", "Al Alam Palace symbol of renaissance", "Al Jalali & Al Mirani Forts"],
+            storiesZh: ["1650年驱逐葡萄牙人", "阿曼航海舰队", "丝绸之路上的马斯喀特港", "阿拉姆宫 - 复兴象征", "贾拉利和米拉尼堡"],
+            customsAr: ["الخنجر العُماني: رمز الرجولة", "القهوة العُمانية: تقدم مع التمر", "مهرجان مسقط: فعاليات سنوية", "اللباس التقليدي: الدشداشة", "الرقصات الشعبية: الرزحة"],
+            customsEn: ["Omani Khanjar: Symbol of manhood", "Omani Coffee: Served with dates", "Muscat Festival: Annual event", "Traditional dress: Dishdasha", "Folk dance: Al Razha"],
+            customsZh: ["阿曼弯刀: 男子气概的象征", "阿曼咖啡: 配椰枣享用", "马斯喀特节: 年度盛会", "传统服饰: 迪什达沙", "民间舞蹈: 拉兹哈舞"],
+            hotelsAr: ["فندق البستان - ريتز كارلتون: منتجع فاخر", "شانغريلا - بر الجصة: منتجع متكامل", "فندق كروم - مسقط: تصميم عصري", "شيراتون عُمان: فندق تاريخي", "انتركونتيننتال مسقط: إطلالة على البحر"],
+            hotelsEn: ["Al Bustan Palace - Ritz-Carlton: Luxury resort", "Shangri-La Barr Al Jissah: Integrated resort", "Crowne Plaza Muscat: Modern design", "Sheraton Oman: Historic hotel", "InterContinental Muscat: Sea view"],
+            hotelsZh: ["阿尔布斯坦宫丽思卡尔顿: 豪华度假村", "香格里拉巴尔阿尔吉萨: 综合度假村", "马斯喀特皇冠假日酒店: 现代设计", "马斯喀特喜来登: 历史酒店", "马斯喀特洲际酒店: 海景"],
+            cafesAr: ["مقهى عُمان للقهوة: قهوة عمانية أصيلة", "ستاربكس - القرم: إطلالة على البحر", "مقهى بون: قهوة مختصة", "مقهى الكتب: أجواء هادئة", "مقهى زين: قهوة تركية"],
+            cafesEn: ["Oman Coffee House: Authentic Omani coffee", "Starbucks - Al Khuwair: Sea view", "Boon Coffee: Specialty coffee", "Book Cafe: Quiet atmosphere", "Zein Cafe: Turkish coffee"],
+            cafesZh: ["阿曼咖啡馆: 正宗阿曼咖啡", "星巴克 - 库维尔: 海景", "Boon咖啡: 精品咖啡", "书香咖啡馆: 安静氛围", "Zein咖啡馆: 土耳其咖啡"],
+            special: {
+                titleAr: "🎭 مهرجان مسقط", titleEn: "🎭 Muscat Festival", titleZh: "🎭 马斯喀特节",
+                descAr: "مهرجان ثقافي سنوي في يناير وفبراير.", descEn: "Annual cultural festival in Jan-Feb.", descZh: "一月至二月的年度文化节。",
+                detailsAr: ["عروض موسيقية", "ألعاب نارية", "أكشاك طعام", "فعاليات عائلية", "معارض حرف"],
+                detailsEn: ["Music performances", "Fireworks", "Food stalls", "Family activities", "Craft exhibitions"],
+                detailsZh: ["音乐表演", "烟花", "美食摊位", "家庭活动", "手工艺展览"]
+            }
+        },
+        nizwa: {
+            nameAr: "نزوى", nameEn: "Nizwa", nameZh: "尼兹瓦",
+            icon: "🌹", category: "culture",
+            descAr: "مدينة التراث العريق وقلعتها الشهيرة", descEn: "City of rich heritage and its famous fort", descZh: "拥有丰富遗产和著名堡垒的城市",
+            highlightsAr: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر", "فلج دارس", "الحلوى العمانية"],
+            highlightsEn: ["Nizwa Fort", "Nizwa Souq", "Jebel Akhdar", "Falaj Daris", "Omani Halwa"],
+            highlightsZh: ["尼兹瓦堡", "尼兹瓦集市", "绿山", "达里斯法拉吉", "阿曼哈尔瓦"],
+            landmarksAr: ["قلعة نزوى: بناها الإمام سلطان بن سيف", "سوق نزوى: يشتهر بالخناجر", "الجبل الأخضر: جبال خضراء", "فلج دارس: موقع تراث عالمي", "حصن بيت الرديدة: حصن تاريخي"],
+            landmarksEn: ["Nizwa Fort: Built by Imam Sultan bin Saif", "Nizwa Souq: Famous for khanjars", "Jebel Akhdar: Green mountains", "Falaj Daris: UNESCO World Heritage", "Bayt Al Redidah: Historic fort"],
+            landmarksZh: ["尼兹瓦堡: 由伊玛目苏丹·本·赛义夫建造", "尼兹瓦集市: 以弯刀闻名", "绿山: 青山", "达里斯法拉吉: 联合国教科文组织遗产", "拜特阿尔雷迪达: 历史堡垒"],
+            foodAr: ["الحلوى العُمانية: تشتهر بها نزوى", "الشواء العُماني: الطبق الوطني", "القبولي: أرز بالتوابل", "الهريس: قمح مع لحم", "العرسية: أرز مهروس"],
+            foodEn: ["Omani Halwa: Nizwa specialty", "Omani Shuwa: National dish", "Qabooli: Spiced rice", "Harees: Wheat with meat", "Arsia: Mashed rice"],
+            foodZh: ["阿曼哈尔瓦: 尼兹瓦特产", "阿曼焖肉: 国菜", "卡布利: 香料饭", "哈里斯: 小麦炖肉", "阿尔西亚: 捣碎的米饭"],
+            storiesAr: ["بناء قلعة نزوى استغرقت 12 سنة", "تسمية نزوى من 'نزا'", "عاصمة العلم والتراث", "طرد البرتغاليين", "بيضة الإسلام"],
+            storiesEn: ["Nizwa Fort took 12 years to build", "Name Nizwa comes from 'Naza'", "Capital of knowledge and heritage", "Expulsion of Portuguese", "Egg of Islam"],
+            storiesZh: ["尼兹瓦堡耗时12年建成", "尼兹瓦名称源于'Naza'", "知识与遗产之都", "驱逐葡萄牙人", "伊斯兰之蛋"],
+            customsAr: ["سوق الماشية: كل جمعة", "صناعة الحلوى", "الفلاج: نظام ري قديم", "البيوت الطينية", "القهوة مع الحلوى"],
+            customsEn: ["Livestock market: Every Friday", "Halwa making", "Falaj: Ancient irrigation system", "Mud-brick houses", "Coffee with halwa"],
+            customsZh: ["牲畜市场: 每周五", "哈尔瓦制作", "法拉吉: 古老灌溉系统", "泥砖房屋", "咖啡配哈尔瓦"],
+            hotelsAr: ["منتجع الجبل الأخضر - أليلا: فاخر على القمة", "فندق نزوى أوتيل: إطلالة على القلعة", "فندق عنتر نزوى: اقتصادي", "منتجع بيت البارندي: تراثي", "فندق الجبل الأخضر: إطلالات رائعة"],
+            hotelsEn: ["Alila Jebel Akhdar: Luxury on the peak", "Nizwa Hotel: Fort view", "Antar Hotel Nizwa: Budget", "Bait Al Baranda Resort: Heritage style", "Jebel Akhdar Hotel: Great views"],
+            hotelsZh: ["阿丽拉绿山度假村: 山顶奢华", "尼兹瓦酒店: 城堡景观", "安塔尔尼兹瓦酒店: 经济型", "拜特阿尔巴兰达度假村: 传统风格", "绿山酒店: 美景"],
+            cafesAr: ["مقهى القلعة: إطلالة رائعة", "مقهى السوق التقليدي: قهوة عربية", "مقهى الواحة: أجواء هادئة", "مقهى البيت العماني: ديكور تراثي", "مقهى الجبل: إطلالة على الجبل"],
+            cafesEn: ["Fort Cafe: Great view", "Traditional Souq Cafe: Arabic coffee", "Oasis Cafe: Quiet atmosphere", "Omani House Cafe: Heritage decor", "Mountain Cafe: Mountain view"],
+            cafesZh: ["城堡咖啡馆: 美景", "传统集市咖啡馆: 阿拉伯咖啡", "绿洲咖啡馆: 安静氛围", "阿曼之家咖啡馆: 传统装饰", "山景咖啡馆: 山景"],
+            special: {
+                titleAr: "🌹 موسم الورد", titleEn: "🌹 Rose Season", titleZh: "🌹 玫瑰季节",
+                descAr: "من مارس إلى مايو في الجبل الأخضر.", descEn: "March to May in Jebel Akhdar.", descZh: "三月至五月。",
+                detailsAr: ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"],
+                detailsEn: ["Rose picking", "Rose water distillation", "Spring Rose Festival", "Rose products", "Natural perfumes"],
+                detailsZh: ["采摘玫瑰", "玫瑰水蒸馏", "春季玫瑰节", "玫瑰产品", "天然香水"]
+            }
+        },
+        salalah: {
+            nameAr: "صلالة", nameEn: "Salalah", nameZh: "塞拉莱",
+            icon: "🌧️", category: "nature",
+            descAr: "جنة الخريف الساحرة، أرض اللبان", descEn: "Magical Khareef paradise, land of frankincense", descZh: "神奇的季风天堂，乳香之地",
+            highlightsAr: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل", "أرض البخور", "سوق الحافة"],
+            highlightsEn: ["Salalah Khareef", "Wadi Darbat", "Mughsail Beach", "Land of Frankincense", "Al Haffa Souq"],
+            highlightsZh: ["塞拉莱雨季", "达尔巴特河谷", "穆格赛尔海滩", "乳香之地", "哈法集市"],
+            landmarksAr: ["وادي دربات: شلالات موسمية", "شاطئ المغسيل: فوهات مائية", "أرض اللبان: موقع يونسكو", "سوق الحافة: لبان وعسل", "جبل صمرحان: إطلالات"],
+            landmarksEn: ["Wadi Darbat: Seasonal waterfalls", "Mughsail Beach: Blowholes", "Land of Frankincense: UNESCO site", "Al Haffa Souq: Frankincense & honey", "Jabal Samhan: Views"],
+            landmarksZh: ["达尔巴特河谷: 季节性瀑布", "穆格赛尔海滩: 吹气孔", "乳香之地: 联合国教科文组织", "哈法集市: 乳香和蜂蜜", "萨姆汉山: 美景"],
+            foodAr: ["المندي: لحم وأرز", "السمك المشوي: طازج", "العسل العماني: جبلي", "حلوى الحليب: تقليدية", "القهوة الظفارية: بنكهة اللبان"],
+            foodEn: ["Mandi: Meat and rice", "Grilled fish: Fresh", "Omani honey: Mountain honey", "Milk halwa: Traditional", "Dhofari coffee: Frankincense flavored"],
+            foodsZh: ["曼迪: 肉和米饭", "烤鱼: 新鲜", "阿曼蜂蜜: 山蜜", "牛奶哈尔瓦: 传统", "佐法尔咖啡: 乳香味"],
+            storiesAr: ["قصة تبع وأصحاب الأيكة", "ميناء صلالة القديم", "تجارة اللبان", "الملكة بلقيس", "الرياح الموسمية"],
+            storiesEn: ["Story of Tubba and the People of the Wood", "Ancient Salalah port", "Frankincense trade", "Queen of Sheba", "Monsoon winds"],
+            storiesZh: ["图巴和丛林人的故事", "古代塞拉莱港", "乳香贸易", "示巴女王", "季风"],
+            customsAr: ["خريف صلالة: ضباب وأمطار", "اللبان: عطور وعلاج", "الرقصات الظفارية", "مهرجانات صيفية", "صناعة البخور"],
+            customsEn: ["Khareef: Mist and rain", "Frankincense: Perfume and medicine", "Dhofari dances", "Summer festivals", "Incense making"],
+            customsZh: ["雨季: 雾和雨", "乳香: 香水和药物", "佐法尔舞蹈", "夏季节日", "制香"],
+            hotelsAr: ["فندق الفانات - جي دبليو ماريوت: منتجع فاخر", "منتجع صلالة روتانا: إطلالة على البحر", "فندق هوليدي إن صلالة: اقتصادي", "منتجع كراون بلازا صلالة: قريب من الشاطئ", "فندق صلالة بيتش: على البحر"],
+            hotelsEn: ["Al Fanar Hotel - JW Marriott: Luxury resort", "Salalah Rotana Resort: Sea view", "Holiday Inn Salalah: Budget", "Crowne Plaza Salalah: Near beach", "Salalah Beach Hotel: On the sea"],
+            hotelsZh: ["阿尔法纳尔JW万豪酒店: 豪华度假村", "塞拉莱罗塔纳度假村: 海景", "塞拉莱假日酒店: 经济型", "塞拉莱皇冠假日酒店: 近海滩", "塞拉莱海滩酒店: 海上"],
+            cafesAr: ["مقهى الضباب: إطلالة على الجبال", "مقهى اللبان: قهوة بنكهة اللبان", "مقهى الخريف: أجواء خريفية", "مقهى الوادي: قريب من وادي دربات", "مقهى الشاطئ: إطلالة على البحر"],
+            cafesEn: ["Fog Cafe: Mountain view", "Frankincense Cafe: Frankincense-flavored coffee", "Khareef Cafe: Autumn atmosphere", "Wadi Cafe: Near Wadi Darbat", "Beach Cafe: Sea view"],
+            cafesZh: ["雾景咖啡馆: 山景", "乳香咖啡馆: 乳香味咖啡", "雨季咖啡馆: 秋季氛围", "河谷咖啡馆: 近达尔巴特河谷", "海滩咖啡馆: 海景"],
+            special: {
+                titleAr: "🌧️ خريف صلالة", titleEn: "🌧️ Khareef Salalah", titleZh: "🌧️ 塞拉莱雨季",
+                descAr: "موسم الضباب والأمطار من يونيو إلى سبتمبر.", descEn: "Monsoon season from June to September.", descZh: "六月至九月的季风季节。",
+                detailsAr: ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"],
+                detailsEn: ["Fog and rain", "Green nature", "Festivals", "Waterfalls", "Cool weather"],
+                detailsZh: ["雾和雨", "绿色自然", "节日", "瀑布", "凉爽天气"]
+            }
+        }
+    };
 
-    "الشواء العُماني": { en: "Omani Shuwa", zh: "阿曼烤肉" },
-    "المجبوس": { en: "Majboos", zh: "马吉布斯" },
-    "الخبيصة": { en: "Khabeesa", zh: "哈比萨甜点" },
-    "البلاليط": { en: "Balaleet", zh: "甜面条" },
-    "الحلوى العُمانية": { en: "Omani Halwa", zh: "阿曼甜点" },
+    const cityKeys = ["muscat", "nizwa", "salalah"];
+    let currentLang = 'ar';
+    let currentCityId = null;
+    let slideIndex = 0;
+    let slideInterval;
 
-    "طرد البرتغاليين": { en: "Portuguese Expulsion", zh: "驱逐葡萄牙人" },
-    "أسطول البحار العُماني": { en: "Omani Navy Fleet", zh: "阿曼海军舰队" },
+    // Translations for UI elements
+    const uiText = {
+        ar: { backHome: "🏠 العودة للرئيسية", footer: "© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان",
+            slide1Title: "🌴 اكتشف جمال عُمان", slide1Desc: "من جبالها الخضراء إلى شواطئها الذهبية",
+            slide2Title: "🏰 تاريخ وتراث عريق", slide2Desc: "قلاع وحصون تحكي قصص المجد",
+            slide3Title: "🌊 طبيعة خلابة", slide3Desc: "وديان وبحار تستحق الاستكشاف",
+            sections: { landmarks: "🏛️ المعالم السياحية", food: "🍽️ الأكلات الشعبية", stories: "📖 القصص التاريخية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل 5 فنادق", cafes: "☕ أفضل 5 مقاهي" }
+        },
+        en: { backHome: "🏠 Back to Home", footer: "© 2026 Summer - Your AI Smart Tourism Guide in Oman",
+            slide1Title: "🌴 Discover the Beauty of Oman", slide1Desc: "From green mountains to golden beaches",
+            slide2Title: "🏰 Rich History & Heritage", slide2Desc: "Forts and castles telling stories of glory",
+            slide3Title: "🌊 Breathtaking Nature", slide3Desc: "Valleys and seas waiting to be explored",
+            sections: { landmarks: "🏛️ Landmarks", food: "🍽️ Traditional Food", stories: "📖 Historical Stories", customs: "🎭 Customs & Traditions", hotels: "🏨 Top 5 Hotels", cafes: "☕ Top 5 Cafes" }
+        },
+        zh: { backHome: "🏠 返回首页", footer: "© 2026 Summer | 您的阿曼智能旅游指南",
+            slide1Title: "🌴 探索阿曼之美", slide1Desc: "从青山到金色海滩",
+            slide2Title: "🏰 丰富的历史与遗产", slide2Desc: "讲述荣耀故事的堡垒和城堡",
+            slide3Title: "🌊 令人惊叹的自然", slide3Desc: "等待探索的山谷和海洋",
+            sections: { landmarks: "🏛️ 地标", food: "🍽️ 传统美食", stories: "📖 历史故事", customs: "🎭 习俗传统", hotels: "🏨 最佳酒店", cafes: "☕ 最佳咖啡馆" }
+        }
+    };
 
-    "الخنجر العُماني": { en: "Khanjar", zh: "阿曼匕首" },
-    "القهوة العُمانية": { en: "Omani Coffee", zh: "阿曼咖啡" },
+    function getLangCode() { return currentLang; }
+    function getText(key) { return uiText[currentLang][key]; }
+    function getCityName(city) { return city[`name${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getCityDesc(city) { return city[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getHighlights(city) { return city[`highlights${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getLandmarks(city) { return city[`landmarks${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getFood(city) { return city[`food${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getStories(city) { return city[`stories${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getCustoms(city) { return city[`customs${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getHotels(city) { return city[`hotels${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getCafes(city) { return city[`cafes${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getSpecialTitle(city) { return city.special[`title${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getSpecialDesc(city) { return city.special[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getSpecialDetails(city) { return city.special[`details${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
 
-    "فندق البستان": { en: "Al Bustan Hotel", zh: "阿尔布斯坦酒店" },
-    "شانغريلا": { en: "Shangri-La", zh: "香格里拉酒店" },
-
-    "مقهى عُمان للقهوة": { en: "Oman Coffee Cafe", zh: "阿曼咖啡馆" },
-    "ستاربكس": { en: "Starbucks", zh: "星巴克" }
-};
-
-function translateItem(item, lang) {
-    const key = item.split(':')[0].trim();
-    if (dict[key] && dict[key][lang]) {
-        return item.replace(key, dict[key][lang]);
+    function renderHome() {
+        const grid = document.getElementById('citiesGrid');
+        grid.innerHTML = cityKeys.map(key => {
+            const city = citiesData[key];
+            const highlights = getHighlights(city);
+            return `<div class="city-card" onclick="openCity('${key}')">
+                        <div class="card-icon">${city.icon}</div>
+                        <div class="card-content">
+                            <h3>${getCityName(city)}</h3>
+                            <p>${getCityDesc(city)}</p>
+                            <div class="city-tags">${highlights.slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
+                        </div>
+                    </div>`;
+        }).join('');
+        document.getElementById('mainPage').style.display = 'block';
+        document.getElementById('cityPagesContainer').innerHTML = '';
     }
-    return item;
-}
 
-function translateArray(arr, lang) {
-    if (lang === 'ar') return arr;
-    return arr.map(item => translateItem(item, lang));
-}
-
-function getTranslated(arr) {
-    return translateArray(arr, currentLang);
-}
-
-/* ==================== YOUR ORIGINAL CODE (FIXED) ==================== */
-
-const cityKeys = ["muscat", "nizwa", "salalah"];
-let currentLang = 'ar';
-let currentCityId = null;
-
-const translations = {
-    ar: { 
-        backHome: "🏠 العودة للرئيسية",
-        sections: { landmarks: "🏛️ المعالم السياحية", food: "🍽️ الأكلات الشعبية", stories: "📖 القصص التاريخية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل الفنادق", cafes: "☕ أفضل المقاهي" } 
-    },
-    en: { 
-        backHome: "🏠 Back to Home",
-        sections: { landmarks: "🏛️ Landmarks", food: "🍽️ Food", stories: "📖 Stories", customs: "🎭 Customs", hotels: "🏨 Hotels", cafes: "☕ Cafes" } 
-    },
-    zh: { 
-        backHome: "🏠 返回首页",
-        sections: { landmarks: "🏛️ 地标", food: "🍽️ 美食", stories: "📖 故事", customs: "🎭 传统", hotels: "🏨 酒店", cafes: "☕ 咖啡馆" } 
-    }
-};
-
-function getCityName(city) { return city[`name${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
-function getCityDesc(city) { return city[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
-function getSpecialTitle(city) { return city.special[`title${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
-function getSpecialDesc(city) { return city.special[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
-
-/* ==================== HOME ==================== */
-function renderHome() {
-    const grid = document.getElementById('citiesGrid');
-
-    grid.innerHTML = cityKeys.map(key => {
-        const city = citiesData[key];
-        return `
-            <div class="city-card" onclick="openCity('${key}')">
-                <div class="card-icon">${city.icon}</div>
-                <div class="card-content">
-                    <h3>${getCityName(city)}</h3>
-                    <p>${getCityDesc(city)}</p>
-                    <div class="city-tags">
-                        ${getTranslated(city.highlights).slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}
-                    </div>
+    function openCity(cityKey) {
+        currentCityId = cityKey;
+        const city = citiesData[cityKey];
+        const t = uiText[currentLang];
+        const container = document.getElementById('cityPagesContainer');
+        container.innerHTML = `
+            <div class="city-page active-page">
+                <div style="text-align:center"><button class="home-btn" onclick="backHome()">${t.backHome}</button></div>
+                <div class="city-header"><h2>${getCityName(city)}</h2></div>
+                <div class="section special-section"><h3>✨ ${getSpecialTitle(city)} <span class="animated-icon">${city.icon}</span></h3><p>${getSpecialDesc(city)}</p>
+                    <div class="items-grid">${getSpecialDetails(city).map(d => `<div class="item-card"><h4>${d}</h4></div>`).join('')}</div>
                 </div>
+                <div class="section"><h3>${t.sections.landmarks}</h3><div class="items-grid">${getLandmarks(city).map(l => `<div class="item-card"><h4>${l.split(':')[0]}</h4><p>${l.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.food}</h3><div class="items-grid">${getFood(city).map(f => `<div class="item-card"><h4>${f.split(':')[0]}</h4><p>${f.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.stories}</h3><div class="items-grid">${getStories(city).map(s => `<div class="item-card"><h4>${s.split(':')[0]}</h4><p>${s.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.customs}</h3><div class="items-grid">${getCustoms(city).map(c => `<div class="item-card"><h4>${c.split(':')[0]}</h4><p>${c.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.hotels}</h3><div class="items-grid">${getHotels(city).map(h => `<div class="item-card"><h4>${h.split(':')[0]}</h4><p>${h.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.cafes}</h3><div class="items-grid">${getCafes(city).map(c => `<div class="item-card"><h4>${c.split(':')[0]}</h4><p>${c.split(':')[1] || ''}</p></div>`).join('')}</div></div>
             </div>
         `;
-    }).join('');
+        document.getElementById('mainPage').style.display = 'none';
+    }
 
-    document.getElementById('mainPage').style.display = 'block';
-    document.getElementById('cityPagesContainer').innerHTML = '';
-}
+    function backHome() { renderHome(); }
 
-/* ==================== CITY PAGE ==================== */
-function openCity(cityKey) {
-    currentCityId = cityKey;
-    const city = citiesData[cityKey];
-    const t = translations[currentLang];
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        const t = uiText[lang];
+        
+        // Update slider texts
+        document.getElementById('slide1Title').innerHTML = t.slide1Title;
+        document.getElementById('slide1Desc').innerHTML = t.slide1Desc;
+        document.getElementById('slide2Title').innerHTML = t.slide2Title;
+        document.getElementById('slide2Desc').innerHTML = t.slide2Desc;
+        document.getElementById('slide3Title').innerHTML = t.slide3Title;
+        document.getElementById('slide3Desc').innerHTML = t.slide3Desc;
+        document.getElementById('footerText').innerHTML = t.footer;
+        
+        if (currentCityId) { openCity(currentCityId); }
+        else { renderHome(); }
+    }
 
-    document.getElementById('cityPagesContainer').innerHTML = `
-        <div class="city-page active-page">
-            <div style="text-align:center">
-                <button class="home-btn" onclick="backHome()">${t.backHome}</button>
-            </div>
+    // Slider functionality
+    function initSlider() {
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('sliderDots');
+        
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+        
+        function goToSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (dotsContainer.children[i]) dotsContainer.children[i].classList.remove('active');
+            });
+            slides[index].classList.add('active');
+            dotsContainer.children[index].classList.add('active');
+            slideIndex = index;
+        }
+        
+        function nextSlide() {
+            let next = (slideIndex + 1) % slides.length;
+            goToSlide(next);
+        }
+        
+        slideInterval = setInterval(nextSlide, 5000);
+        window.goToSlide = goToSlide;
+    }
 
-            <div class="city-header">
-                <h2>${getCityName(city)}</h2>
-            </div>
-
-            <div class="section special-section">
-                <h3>✨ ${getSpecialTitle(city)}</h3>
-                <p>${getSpecialDesc(city)}</p>
-            </div>
-
-            <div class="section">
-                <h3>${t.sections.landmarks}</h3>
-                <div class="items-grid">
-                    ${getTranslated(city.landmarks).map(l => `<div class="item-card"><p>${l}</p></div>`).join('')}
-                </div>
-            </div>
-
-            <div class="section">
-                <h3>${t.sections.food}</h3>
-                <div class="items-grid">
-                    ${getTranslated(city.food).map(f => `<div class="item-card"><p>${f}</p></div>`).join('')}
-                </div>
-            </div>
-
-            <div class="section">
-                <h3>${t.sections.stories}</h3>
-                <div class="items-grid">
-                    ${getTranslated(city.stories).map(s => `<div class="item-card"><p>${s}</p></div>`).join('')}
-                </div>
-            </div>
-
-            <div class="section">
-                <h3>${t.sections.customs}</h3>
-                <div class="items-grid">
-                    ${getTranslated(city.customs).map(c => `<div class="item-card"><p>${c}</p></div>`).join('')}
-                </div>
-            </div>
-
-            <div class="section">
-                <h3>${t.sections.hotels}</h3>
-                <div class="items-grid">
-                    ${getTranslated(city.hotels).map(h => `<div class="item-card"><p>${h}</p></div>`).join('')}
-                </div>
-            </div>
-
-            <div class="section">
-                <h3>${t.sections.cafes}</h3>
-                <div class="items-grid">
-                    ${getTranslated(city.cafes).map(c => `<div class="item-card"><p>${c}</p></div>`).join('')}
-                </div>
-            </div>
-        </div>
-    `;
-
-    document.getElementById('mainPage').style.display = 'none';
-}
-
-/* ==================== NAV ==================== */
-function backHome() { renderHome(); }
-
-function setLanguage(lang) {
-    currentLang = lang;
-    document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-
-    if (currentCityId) openCity(currentCityId);
-    else renderHome();
-}
-
-/* ==================== INIT ==================== */
-renderHome();
-
+    renderHome();
+    initSlider();
 </script>
+</body>
+</html>
