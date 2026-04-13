@@ -158,7 +158,17 @@
     <button class="lang-btn" onclick="setLanguage('en')">🇬🇧 English</button>
     <button class="lang-btn" onclick="setLanguage('zh')">🇨🇳 中文</button>
 </div>
+</div>
 
+<button onclick="goBack()" style="background: #d4af37; color: #1a5c3e; border: none; padding: 0.6rem 1.5rem; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 10px auto; display: block; font-size: 1rem;">
+    🔙 رجوع
+</button>
+
+<div id="mainPage">
+    <div class="hero">
+        <h1 id="heroTitle">🌴 سمر | Summer</h1>
+        <p id="heroDesc">مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان</p>
+    </div>
 <div id="mainPage">
     <div class="hero">
         <h1 id="heroTitle">🌴 سمر | Summer</h1>
@@ -424,6 +434,15 @@
     }
 
     renderHome();
+        function goBack() {
+        if (currentDetailId) {
+            closeDetailPage();
+        } else if (currentCityId) {
+            backHome();
+        } else {
+            window.history.back();
+        }
+    }
 </script>
 </body>
 </html>
