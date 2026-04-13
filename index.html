@@ -39,7 +39,6 @@
         }
         .lang-btn:hover { background-color: #d4af37; color: #1a5c3e; transform: scale(1.05); }
 
-        /* زر الرجوع */
         .back-btn {
             background: #d4af37;
             color: #1a5c3e;
@@ -138,12 +137,6 @@
         .special-section { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border: 2px solid #d4af37; }
         .animated-icon { display: inline-block; animation: float 2s infinite; font-size: 1.5rem; }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
-        .home-btn {
-            background: #d4af37; color: #1a5c3e; border: none; padding: 0.6rem 1.5rem;
-            border-radius: 30px; cursor: pointer; margin: 1rem auto; display: inline-block;
-            font-weight: bold;
-        }
-        .home-btn:hover { background: #1a5c3e; color: #d4af37; }
         .footer { background: #1a5c3e; color: #e8f5e9; text-align: center; padding: 1.5rem; margin-top: 2rem; }
 
         .detail-page {
@@ -179,9 +172,6 @@
     <button class="lang-btn" onclick="setLanguage('zh')">🇨🇳 中文</button>
 </div>
 
-<!-- زر الرجوع -->
-<button class="back-btn" onclick="goBack()">🔙 رجوع</button>
-
 <div id="mainPage">
     <div class="hero">
         <h1 id="heroTitle">🌴 سمر | Summer</h1>
@@ -196,31 +186,31 @@
 <div class="footer"><p>© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان</p></div>
 
 <script>
-    // ==================== DETAILS DATA ====================
+    // ==================== COMPLETE DETAILS DATA WITH FULL TRANSLATIONS ====================
     const detailsData = {
         "hotel-grand-hyatt-muscat": {
-            ar: { title: "🏨 فندق جراند حياة مسقط", desc: "فندق فاخر 5 نجوم يقع في قلب مسقط.", location: "الخوير، مسقط", directions: "على شارع السلطان قابوس", price: "من 95 ر.ع. / 380 ر.س", bestTime: "طوال العام" },
-            en: { title: "🏨 Grand Hyatt Muscat", desc: "5-star luxury hotel in the heart of Muscat.", location: "Al Khuwair, Muscat", directions: "On Sultan Qaboos Street", price: "From $247", bestTime: "All year round" },
-            zh: { title: "🏨 马斯喀特君悦酒店", desc: "位于马斯喀特市中心的五星级豪华酒店。", location: "阿尔库维尔，马斯喀特", directions: "位于苏丹卡布斯大街", price: "247美元起", bestTime: "全年" }
+            ar: { title: "🏨 فندق جراند حياة مسقط", desc: "فندق فاخر 5 نجوم يقع في قلب مسقط، يوفر إطلالات رائعة على البحر.", location: "الخوير، مسقط", directions: "على شارع السلطان قابوس، بالقرب من مجمع الخوير.", price: "من 95 ر.ع. / 380 ر.س", bestTime: "طوال العام" },
+            en: { title: "🏨 Grand Hyatt Muscat", desc: "5-star luxury hotel in the heart of Muscat with stunning sea views.", location: "Al Khuwair, Muscat", directions: "On Sultan Qaboos Street, near Al Khuwair Complex.", price: "From $247", bestTime: "All year round" },
+            zh: { title: "🏨 马斯喀特君悦酒店", desc: "位于马斯喀特市中心的五星级豪华酒店，享有壮丽海景。", location: "阿尔库维尔，马斯喀特", directions: "位于苏丹卡布斯大街，靠近阿尔库维尔综合大楼。", price: "247美元起", bestTime: "全年" }
         },
         "special-fireworks": {
-            ar: { title: "🎆 ألعاب نارية", desc: "عرض ألعاب نارية مذهلة يضيء سماء مسقط.", location: "حديقة النسيم، مسقط", directions: "بجانب دار الأوبرا", price: "مجاني", bestTime: "يناير - فبراير، 9 مساءً" },
-            en: { title: "🎆 Fireworks", desc: "Spectacular fireworks display in Muscat.", location: "Al Naseem Park, Muscat", directions: "Next to Royal Opera House", price: "Free", bestTime: "Jan-Feb, 9 PM" },
-            zh: { title: "🎆 烟花", desc: "马斯喀特壮观的烟花表演。", location: "阿纳西姆公园，马斯喀特", directions: "皇家歌剧院旁边", price: "免费", bestTime: "一月至二月，晚上9点" }
+            ar: { title: "🎆 ألعاب نارية - مهرجان مسقط", desc: "عرض ألعاب نارية مذهلة يضيء سماء مسقط في ختام المهرجان.", location: "حديقة النسيم العامة، مسقط", directions: "تقع بجانب دار الأوبرا السلطانية.", price: "مجاني", bestTime: "يناير - فبراير، الساعة 9 مساءً" },
+            en: { title: "🎆 Fireworks - Muscat Festival", desc: "Spectacular fireworks display lighting up the Muscat sky at the festival's conclusion.", location: "Al Naseem Public Park, Muscat", directions: "Located next to the Royal Opera House.", price: "Free", bestTime: "January - February, 9 PM" },
+            zh: { title: "🎆 烟花 - 马斯喀特节", desc: "壮观的烟花表演在节日结束时照亮马斯喀特的天空。", location: "阿纳西姆公园，马斯喀特", directions: "位于皇家歌剧院旁边。", price: "免费", bestTime: "一月至二月，晚上9点" }
         },
         "special-rose": {
-            ar: { title: "🌹 موسم الورد", desc: "موسم قطف الورد في الجبل الأخضر.", location: "الجبل الأخضر، نزوى", directions: "45 دقيقة من نزوى", price: "2 ر.ع. / 8 ر.س", bestTime: "مارس - مايو" },
-            en: { title: "🌹 Rose Season", desc: "Rose picking season in Jebel Akhdar.", location: "Jebel Akhdar, Nizwa", directions: "45 min from Nizwa", price: "$5.20", bestTime: "March - May" },
-            zh: { title: "🌹 玫瑰季节", desc: "绿色山脈的玫瑰采摘季节。", location: "绿色山脈，尼兹瓦", directions: "距尼兹瓦45分钟", price: "38元", bestTime: "三月至五月" }
+            ar: { title: "🌹 موسم الورد في الجبل الأخضر", desc: "من مارس إلى مايو، يتفتح الورد الجبلي بآلاف الألوان والعطور.", location: "الجبل الأخضر، نزوى", directions: "على بعد 45 دقيقة من مدينة نزوى عبر طريق جبلي.", price: "الدخول للمهرجان: 2 ر.ع. / 8 ر.س", bestTime: "مارس - مايو" },
+            en: { title: "🌹 Rose Season in Jebel Akhdar", desc: "From March to May, the mountain roses bloom with thousands of colors and scents.", location: "Jebel Akhdar, Nizwa", directions: "45 minutes from Nizwa city via mountain road.", price: "Festival entry: $5.20", bestTime: "March - May" },
+            zh: { title: "🌹 绿色山脈的玫瑰季节", desc: "三月至五月，高山玫瑰绽放，成千上万的颜色和香味。", location: "绿色山脈，尼兹瓦", directions: "经山路距尼兹瓦市45分钟车程。", price: "节日入场费：38元", bestTime: "三月至五月" }
         },
         "special-khareef": {
-            ar: { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار في صلالة.", location: "صلالة، ظفار", directions: "مطار صلالة الدولي", price: "مجاني", bestTime: "يونيو - سبتمبر" },
-            en: { title: "🌧️ Khareef Salalah", desc: "Monsoon season in Salalah.", location: "Salalah, Dhofar", directions: "Salalah International Airport", price: "Free", bestTime: "June - September" },
-            zh: { title: "🌧️ 塞拉莱雨季", desc: "塞拉莱的季风季节。", location: "塞拉莱，佐法尔", directions: "塞拉莱国际机场", price: "免费", bestTime: "六月至九月" }
+            ar: { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار من يونيو إلى سبتمبر، تتحول الطبيعة إلى خضرة.", location: "صلالة، ظفار", directions: "يمكن الوصول عبر مطار صلالة الدولي أو الطريق الساحلي.", price: "الدخول مجاني (بعض المواقع 1-2 ر.ع.)", bestTime: "يونيو - سبتمبر" },
+            en: { title: "🌧️ Khareef Salalah", desc: "Monsoon season from June to September, nature turns lush green.", location: "Salalah, Dhofar", directions: "Accessible via Salalah International Airport or coastal road.", price: "Free entry (some sites $2.60-$5.20)", bestTime: "June - September" },
+            zh: { title: "🌧️ 塞拉莱雨季", desc: "六月至九月的季风季节，大自然变成郁郁葱葱的绿色。", location: "塞拉莱，佐法尔", directions: "可通过塞拉莱国际机场或沿海公路到达。", price: "免费入场（部分景点19-38元）", bestTime: "六月至九月" }
         }
     };
 
-    // ==================== CITY DATA ====================
+    // ==================== CITY DATA WITH FULL TRANSLATIONS ====================
     const citiesData = {
         muscat: {
             nameAr: "مسقط", nameEn: "Muscat", nameZh: "马斯喀特",
@@ -233,7 +223,7 @@
             customs: ["الخنجر العُماني: رمز الرجولة", "القهوة العُمانية: تقدم مع التمر", "مهرجان مسقط: فعاليات سنوية", "اللباس التقليدي: الدشداشة", "الرقصات الشعبية: الرزحة"],
             hotels: ["فندق جراند حياة مسقط", "شانغريلا - بر الجصة", "كراون بلازا مسقط", "شيراتون عُمان", "انتركونتيننتال مسقط"],
             cafes: ["مقهى عُمان للقهوة", "ستاربكس - القرم", "مقهى بون", "مقهى الكتب", "مقهى زين"],
-            special: { titleAr: "🎭 مهرجان مسقط", titleEn: "🎭 Muscat Festival", titleZh: "🎭 马斯喀特节", descAr: "مهرجان ثقافي سنوي في يناير وفبراير.", descEn: "Annual cultural festival in Jan-Feb.", descZh: "一月至二月的年度文化节。", details: ["ألعاب نارية"] }
+            special: { titleAr: "🎭 مهرجان مسقط", titleEn: "🎭 Muscat Festival", titleZh: "🎭 马斯喀特节", descAr: "مهرجان ثقافي سنوي في يناير وفبراير.", descEn: "Annual cultural festival in January-February.", descZh: "一月至二月的年度文化节。", details: ["ألعاب نارية"] }
         },
         nizwa: {
             nameAr: "نزوى", nameEn: "Nizwa", nameZh: "尼兹瓦",
@@ -251,7 +241,7 @@
         salalah: {
             nameAr: "صلالة", nameEn: "Salalah", nameZh: "塞拉莱",
             icon: "🌧️", category: "nature",
-            descAr: "جنة الخريف الساحرة، أرض اللبان", descEn: "Magical Khareef paradise", descZh: "神奇的季风天堂",
+            descAr: "جنة الخريف الساحرة، أرض اللبان", descEn: "Magical Khareef paradise, land of frankincense", descZh: "神奇的季风天堂，乳香之地",
             highlights: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل", "أرض البخور", "سوق الحافة"],
             landmarks: ["وادي دربات: شلالات موسمية", "شاطئ المغسيل: فوهات مائية", "أرض اللبان: موقع يونسكو", "سوق الحافة: لبان وعسل", "جبل صمرحان: إطلالات"],
             food: ["المندي: لحم وأرز", "السمك المشوي: طازج", "العسل العماني: جبلي", "حلوى الحليب: تقليدية", "القهوة الظفارية: بنكهة اللبان"],
@@ -269,12 +259,12 @@
     let currentDetailId = null;
 
     const translations = {
-        ar: { heroTitle: "🌴 سمر | Summer", heroDesc: "مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان", backHome: "🏠 العودة للرئيسية", backToCity: "🏠 العودة للمدينة",
+        ar: { heroTitle: "🌴 سمر | Summer", heroDesc: "مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان", backToCity: "🏠 العودة للمدينة", backHome: "🏠 العودة للرئيسية",
               sections: { landmarks: "🏛️ المعالم السياحية", food: "🍽️ الأكلات الشعبية", stories: "📖 القصص التاريخية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل 5 فنادق", cafes: "☕ أفضل 5 مقاهي" } },
-        en: { heroTitle: "🌴 Summer | Your AI Guide", heroDesc: "Your AI Smart Tourism Guide | Covers the best destinations in Oman", backHome: "🏠 Back to Home", backToCity: "🏠 Back to City",
-              sections: { landmarks: "🏛️ Landmarks", food: "🍽️ Traditional Food", stories: "📖 Historical Stories", customs: "🎭 Customs & Traditions", hotels: "🏨 Top 5 Hotels", cafes: "☕ Top 5 Cafes" } },
-        zh: { heroTitle: "🌴 Summer | 您的AI导游", heroDesc: "您的AI智能旅游指南 | 覆盖阿曼最佳目的地", backHome: "🏠 返回首页", backToCity: "🏠 返回城市",
-              sections: { landmarks: "🏛️ 地标", food: "🍽️ 传统美食", stories: "📖 历史故事", customs: "🎭 习俗传统", hotels: "🏨 最佳酒店", cafes: "☕ 最佳咖啡馆" } }
+        en: { heroTitle: "🌴 Summer | Your AI Guide", heroDesc: "Your AI Smart Tourism Guide | Covers the best destinations in Oman", backToCity: "🏠 Back to City", backHome: "🏠 Back to Home",
+              sections: { landmarks: "🏛️ Landmarks & Attractions", food: "🍽️ Traditional Food", stories: "📖 Historical Stories", customs: "🎭 Customs & Traditions", hotels: "🏨 Top 5 Hotels", cafes: "☕ Top 5 Cafes" } },
+        zh: { heroTitle: "🌴 Summer | 您的AI导游", heroDesc: "您的AI智能旅游指南 | 覆盖阿曼最佳目的地", backToCity: "🏠 返回城市", backHome: "🏠 返回首页",
+              sections: { landmarks: "🏛️ 地标与景点", food: "🍽️ 传统美食", stories: "📖 历史故事", customs: "🎭 习俗与传统", hotels: "🏨 最佳酒店", cafes: "☕ 最佳咖啡馆" } }
     };
 
     function getCityName(city) { return city[`name${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
@@ -287,10 +277,11 @@
         const detail = detailsData[detailId];
         if (!detail) return;
         const t = detail[currentLang];
+        const trans = translations[currentLang];
         const container = document.getElementById('detailPageContainer');
         container.innerHTML = `
             <div class="detail-page active-detail">
-                <button class="back-btn" onclick="closeDetailPage()" style="margin: 10px auto;">🔙 ${currentLang === 'ar' ? 'رجوع للمدينة' : (currentLang === 'en' ? 'Back to City' : '返回城市')}</button>
+                <button class="back-btn" onclick="closeDetailPage()">🔙 ${trans.backToCity}</button>
                 <div class="detail-header"><h2>${t.title}</h2></div>
                 <div class="detail-info"><h3>📝 ${currentLang === 'ar' ? 'الوصف' : (currentLang === 'en' ? 'Description' : '描述')}</h3><p>${t.desc}</p></div>
                 <div class="detail-location"><h3>📍 ${currentLang === 'ar' ? 'الموقع' : (currentLang === 'en' ? 'Location' : '位置')}</h3><p>${t.location}</p></div>
@@ -310,7 +301,6 @@
             openCity(currentCityId);
         } else {
             document.getElementById('mainPage').style.display = 'block';
-            document.getElementById('cityPagesContainer').style.display = 'block';
         }
     }
 
@@ -340,7 +330,7 @@
         
         container.innerHTML = `
             <div class="city-page active-page">
-                <button class="back-btn" onclick="backHome()" style="margin: 10px auto;">🔙 ${t.backHome}</button>
+                <button class="back-btn" onclick="backHome()">🔙 ${t.backHome}</button>
                 <div class="city-header"><h2>${getCityName(city)}</h2></div>
                 <div class="section special-section"><h3>✨ ${getSpecialTitle(city)} <span class="animated-icon">${city.icon}</span></h3><p>${getSpecialDesc(city)}</p>
                     <div class="items-grid">${city.special.details.map((d, idx) => `<div class="item-card" onclick="openDetailPage('special-fireworks')"><h4>${d}</h4></div>`).join('')}</div>
@@ -349,8 +339,8 @@
                 <div class="section"><h3>${t.sections.food}</h3><div class="items-grid">${city.food.map(f => `<div class="item-card"><h4>${f.split(':')[0]}</h4><p>${f.split(':')[1] || ''}</p></div>`).join('')}</div></div>
                 <div class="section"><h3>${t.sections.stories}</h3><div class="items-grid">${city.stories.map(s => `<div class="item-card"><h4>${s.split(':')[0]}</h4><p>${s.split(':')[1] || ''}</p></div>`).join('')}</div></div>
                 <div class="section"><h3>${t.sections.customs}</h3><div class="items-grid">${city.customs.map(c => `<div class="item-card"><h4>${c.split(':')[0]}</h4><p>${c.split(':')[1] || ''}</p></div>`).join('')}</div></div>
-                <div class="section"><h3>${t.sections.hotels}</h3><div class="items-grid">${city.hotels.map((h, idx) => `<div class="item-card" onclick="openDetailPage('hotel-grand-hyatt-muscat')"><h4>${h}</h4><p>فندق 5 نجوم</p></div>`).join('')}</div></div>
-                <div class="section"><h3>${t.sections.cafes}</h3><div class="items-grid">${city.cafes.map(c => `<div class="item-card"><h4>${c}</h4><p>مقهى مميز</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.hotels}</h3><div class="items-grid">${city.hotels.map((h, idx) => `<div class="item-card" onclick="openDetailPage('hotel-grand-hyatt-muscat')"><h4>${h}</h4><p>${currentLang === 'ar' ? 'فندق 5 نجوم' : (currentLang === 'en' ? '5-star hotel' : '五星级酒店')}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.cafes}</h3><div class="items-grid">${city.cafes.map(c => `<div class="item-card"><h4>${c}</h4><p>${currentLang === 'ar' ? 'مقهى مميز' : (currentLang === 'en' ? 'Specialty cafe' : '特色咖啡馆')}</p></div>`).join('')}</div></div>
             </div>
         `;
         document.getElementById('mainPage').style.display = 'none';
