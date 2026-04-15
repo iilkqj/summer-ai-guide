@@ -360,7 +360,7 @@
         .detail-price { font-size: 1.5rem; color: #D4AF37; font-weight: bold; margin: 1rem 0; }
         .detail-location { background: #E3F2FD; padding: 1rem; border-radius: 15px; margin: 1rem 0; }
 
-        /* AI Floating Button & Chat */
+        /* AI Chat */
         .ai-floating {
             position: fixed;
             bottom: 20px;
@@ -390,7 +390,7 @@
             position: fixed;
             bottom: 90px;
             left: 20px;
-            width: 350px;
+            width: 380px;
             background: white;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -409,7 +409,7 @@
         }
         .ai-chat-body {
             padding: 1rem;
-            height: 350px;
+            height: 400px;
             overflow-y: auto;
             font-size: 0.9rem;
         }
@@ -427,13 +427,15 @@
             margin: 0.5rem 0;
             text-align: left;
         }
-        .suggestions-grid {
+        .quick-buttons {
             display: flex;
-            flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: #F8F9FA;
+            border-bottom: 1px solid #E3F2FD;
+            flex-wrap: wrap;
         }
-        .suggestion-btn {
+        .quick-btn {
             background: #1E88E5;
             color: white;
             border: none;
@@ -443,7 +445,7 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        .suggestion-btn:hover {
+        .quick-btn:hover {
             background: #D4AF37;
             color: #0D47A1;
         }
@@ -471,7 +473,7 @@
             .city-header h2 { font-size: 1.8rem; }
             .section h3 { font-size: 1.4rem; }
             .why-grid, .seasons-grid { grid-template-columns: 1fr; }
-            .ai-chat { width: 300px; left: 10px; bottom: 80px; }
+            .ai-chat { width: 320px; left: 10px; bottom: 80px; }
         }
     </style>
 </head>
@@ -523,20 +525,24 @@
 
 <div class="ai-chat" id="aiChat">
     <div class="ai-chat-header">🤖 سمر | المساعد الذكي</div>
+    <div class="quick-buttons">
+        <button class="quick-btn" onclick="askQuestion('ask')">🔍 اسأل سمر</button>
+        <button class="quick-btn" onclick="askQuestion('plan')">🗺️ خطط رحلتي</button>
+        <button class="quick-btn" onclick="askQuestion('suggest')">💡 اقتراح تلقائي</button>
+    </div>
     <div class="ai-chat-body" id="aiChatBody">
         <div class="ai-chat-message">👋 مرحباً! أنا سمر، مساعدك الذكي. اسألني عن أي شيء في عمان!</div>
-        <div class="suggestions-grid" id="suggestionsGrid"></div>
     </div>
     <div class="ai-chat-input">
-        <input type="text" id="aiChatInput" placeholder="اسأل سمر...">
+        <input type="text" id="aiChatInput" placeholder="اكتب سؤالك هنا...">
         <button onclick="sendAIMessage()">إرسال</button>
     </div>
 </div>
 
-<div class="footer"><p>© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان</p></div>
+<div class="footer"><p id="footerText">© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان</p></div>
 
 <script>
-    // ==================== COMPLETE TRANSLATIONS ====================
+    // ==================== COMPLETE TRANSLATIONS (FULLY TRANSLATED) ====================
     const translations = {
         ar: {
             heroTitle: "🌊 سمر | Summer",
@@ -552,6 +558,7 @@
             khareefTitle: "خريف صلالة", khareefDesc: "موسم الضباب والأمطار من يونيو إلى سبتمبر",
             winterTitle: "الشتاء", winterDesc: "أفضل وقت للتخييم في الصحاري والوديان",
             backToCity: "🏠 العودة للمدينة", backHome: "🏠 العودة للرئيسية",
+            footer: "© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان",
             sections: { landmarks: "🏛️ المعالم والأنشطة", food: "🍽️ الأكلات الشعبية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل الفنادق", cafes: "☕ أفضل المقاهي", restaurants: "🍽️ أفضل المطاعم" }
         },
         en: {
@@ -568,6 +575,7 @@
             khareefTitle: "Salalah Khareef", khareefDesc: "Monsoon season from June to September",
             winterTitle: "Winter", winterDesc: "Best time for camping in deserts and wadis",
             backToCity: "🏠 Back to City", backHome: "🏠 Back to Home",
+            footer: "© 2026 Summer | Your AI Smart Tourism Guide in Oman",
             sections: { landmarks: "🏛️ Attractions & Activities", food: "🍽️ Traditional Food", customs: "🎭 Customs & Traditions", hotels: "🏨 Top Hotels", cafes: "☕ Top Cafes", restaurants: "🍽️ Best Restaurants" }
         },
         zh: {
@@ -584,53 +592,66 @@
             khareefTitle: "塞拉莱雨季", khareefDesc: "六月至九月的季风季节",
             winterTitle: "冬季", winterDesc: "沙漠和干河露营的最佳时间",
             backToCity: "🏠 返回城市", backHome: "🏠 返回首页",
+            footer: "© 2026 Summer | 您的阿曼智能旅游指南",
             sections: { landmarks: "🏛️ 景点与活动", food: "🍽️ 传统美食", customs: "🎭 习俗与传统", hotels: "🏨 最佳酒店", cafes: "☕ 最佳咖啡馆", restaurants: "🍽️ 最佳餐厅" }
         }
     };
 
-    // ==================== AI RESPONSES (10+ Smart Responses) ====================
+    // ==================== SMART AI RESPONSES (FULLY TRANSLATED) ====================
     const aiResponses = {
         ar: {
-            default: "شكراً لسؤالك! 😊 أنا سمر، أساعدك في اكتشاف عمان. يمكنك سؤالي عن المدن، المطاعم، الفعاليات، أو أطلب مني اقتراح خيارات. ماذا تحب أن تعرف؟",
-            restaurantsMuscat: "🍽️ **أفضل ٥ مطاعم في مسقط:**\n1. P.F. Chang's (صيني - Avenues Mall)\n2. China Mood (صيني فاخر - Al Bustan Palace)\n3. Bait Al Luban (عماني تقليدي - القرم)\n4. Turkish House (تركي - الخوير)\n5. The Steakhouse (ستيك - الخوير)\n\nهل تريد معلومات أكثر عن أي مطعم؟",
-            placesNizwa: "🏛️ **أفضل أماكن سياحية في نزوى:**\n• قلعة نزوى (برج دائري ضخم)\n• سوق نزوى التقليدي (خناجر وفضة)\n• الجبل الأخضر (موسم الورد مارس-مايو)\n• فلج دارس (موقع تراث عالمي)\n• حصن بيت الرديدة\n\nهل تريد تفاصيل أكثر عن أي مكان؟",
-            khareefTiming: "🌧️ **موسم خريف صلالة** يبدأ من **يونيو** ويستمر حتى **سبتمبر**.\n\nخلال هذه الفترة، تتحول الطبيعة إلى خضرة جميلة، مع ضباب وأمطار خفيفة. أفضل وقت للزيارة هو يوليو وأغسطس.\n\nهل تريد اقتراحات لأماكن في صلالة؟",
-            omaniFood: "🍖 **أين تذوق الأكل العماني الشعبي؟**\n\n• مطعم الأخطم (القرم، مسقط) - الشواء العماني\n• مطعم بيت اللبن (القرم) - مجبوس وهريس\n• مطعم القلعة (نزوى) - حلوى عمانية\n• سوق مطرح (مسقط) - خبيصة وبلاليط\n\nهل تريد طريقة تحضير أي أكلة؟",
-            hotelSalalah: "🏨 **أفضل فنادق ٥ نجوم في صلالة:**\n\n1. فندق الفانات - جي دبليو ماريوت (منتجع فاخر)\n2. منتجع صلالة روتانا (إطلالة على البحر)\n3. منتجع كراون بلازا صلالة (قريب من شاطئ المغسيل)\n4. فندق صلالة بيتش (على البحر مباشرة)\n5. فندق هوليدي إن صلالة (خيار اقتصادي فاخر)\n\nهل تريد معرفة الأسعار؟",
-            eventsMuscat: "🎭 **الفعاليات في مسقط 2026:**\n\n• مهرجان مسقط (يناير-فبراير): عروض موسيقية، ألعاب نارية، أكشاك طعام\n• معرض عمان للكتاب (فبراير/مارس)\n• مهرجان صلالة السياحي (يوليو-أغسطس)\n• سباقات الهجن (أكتوبر-مارس)\n\nهل تريد مواعيد محددة؟",
-            wadiShabDirections: "🏞️ **كيف تصل إلى وادي شاب؟**\n\n• من مسقط: 1.5 ساعة بالسيارة (اتجاه صور)\n• من صور: 45 دقيقة\n• بعد الوصول: تحتاج قارب صغير (1 ريال) لعبور النهر\n• ثم تمشي 40 دقيقة لتصل إلى المسابح والكهف\n\n⚠️ نصيحة: أحضر ملابس سباحة وماء!",
-            omaniCustoms: "🎭 **العادات العمانية الأصيلة:**\n\n• الخنجر العماني: رمز الرجولة والشرف\n• القهوة العمانية: تقدم للضيوف مع التمر\n• الرزحة: رقصة شعبية بالسيوف\n• العازي: فن شعري تقليدي\n• الفلاج: نظام ري قديم (تراث عالمي)\n\nهل تريد معرفة المزيد عن أي عادة؟",
-            twoDayTrip: "🗺️ **رحلة مقترحة ليومين في عمان:**\n\n**اليوم الأول - مسقط:**\n• الصباح: الجامع الكبير\n• الظهر: متحف عمان + سوق مطرح\n• المساء: كورنيش مطرح + دار الأوبرا\n\n**اليوم الثاني - نزوى:**\n• الصباح: قلعة نزوى + سوق نزوى\n• الظهر: الجبل الأخضر (مدرجات الورد)\n• المساء: العودة لمسقط\n\nهل تريد تعديل الرحلة؟",
-            jebelAkhdarBestTime: "🌹 **أفضل وقت لزيارة الجبل الأخضر:**\n\n• **مارس - مايو**: موسم الورد (قطف الورد وتقطير ماء الورد)\n• **يونيو - أغسطس**: هروب من حر الصيف (أجواء معتدلة)\n• **سبتمبر - أكتوبر**: موسم الرمان\n\n⚠️ ملاحظة: الطريق جبلي، يفضل سيارة دفع رباعي.\n\nهل تريد معلومات عن الإقامة هناك؟",
-            generalHelp: "أنا هنا لمساعدتك! يمكنك سؤالي عن:\n• مدن عمان (مسقط، نزوى، صلالة)\n• مطاعم وفنادق\n• فعاليات ومواسم\n• عادات وتقاليد\n• وجهات سياحية\n\nماذا تريد أن تعرف؟"
+            welcome: "👋 مرحباً! أنا سمر، مساعدك الذكي. اسألني عن أي شيء في عمان!",
+            ask: "🔍 ماذا تريد أن تسأل عن عمان؟ يمكنك أن تسألني عن المدن، المطاعم، الفنادق، الفعاليات، أو أي شيء آخر!",
+            plan: "🗺️ خطط رحلتك إلى عمان! أخبرني: كم يوم ستقضي؟ ما هي اهتماماتك (ثقافة، طبيعة، شواطئ)؟ وسأقوم بإنشاء رحلة مخصصة لك!",
+            suggest: "💡 بناءً على اهتماماتك، أقترح عليك:\n• زيارة مسقط (الجامع الكبير، دار الأوبرا، سوق مطرح)\n• رحلة إلى نزوى (قلعة نزوى، الجبل الأخضر)\n• استمتع بخريف صلالة (يونيو-سبتمبر)\n• مغامرة في وادي شاب أو رمال وهيبة\n• تذوق الأكل العماني الشهي\n\nهل تريد تفاصيل أكثر؟",
+            defaultResponse: (q) => `شكراً لسؤالك عن "${q}". 😊\n\nأنا سمر، مساعدك السياحي الذكي. هل يمكنك توضيح سؤالك أكثر؟\n\nيمكنني مساعدتك في:\n• معلومات عن المدن (مسقط، نزوى، صلالة)\n• اقتراح مطاعم وفنادق\n• فعاليات ومواسم\n• عادات وتقاليد\n• خطط رحلات\n\nماذا تريد أن تعرف بالضبط؟`,
+            muscat: "مسقط: عاصمة عُمان. أبرز المعالم: الجامع الكبير، دار الأوبرا السلطانية، سوق مطرح، متحف عُمان، كورنيش مطرح. أفضل مطاعم: P.F. Chang's، China Mood، Bait Al Luban. أفضل فنادق: جراند حياة، شانغريلا، كراون بلازا.",
+            nizwa: "نزوى: مدينة التراث. أبرز المعالم: قلعة نزوى (برج دائري ضخم)، سوق نزوى التقليدي، الجبل الأخضر (موسم الورد مارس-مايو)، فلج دارس (تراث عالمي).",
+            salalah: "صلالة: جنة الخريف. أبرز المعالم: وادي دربات (شلالات موسمية)، شاطئ المغسيل (فوهات مائية)، أرض اللبان (يونسكو)، خريف صلالة (يونيو-سبتمبر).",
+            wadiShab: "وادي شاب: من أجمل الوديان في عمان.\n• الموقع: بين مسقط وصور\n• النشاطات: سباحة، مشي، تصوير\n• كيفية الوصول: قارب صغير + مشي 40 دقيقة\n• أفضل وقت: أكتوبر-أبريل",
+            wahiba: "رمال وهيبة: بحر من الكثبان الذهبية.\n• النشاطات: ركوب الكثبان، تخييم، مراقبة النجوم\n• أفضل وقت: أكتوبر-مارس (الشتاء)\n• نصيحة: خذ جولة مع مرشد محلي",
+            jebelShams: "جبل شمس: أعلى قمة في عمان (3000م).\n• المميزات: جراند كانيون عمان، مناظر خلابة\n• النشاطات: مشي، تخييم، تصوير\n• أفضل وقت: سبتمبر-أبريل",
+            khareef: "خريف صلالة: موسم الضباب والأمطار من يونيو إلى سبتمبر.\n• المميزات: طبيعة خضراء، شلالات، أجواء باردة\n• الأماكن: وادي دربات، شاطئ المغسيل، جبل صمرحان",
+            restaurants: "أفضل المطاعم في عمان:\n• مسقط: P.F. Chang's (صيني)، Bait Al Luban (عماني)، Turkish House (تركي)\n• نزوى: Great Wall Hot Pot (صيني)، Nizwa Fort Restaurant (عماني)\n• صلالة: China Palace (صيني)، Al Mina (مأكولات بحرية)",
+            hotels: "أفضل الفنادق في عمان:\n• مسقط: جراند حياة، شانغريلا، كراون بلازا\n• نزوى: منتجع الجبل الأخضر، فندق نزوى أوتيل\n• صلالة: الفانات - جي دبليو ماريوت، صلالة روتانا",
+            customs: "العادات العمانية الأصيلة:\n• الخنجر العماني: رمز الرجولة والشرف\n• القهوة العمانية: تقدم للضيوف مع التمر\n• الرزحة: رقصة شعبية بالسيوف\n• العازي: فن شعري تقليدي\n• الفلاج: نظام ري قديم (تراث عالمي)",
+            events: "الفعاليات السنوية في عمان:\n• مهرجان مسقط (يناير-فبراير)\n• معرض عمان للكتاب (فبراير-مارس)\n• خريف صلالة (يونيو-سبتمبر)\n• مهرجان ربيع الورد (مارس-مايو في الجبل الأخضر)\n• سباقات الهجن (أكتوبر-مارس)"
         },
         en: {
-            default: "Thank you for your question! 😊 I'm Summer, your smart guide to Oman. Ask me about cities, restaurants, events, or ask for suggestions. What would you like to know?",
-            restaurantsMuscat: "🍽️ **Top 5 Restaurants in Muscat:**\n1. P.F. Chang's (Chinese - Avenues Mall)\n2. China Mood (Fine Chinese - Al Bustan Palace)\n3. Bait Al Luban (Traditional Omani - Qurum)\n4. Turkish House (Turkish - Al Khuwair)\n5. The Steakhouse (Steak - Al Khuwair)\n\nWant more details about any restaurant?",
-            placesNizwa: "🏛️ **Top attractions in Nizwa:**\n• Nizwa Fort (circular tower)\n• Nizwa Traditional Souq (daggers & silver)\n• Jebel Akhdar (Rose Season March-May)\n• Falaj Daris (UNESCO site)\n• Al Rudaidah Fort\n\nWant more details?",
-            khareefTiming: "🌧️ **Salalah Khareef season** runs from **June to September**.\n\nThe weather is cool with fog and light rain. Best time to visit is July-August.\n\nWant recommendations for places in Salalah?",
-            omaniFood: "🍖 **Where to try Omani food?**\n\n• Al Aktham Restaurant (Qurum, Muscat) - Shuwa\n• Bait Al Luban (Qurum) - Majboos\n• Nizwa Fort Restaurant (Nizwa) - Omani Halwa\n• Mutrah Souq (Muscat) - Khabeesa\n\nWant recipes?",
-            hotelSalalah: "🏨 **Top 5-star hotels in Salalah:**\n\n1. Al Fanar - JW Marriott (Luxury resort)\n2. Salalah Rotana Resort (Sea view)\n3. Crowne Plaza Salalah (Near Mughsail Beach)\n4. Salalah Beach Hotel (On the beach)\n5. Holiday Inn Salalah (Affordable luxury)\n\nWant prices?",
-            eventsMuscat: "🎭 **Events in Muscat 2026:**\n\n• Muscat Festival (Jan-Feb): Music, fireworks, food stalls\n• Oman Book Fair (Feb/Mar)\n• Salalah Tourism Festival (Jul-Aug)\n• Camel Racing (Oct-Mar)\n\nWant specific dates?",
-            wadiShabDirections: "🏞️ **How to get to Wadi Shab:**\n\n• From Muscat: 1.5 hours drive (towards Sur)\n• From Sur: 45 minutes\n• After arrival: Take a small boat (1 OMR)\n• Then hike 40 minutes to the pools and cave\n\n⚠️ Tip: Bring swimwear and water!",
-            omaniCustoms: "🎭 **Authentic Omani customs:**\n\n• Omani Khanjar: Symbol of honor\n• Omani Coffee: Served with dates\n• Al Razha: Traditional sword dance\n• Al Azi: Traditional poetry\n• Falaj: Ancient irrigation system\n\nWant to know more?",
-            twoDayTrip: "🗺️ **2-day Oman itinerary:**\n\n**Day 1 - Muscat:**\n• Morning: Grand Mosque\n• Afternoon: National Museum + Mutrah Souq\n• Evening: Mutrah Corniche + Opera House\n\n**Day 2 - Nizwa:**\n• Morning: Nizwa Fort + Souq\n• Afternoon: Jebel Akhdar (Rose terraces)\n• Evening: Return to Muscat\n\nWant to modify the trip?",
-            jebelAkhdarBestTime: "🌹 **Best time to visit Jebel Akhdar:**\n\n• **March-May**: Rose season\n• **June-August**: Escape summer heat\n• **September-October**: Pomegranate season\n\n⚠️ Note: Mountain road, 4x4 recommended.\n\nWant accommodation info?",
-            generalHelp: "I'm here to help! Ask me about:\n• Omani cities (Muscat, Nizwa, Salalah)\n• Restaurants & Hotels\n• Events & Seasons\n• Customs & Traditions\n• Tourist attractions\n\nWhat would you like to know?"
+            welcome: "👋 Hello! I'm Summer, your smart assistant. Ask me anything about Oman!",
+            ask: "🔍 What would you like to ask about Oman? You can ask me about cities, restaurants, hotels, events, or anything else!",
+            plan: "🗺️ Plan your trip to Oman! Tell me: How many days will you spend? What are your interests (culture, nature, beaches)? I'll create a customized itinerary for you!",
+            suggest: "💡 Based on your interests, I suggest:\n• Visit Muscat (Grand Mosque, Opera House, Mutrah Souq)\n• Trip to Nizwa (Nizwa Fort, Jebel Akhdar)\n• Enjoy Salalah Khareef (June-September)\n• Adventure in Wadi Shab or Wahiba Sands\n• Taste delicious Omani food\n\nWant more details?",
+            defaultResponse: (q) => `Thank you for asking about "${q}". 😊\n\nI'm Summer, your smart tourism assistant. Could you clarify your question?\n\nI can help you with:\n• City information (Muscat, Nizwa, Salalah)\n• Restaurant and hotel recommendations\n• Events and seasons\n• Customs and traditions\n• Trip planning\n\nWhat would you like to know exactly?`,
+            muscat: "Muscat: The capital of Oman. Top attractions: Grand Mosque, Royal Opera House, Mutrah Souq, National Museum, Mutrah Corniche. Best restaurants: P.F. Chang's, China Mood, Bait Al Luban. Best hotels: Grand Hyatt, Shangri-La, Crowne Plaza.",
+            nizwa: "Nizwa: Heritage city. Top attractions: Nizwa Fort (large circular tower), Nizwa Traditional Souq, Jebel Akhdar (Rose Season March-May), Falaj Daris (UNESCO).",
+            salalah: "Salalah: Khareef paradise. Top attractions: Wadi Darbat (seasonal waterfalls), Mughsail Beach (blowholes), Land of Frankincense (UNESCO), Khareef Salalah (June-September).",
+            wadiShab: "Wadi Shab: One of the most beautiful wadis in Oman.\n• Location: Between Muscat and Sur\n• Activities: Swimming, hiking, photography\n• How to get there: Small boat + 40 min hike\n• Best time: October-April",
+            wahiba: "Wahiba Sands: Sea of golden dunes.\n• Activities: Dune bashing, camping, stargazing\n• Best time: October-March (winter)\n• Tip: Take a tour with a local guide",
+            jebelShams: "Jebel Shams: Highest peak in Oman (3000m).\n• Features: Oman's Grand Canyon, stunning views\n• Activities: Hiking, camping, photography\n• Best time: September-April",
+            khareef: "Salalah Khareef: Monsoon season from June to September.\n• Features: Green nature, waterfalls, cool weather\n• Places: Wadi Darbat, Mughsail Beach, Jabal Samhan",
+            restaurants: "Best restaurants in Oman:\n• Muscat: P.F. Chang's (Chinese), Bait Al Luban (Omani), Turkish House (Turkish)\n• Nizwa: Great Wall Hot Pot (Chinese), Nizwa Fort Restaurant (Omani)\n• Salalah: China Palace (Chinese), Al Mina (Seafood)",
+            hotels: "Best hotels in Oman:\n• Muscat: Grand Hyatt, Shangri-La, Crowne Plaza\n• Nizwa: Jebel Akhdar Resort, Nizwa Hotel\n• Salalah: Al Fanar - JW Marriott, Salalah Rotana",
+            customs: "Authentic Omani customs:\n• Omani Khanjar: Symbol of honor\n• Omani Coffee: Served with dates\n• Al Razha: Traditional sword dance\n• Al Azi: Traditional poetry\n• Falaj: Ancient irrigation system (UNESCO)",
+            events: "Annual events in Oman:\n• Muscat Festival (January-February)\n• Oman Book Fair (February-March)\n• Salalah Khareef (June-September)\n• Spring Rose Festival (March-May in Jebel Akhdar)\n• Camel Racing (October-March)"
         },
         zh: {
-            default: "谢谢你的提问！😊 我是Summer，您的阿曼智能导游。请问您想了解城市、餐厅、活动，还是需要建议？",
-            restaurantsMuscat: "🍽️ **马斯喀特最佳5家餐厅：**\n1. P.F. Chang's (中餐 - Avenues Mall)\n2. China Mood (精致中餐 - Al Bustan Palace)\n3. Bait Al Luban (传统阿曼菜 - 库鲁姆)\n4. Turkish House (土耳其菜 - 阿尔库维尔)\n5. The Steakhouse (牛排 - 阿尔库维尔)\n\n需要更多信息吗？",
-            placesNizwa: "🏛️ **尼兹瓦最佳景点：**\n• 尼兹瓦堡（圆形塔）\n• 尼兹瓦传统集市（弯刀和银器）\n• 绿色山脈（玫瑰季节 3月-5月）\n• 法莱吉达里斯（联合国教科文组织）\n\n需要更多细节吗？",
-            khareefTiming: "🌧️ **塞拉莱季风季节**从**六月到九月**。\n\n天气凉爽，有雾和小雨。最佳游览时间是七月至八月。\n\n需要塞拉莱的景点推荐吗？",
-            omaniFood: "🍖 **在哪里品尝阿曼美食？**\n\n• Al Aktham餐厅（库鲁姆，马斯喀特）- 舒瓦烤肉\n• Bait Al Luban（库鲁姆）- 马吉布斯\n• 尼兹瓦堡餐厅（尼兹瓦）- 阿曼哈尔瓦\n• 马托拉集市（马斯喀特）- 哈比萨\n\n需要食谱吗？",
-            hotelSalalah: "🏨 **塞拉莱最佳五星级酒店：**\n\n1. Al Fanar - JW万豪酒店（豪华度假村）\n2. 塞拉莱罗塔纳度假村（海景）\n3. 塞拉莱皇冠假日酒店（靠近穆格赛尔海滩）\n4. 塞拉莱海滩酒店（在海滩上）\n5. 塞拉莱假日酒店（经济豪华）\n\n需要价格吗？",
-            eventsMuscat: "🎭 **2026年马斯喀特活动：**\n\n• 马斯喀特节（1月-2月）：音乐、烟花、美食摊位\n• 阿曼书展（2月/3月）\n• 塞拉莱旅游节（7月-8月）\n• 骆驼赛（10月-3月）\n\n需要具体日期吗？",
-            wadiShabDirections: "🏞️ **如何前往沙布干河：**\n\n• 从马斯喀特出发：1.5小时车程（往苏尔方向）\n• 从苏尔出发：45分钟\n• 到达后：乘小船（1阿曼里亚尔）过河\n• 然后徒步40分钟到达水池和洞穴\n\n⚠️ 提示：带上泳衣和水！",
-            omaniCustoms: "🎭 **正宗阿曼习俗：**\n\n• 阿曼弯刀：荣誉的象征\n• 阿曼咖啡：与椰枣一起供应\n• 阿尔拉兹哈：传统剑舞\n• 阿尔阿齐：传统诗歌\n• 法拉吉：古老灌溉系统\n\n想了解更多吗？",
-            twoDayTrip: "🗺️ **2天阿曼行程建议：**\n\n**第一天 - 马斯喀特：**\n• 上午：大清真寺\n• 下午：国家博物馆 + 马托拉集市\n• 晚上：马托拉滨海大道 + 歌剧院\n\n**第二天 - 尼兹瓦：**\n• 上午：尼兹瓦堡 + 集市\n• 下午：绿色山脈（玫瑰梯田）\n• 晚上：返回马斯喀特\n\n想修改行程吗？",
-            jebelAkhdarBestTime: "🌹 **游览绿色山脈的最佳时间：**\n\n• **3月-5月**：玫瑰季节\n• **6月-8月**：躲避夏季炎热\n• **9月-10月**：石榴季节\n\n⚠️ 注意：山路，建议四驱车。\n\n需要住宿信息吗？",
-            generalHelp: "我在这里帮助您！可以问我关于：\n• 阿曼城市（马斯喀特、尼兹瓦、塞拉莱）\n• 餐厅和酒店\n• 活动和季节\n• 习俗和传统\n• 旅游景点\n\n您想了解什么？"
+            welcome: "👋 您好！我是Summer，您的智能助手。请问您想了解阿曼的什么？",
+            ask: "🔍 您想问关于阿曼的什么？您可以问我关于城市、餐厅、酒店、活动或任何其他问题！",
+            plan: "🗺️ 规划您的阿曼之旅！告诉我：您将花费多少天？您的兴趣是什么（文化、自然、海滩）？我会为您创建定制行程！",
+            suggest: "💡 根据您的兴趣，我建议：\n• 参观马斯喀特（大清真寺、歌剧院、马托拉集市）\n• 前往尼兹瓦（尼兹瓦堡、绿色山脈）\n• 享受塞拉莱季风季节（六月至九月）\n• 在沙布干河或瓦希巴沙地冒险\n• 品尝美味的阿曼美食\n\n想要更多细节吗？",
+            defaultResponse: (q) => `感谢您询问关于"${q}"的问题。😊\n\n我是Summer，您的智能旅游助手。您能更具体地说明您的问题吗？\n\n我可以帮助您：\n• 城市信息（马斯喀特、尼兹瓦、塞拉莱）\n• 餐厅和酒店推荐\n• 活动和季节\n• 习俗和传统\n• 旅行规划\n\n您具体想了解什么？`,
+            muscat: "马斯喀特：阿曼首都。主要景点：大清真寺、皇家歌剧院、马托拉集市、国家博物馆、马托拉滨海大道。最佳餐厅：P.F. Chang's、China Mood、Bait Al Luban。最佳酒店：君悦酒店、香格里拉、皇冠假日。",
+            nizwa: "尼兹瓦：遗产城市。主要景点：尼兹瓦堡（大型圆形塔）、尼兹瓦传统集市、绿色山脈（玫瑰季节 3月-5月）、法莱吉达里斯（联合国教科文组织）。",
+            salalah: "塞拉莱：季风天堂。主要景点：达尔巴特干河（季节性瀑布）、穆格赛尔海滩（喷水洞）、乳香之地（联合国教科文组织）、塞拉莱季风季节（六月至九月）。",
+            wadiShab: "沙布干河：阿曼最美丽的干河之一。\n• 位置：马斯喀特和苏尔之间\n• 活动：游泳、徒步、摄影\n• 如何到达：小船 + 40分钟徒步\n• 最佳时间：十月至四月",
+            wahiba: "瓦希巴沙地：金色沙丘的海洋。\n• 活动：沙丘冲浪、露营、观星\n• 最佳时间：十月至三月（冬季）\n• 提示：请当地导游带领",
+            jebelShams: "沙姆斯山：阿曼最高峰（3000米）。\n• 特色：阿曼大峡谷，壮丽景色\n• 活动：徒步、露营、摄影\n• 最佳时间：九月至四月",
+            khareef: "塞拉莱季风季节：六月至九月的季风季节。\n• 特色：绿色自然、瀑布、凉爽天气\n• 地点：达尔巴特干河、穆格赛尔海滩、萨姆汉山",
+            restaurants: "阿曼最佳餐厅：\n• 马斯喀特：P.F. Chang's（中餐）、Bait Al Luban（阿曼菜）、Turkish House（土耳其菜）\n• 尼兹瓦：Great Wall Hot Pot（中餐）、Nizwa Fort Restaurant（阿曼菜）\n• 塞拉莱：China Palace（中餐）、Al Mina（海鲜）",
+            hotels: "阿曼最佳酒店：\n• 马斯喀特：君悦酒店、香格里拉、皇冠假日\n• 尼兹瓦：绿色山脈度假村、尼兹瓦酒店\n• 塞拉莱：Al Fanar - JW万豪酒店、塞拉莱罗塔纳",
+            customs: "正宗阿曼习俗：\n• 阿曼弯刀：荣誉的象征\n• 阿曼咖啡：与椰枣一起供应\n• 阿尔拉兹哈：传统剑舞\n• 阿尔阿齐：传统诗歌\n• 法拉吉：古老灌溉系统（联合国教科文组织）",
+            events: "阿曼年度活动：\n• 马斯喀特节（一月-二月）\n• 阿曼书展（二月-三月）\n• 塞拉莱季风季节（六月-九月）\n• 春季玫瑰节（三月-五月，绿色山脈）\n• 骆驼赛（十月-三月）"
         }
     };
 
@@ -653,28 +674,25 @@
         return `<div class="stars">${stars} (${rating})</div>`;
     }
 
-    function renderSuggestions() {
-        const suggestions = [
-            "اقترح لي ٥ مطاعم في مسقط",
-            "وش أفضل أماكن سياحية في نزوى؟",
-            "متى موسم خريف صلالة؟",
-            "وين ألقى أكل عماني شعبي؟",
-            "اقترح فندق ٥ نجوم في صلالة",
-            "وش الفعاليات في مسقط هالسنة؟",
-            "كيف أوصل إلى وادي شاب؟",
-            "وش العادات العمانية الأصيلة؟",
-            "اقترح لي رحلة ليومين في عمان",
-            "وش أفضل وقت لزيارة الجبل الأخضر؟"
-        ];
-        const grid = document.getElementById('suggestionsGrid');
-        if (grid) {
-            grid.innerHTML = suggestions.map(s => `<button class="suggestion-btn" onclick="sendSuggestion('${s.replace(/'/g, "\\'")}')">💡 ${s}</button>`).join('');
+    function askQuestion(type) {
+        const responses = aiResponses[currentLang];
+        const chatBody = document.getElementById('aiChatBody');
+        if (type === 'ask') {
+            chatBody.innerHTML += `<div class="user-message">👤 🔍 اسأل سمر</div>`;
+            chatBody.innerHTML += `<div class="ai-chat-message">🤖 ${responses.ask}</div>`;
+        } else if (type === 'plan') {
+            chatBody.innerHTML += `<div class="user-message">👤 🗺️ خطط رحلتي</div>`;
+            chatBody.innerHTML += `<div class="ai-chat-message">🤖 ${responses.plan}</div>`;
+        } else if (type === 'suggest') {
+            chatBody.innerHTML += `<div class="user-message">👤 💡 اقتراح تلقائي</div>`;
+            chatBody.innerHTML += `<div class="ai-chat-message">🤖 ${responses.suggest}</div>`;
         }
-    }
-
-    function sendSuggestion(text) {
-        document.getElementById('aiChatInput').value = text;
-        sendAIMessage();
+        chatBody.scrollTop = chatBody.scrollHeight;
+        // Show chat window if hidden
+        const chat = document.getElementById('aiChat');
+        if (chat.style.display !== 'flex') {
+            chat.style.display = 'flex';
+        }
     }
 
     function sendAIMessage() {
@@ -696,58 +714,43 @@
         const lowerQ = question.toLowerCase();
         const responses = aiResponses[currentLang];
         
-        if (lowerQ.includes('مطاعم') && (lowerQ.includes('مسقط') || lowerQ.includes('muscat'))) {
-            return responses.restaurantsMuscat;
+        // Check for specific keywords
+        if (lowerQ.includes('مسقط') || lowerQ.includes('muscat') || lowerQ.includes('马斯喀特')) {
+            return responses.muscat;
         }
-        if (lowerQ.includes('أفضل') && (lowerQ.includes('نزوى') || lowerQ.includes('nizwa'))) {
-            return responses.placesNizwa;
+        if (lowerQ.includes('نزوى') || lowerQ.includes('nizwa') || lowerQ.includes('尼兹瓦')) {
+            return responses.nizwa;
         }
-        if (lowerQ.includes('موسم') && (lowerQ.includes('خريف') || lowerQ.includes('صلالة') || lowerQ.includes('salalah') || lowerQ.includes('khareef'))) {
-            return responses.khareefTiming;
+        if (lowerQ.includes('صلالة') || lowerQ.includes('salalah') || lowerQ.includes('塞拉莱')) {
+            return responses.salalah;
         }
-        if ((lowerQ.includes('أكل') || lowerQ.includes('عماني') || lowerQ.includes('شعبي') || lowerQ.includes('food')) && !lowerQ.includes('مطاعم')) {
-            return responses.omaniFood;
+        if (lowerQ.includes('وادي شاب') || lowerQ.includes('wadi shab') || lowerQ.includes('沙布干河')) {
+            return responses.wadiShab;
         }
-        if (lowerQ.includes('فندق') && (lowerQ.includes('صلالة') || lowerQ.includes('salalah'))) {
-            return responses.hotelSalalah;
+        if ((lowerQ.includes('رمال') || lowerQ.includes('wahiba')) && (lowerQ.includes('صحراء') || lowerQ.includes('desert'))) {
+            return responses.wahiba;
         }
-        if ((lowerQ.includes('فعاليات') || lowerQ.includes('مهرجان')) && (lowerQ.includes('مسقط') || lowerQ.includes('muscat'))) {
-            return responses.eventsMuscat;
+        if ((lowerQ.includes('جبل شمس') || lowerQ.includes('jebel shams')) && (lowerQ.includes('قمة') || lowerQ.includes('peak'))) {
+            return responses.jebelShams;
         }
-        if ((lowerQ.includes('وادي شاب') || lowerQ.includes('wadi shab')) && (lowerQ.includes('كيف') || lowerQ.includes('اوصل') || lowerQ.includes('directions'))) {
-            return responses.wadiShabDirections;
+        if (lowerQ.includes('خريف') && (lowerQ.includes('صلالة') || lowerQ.includes('salalah') || lowerQ.includes('khareef'))) {
+            return responses.khareef;
         }
-        if ((lowerQ.includes('عادات') || lowerQ.includes('تقاليد') || lowerQ.includes('customs'))) {
-            return responses.omaniCustoms;
+        if (lowerQ.includes('مطعم') || lowerQ.includes('restaurant') || lowerQ.includes('餐厅')) {
+            return responses.restaurants;
         }
-        if ((lowerQ.includes('رحلة') || lowerQ.includes('يومين') || lowerQ.includes('itinerary'))) {
-            return responses.twoDayTrip;
+        if (lowerQ.includes('فندق') || lowerQ.includes('hotel') || lowerQ.includes('酒店')) {
+            return responses.hotels;
         }
-        if ((lowerQ.includes('الجبل الأخضر') || lowerQ.includes('jebel akhdar')) && (lowerQ.includes('وقت') || lowerQ.includes('best time'))) {
-            return responses.jebelAkhdarBestTime;
+        if (lowerQ.includes('عادات') || lowerQ.includes('customs') || lowerQ.includes('习俗')) {
+            return responses.customs;
         }
-        if (lowerQ.includes('مساعدة') || lowerQ.includes('help') || lowerQ.includes('خيارات') || lowerQ.includes('options')) {
-            return responses.generalHelp;
-        }
-        
-        // Handle random questions
-        if (lowerQ.includes('كم') || lowerQ.includes('سعر') || lowerQ.includes('price')) {
-            return currentLang === 'ar' ? "الأسعار تختلف حسب الموسم والفندق. هل تريد استفسار عن فندق معين؟ 😊" :
-                   (currentLang === 'en' ? "Prices vary by season and hotel. Would you like to inquire about a specific hotel? 😊" :
-                   "价格因季节和酒店而异。您想咨询特定酒店吗？😊");
-        }
-        if (lowerQ.includes('طقس') || lowerQ.includes('weather')) {
-            return currentLang === 'ar' ? "عمان تتمتع بمناخ متنوع. الصيف حار (خاصة يونيو-أغسطس)، والشتاء معتدل. صلالة باردة خلال الخريف (يونيو-سبتمبر). 😊" :
-                   (currentLang === 'en' ? "Oman has diverse climate. Summer is hot (especially June-August), winter is mild. Salalah is cool during Khareef (June-September). 😊" :
-                   "阿曼气候多样。夏季炎热（尤其是六月至八月），冬季温和。塞拉莱在季风季节（六月至九月）凉爽。😊");
-        }
-        if (lowerQ.includes('تأشيرة') || lowerQ.includes('visa')) {
-            return currentLang === 'ar' ? "مواطني أكثر من 100 دولة يمكنهم الحصول على تأشيرة إلكترونية أو تأشيرة عند الوصول. يفضل مراجعة موقع الشرطة السلطانية العمانية للتفاصيل. 😊" :
-                   (currentLang === 'en' ? "Citizens of over 100 countries can get an eVisa or visa on arrival. Please check the Royal Oman Police website for details. 😊" :
-                   "超过100个国家的公民可以获得电子签证或落地签证。请查看阿曼皇家警察网站了解详情。😊");
+        if (lowerQ.includes('فعاليات') || lowerQ.includes('مهرجان') || lowerQ.includes('events') || lowerQ.includes('festival')) {
+            return responses.events;
         }
         
-        return responses.default;
+        // Default response
+        return responses.defaultResponse(question);
     }
 
     function toggleAIChat() {
@@ -756,7 +759,6 @@
             chat.style.display = 'none';
         } else {
             chat.style.display = 'flex';
-            renderSuggestions();
         }
     }
 
@@ -929,6 +931,13 @@
         document.getElementById('khareefDesc').innerHTML = t.khareefDesc;
         document.getElementById('winterTitle').innerHTML = t.winterTitle;
         document.getElementById('winterDesc').innerHTML = t.winterDesc;
+        document.getElementById('footerText').innerHTML = t.footer;
+        
+        // Update welcome message in chat
+        const chatBody = document.getElementById('aiChatBody');
+        if (chatBody && chatBody.children.length > 0) {
+            chatBody.innerHTML = `<div class="ai-chat-message">${aiResponses[lang].welcome}</div>`;
+        }
         
         document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
         if (lang === 'ar') document.querySelector('.lang-btn:first-child').classList.add('active');
