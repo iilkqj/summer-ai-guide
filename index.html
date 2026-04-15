@@ -18,6 +18,7 @@
         body[dir="ltr"] { direction: ltr; text-align: left; }
         body[dir="rtl"] { direction: rtl; text-align: right; }
 
+        /* ========== ANIMATIONS ========== */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -35,10 +36,15 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
+        @keyframes slideFade {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
         
         .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+        /* ========== LANGUAGE BAR ========== */
         .language-bar {
             background-color: #0D47A1;
             padding: 0.8rem 2rem;
@@ -67,6 +73,7 @@
             transform: scale(1.05);
         }
 
+        /* ========== WOW HEADER ========== */
         .hero {
             background: linear-gradient(135deg, #0D47A1, #1E88E5, #0D47A1);
             background-size: 200% 200%;
@@ -82,6 +89,7 @@
             margin-bottom: 1rem;
             letter-spacing: -1px;
             animation: fadeIn 1s ease;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
         }
         .hero p {
             font-size: 1.3rem;
@@ -100,6 +108,74 @@
             border: 1px solid #D4AF37;
         }
 
+        /* ========== WHY OMAN SECTION ========== */
+        .why-oman {
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 32px;
+            max-width: 1200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .why-oman h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #0D47A1;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #D4AF37;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .why-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: #F8F9FA;
+            border-radius: 24px;
+            transition: all 0.3s;
+        }
+        .why-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .why-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+        .why-card h3 { color: #0D47A1; margin-bottom: 0.5rem; }
+        .why-card p { color: #1E88E5; font-size: 0.9rem; }
+
+        /* ========== SEASONS SECTION ========== */
+        .seasons {
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 32px;
+            max-width: 1200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .seasons h2 { text-align: center; font-size: 2rem; color: #0D47A1; margin-bottom: 1.5rem; border-bottom: 3px solid #D4AF37; display: inline-block; width: auto; margin-left: auto; margin-right: auto; }
+        .seasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .season-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            border-radius: 24px;
+            transition: all 0.3s;
+        }
+        .season-card:hover { transform: translateY(-5px); }
+        .season-icon { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+        .season-card h3 { color: #0D47A1; }
+        .season-card p { color: #1E88E5; font-size: 0.85rem; }
+
+        /* ========== CITIES GRID ========== */
         .cities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -110,7 +186,7 @@
         }
         .city-card {
             background: white;
-            border-radius: 24px;
+            border-radius: 28px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
@@ -139,7 +215,11 @@
         }
         .city-card:hover .card-icon { transform: scale(1.05); }
         .card-content { padding: 1.5rem; }
-        .card-content h3 { color: #0D47A1; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .card-content h3 {
+            color: #0D47A1;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
         .card-content h3::first-letter { font-size: 2.5rem; color: #D4AF37; }
         .card-content p { color: #1E88E5; margin-bottom: 1rem; }
         .city-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
@@ -153,6 +233,7 @@
         }
         .tag:hover { background: #D4AF37; transform: translateY(-2px); }
 
+        /* ========== CITY PAGE ========== */
         .city-page {
             max-width: 1200px;
             margin: 2rem auto;
@@ -162,7 +243,7 @@
             display: none;
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            animation: fadeInUp 0.5s ease;
+            animation: slideFade 0.5s ease;
         }
         .active-page { display: block; }
         .city-header { text-align: center; margin-bottom: 2rem; }
@@ -288,7 +369,7 @@
             .cities-grid { padding: 1rem; gap: 1rem; }
             .city-header h2 { font-size: 1.8rem; }
             .section h3 { font-size: 1.4rem; }
-            .city-card h3 { font-size: 1.4rem; }
+            .why-grid, .seasons-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -304,8 +385,30 @@
     <div class="hero">
         <h1 id="heroTitle">🌊 سمر | Summer</h1>
         <p id="heroDesc">مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان</p>
-        <div class="hero-welcome" id="welcomeMessage">✨ مرحباً بك في سمر — دليلك الذكي إلى عُمان ✨</div>
+        <div class="hero-welcome" id="welcomeMessage">✨ مرحباً بك في سمر — اكتشف عُمان بطريقة جديدة ✨</div>
     </div>
+
+    <!-- Why Visit Oman Section -->
+    <div class="why-oman fade-up">
+        <div style="text-align: center;"><h2 id="whyTitle">🇴🇲 لماذا تزور عُمان؟</h2></div>
+        <div class="why-grid">
+            <div class="why-card"><div class="why-icon">🌴</div><h3 id="why1Title">طبيعة متنوعة</h3><p id="why1Desc">من الجبال الخضراء إلى الصحاري الذهبية والشواطئ الفيروزية</p></div>
+            <div class="why-card"><div class="why-icon">🏜️</div><h3 id="why2Title">صحاري ووديان</h3><p id="why2Desc">رمال وهيبة، وادي شاب، جبل شمس — مغامرات لا تنسى</p></div>
+            <div class="why-card"><div class="why-icon">🏛️</div><h3 id="why3Title">تراث عريق</h3><p id="why3Desc">قلاع وحصون وأسواق تقليدية تعود لآلاف السنين</p></div>
+            <div class="why-card"><div class="why-icon">☕</div><h3 id="why4Title">ثقافة وضيافة</h3><p id="why4Desc">القهوة العمانية والتمر والخنجر — ترحيب أصيل</p></div>
+        </div>
+    </div>
+
+    <!-- Seasons Section -->
+    <div class="seasons fade-up">
+        <div style="text-align: center;"><h2 id="seasonsTitle">🌦️ الفصول والمواسم</h2></div>
+        <div class="seasons-grid">
+            <div class="season-card"><div class="season-icon">☀️</div><h3 id="summerTitle">الصيف</h3><p id="summerDesc">هروب إلى الجبال (الجبل الأخضر) أو استمتع بخريف صلالة</p></div>
+            <div class="season-card"><div class="season-icon">🌧️</div><h3 id="khareefTitle">خريف صلالة</h3><p id="khareefDesc">موسم الضباب والأمطار من يونيو إلى سبتمبر</p></div>
+            <div class="season-card"><div class="season-icon">🏕️</div><h3 id="winterTitle">الشتاء</h3><p id="winterDesc">أفضل وقت للتخييم في الصحاري والوديان</p></div>
+        </div>
+    </div>
+
     <div class="cities-grid" id="citiesGrid"></div>
 </div>
 
@@ -315,196 +418,153 @@
 <div class="footer"><p>© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان</p></div>
 
 <script>
-    // ==================== FULL MULTILINGUAL CONTENT ====================
-    const fullContent = {
-        ar: {
-            heroTitle: "🌊 سمر | Summer",
-            heroDesc: "مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان",
-            welcome: "✨ مرحباً بك في سمر — دليلك الذكي إلى عُمان ✨",
-            backToCity: "🏠 العودة للمدينة",
-            backHome: "🏠 العودة للرئيسية",
-            sections: {
-                landmarks: "🏛️ المعالم السياحية",
-                food: "🍽️ الأكلات الشعبية",
-                stories: "📖 القصص التاريخية",
-                customs: "🎭 العادات والتقاليد",
-                hotels: "🏨 أفضل الفنادق",
-                cafes: "☕ أفضل المقاهي",
-                special: "✨ فعاليات خاصة"
-            },
-            cities: {
-                muscat: {
-                    name: "مسقط", desc: "عاصمة عُمان النابضة بالحياة", icon: "🎭",
-                    highlights: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح", "متحف عُمان", "كورنيش مطرح"],
-                    landmarks: ["الجامع الكبير السلطان قابوس", "دار الأوبرا السلطانية", "سوق مطرح", "متحف عُمان", "كورنيش مطرح"],
-                    food: ["الشواء العُماني", "المجبوس", "الخبيصة", "البلاليط", "الحلوى العُمانية"],
-                    stories: ["طرد البرتغاليين عام 1650م", "أسطول البحار العُماني", "ميناء مسقط على طريق الحرير", "قصر العلم رمز النهضة", "قلعتي الجلالي والميراني"],
-                    customs: ["الخنجر العُماني", "القهوة العُمانية", "مهرجان مسقط", "اللباس التقليدي", "الرقصات الشعبية"],
-                    hotels: ["فندق جراند حياة مسقط", "فندق الشيراتون مسقط", "فندق كراون بلازا", "فندق إنتركونتيننتال", "فندق فور سيزونز"],
-                    cafes: ["مقهى عُمان للقهوة", "ستاربكس الخوير", "مقهى بارادايس", "مقهى بون", "مقهى عُمان جو"],
-                    special: { title: "🎭 مهرجان مسقط", desc: "مهرجان ثقافي سنوي في يناير وفبراير.", details: ["ألعاب نارية", "فنون شعبية", "عروض موسيقية", "أكلات تقليدية", "معارض حرفية"] }
-                },
-                nizwa: {
-                    name: "نزوى", desc: "مدينة التراث العريق وقلعتها الشهيرة", icon: "🌹",
-                    highlights: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر", "فلج دارس", "الحلوى العمانية"],
-                    landmarks: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر", "فلج دارس", "حصن بيت الرديدة"],
-                    food: ["الحلوى العُمانية", "الشواء العُماني", "القبولي", "الهريس", "العرسية"],
-                    stories: ["بناء قلعة نزوى استغرقت 12 سنة", "تسمية نزوى من 'نزا'", "عاصمة العلم والتراث", "طرد البرتغاليين", "بيضة الإسلام"],
-                    customs: ["سوق الماشية", "صناعة الحلوى", "الفلاج", "البيوت الطينية", "القهوة مع الحلوى"],
-                    hotels: ["منتجع الجبل الأخضر - أليلا", "فندق نزوى هيريتيج إن", "فندق أنترناشيونال نزوى", "فندق الفلج", "منتجع استراحة نزوى"],
-                    cafes: ["مقهى القلعة", "مقهى البستان", "كافيه نزوى القديم", "مقهى الواحة", "بيت القهوة نزوى"],
-                    special: { title: "🌹 موسم الورد", desc: "من مارس إلى مايو في الجبل الأخضر.", details: ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"] }
-                },
-                salalah: {
-                    name: "صلالة", desc: "جنة الخريف الساحرة، أرض اللبان", icon: "🌧️",
-                    highlights: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل", "أرض البخور", "سوق الحافة"],
-                    landmarks: ["وادي دربات", "شاطئ المغسيل", "أرض اللبان", "سوق الحافة", "جبل صمرحان"],
-                    food: ["المندي", "السمك المشوي", "العسل العماني", "حلوى الحليب", "القهوة الظفارية"],
-                    stories: ["قصة تبع وأصحاب الأيكة", "ميناء صلالة القديم", "تجارة اللبان", "الملكة بلقيس", "الرياح الموسمية"],
-                    customs: ["خريف صلالة", "اللبان", "الرقصات الظفارية", "مهرجانات صيفية", "صناعة البخور"],
-                    hotels: ["فندق الفانات - جي دبليو ماريوت", "هيلتون صلالة", "فندق كراون بلازا صلالة", "فندق المروة", "منتجع صلالة جاردن"],
-                    cafes: ["مقهى الضباب", "كافيه اللبان", "مقهى الوادي", "ستاربكس صلالة", "بيت القهوة الظفاري"],
-                    special: { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار من يونيو إلى سبتمبر.", details: ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"] }
-                }
-            }
-        },
-        en: {
-            heroTitle: "🌊 Summer | Your AI Guide",
-            heroDesc: "Your AI Smart Tourism Guide | Covers the best destinations in Oman",
-            welcome: "✨ Welcome to Summer — Your Smart Guide to Oman ✨",
-            backToCity: "🏠 Back to City",
-            backHome: "🏠 Back to Home",
-            sections: {
-                landmarks: "🏛️ Landmarks & Attractions",
-                food: "🍽️ Traditional Food",
-                stories: "📖 Historical Stories",
-                customs: "🎭 Customs & Traditions",
-                hotels: "🏨 Top Hotels",
-                cafes: "☕ Top Cafes",
-                special: "✨ Special Events"
-            },
-            cities: {
-                muscat: {
-                    name: "Muscat", desc: "The vibrant capital of Oman", icon: "🎭",
-                    highlights: ["Sultan Qaboos Grand Mosque", "Royal Opera House", "Mutrah Souq", "Oman Museum", "Mutrah Corniche"],
-                    landmarks: ["Sultan Qaboos Grand Mosque", "Royal Opera House", "Mutrah Souq", "Oman Museum", "Mutrah Corniche"],
-                    food: ["Omani Shuwa", "Majboos", "Khabeesa", "Balaleet", "Omani Halwa"],
-                    stories: ["Expulsion of the Portuguese in 1650", "Omani Maritime Fleet", "Muscat Port on Silk Road", "Al Alam Palace", "Al Jalali & Al Mirani Forts"],
-                    customs: ["Omani Khanjar", "Omani Coffee", "Muscat Festival", "Traditional Dress", "Folk Dances"],
-                    hotels: ["Grand Hyatt Muscat", "Sheraton Muscat", "Crowne Plaza Muscat", "InterContinental Muscat", "Four Seasons Muscat"],
-                    cafes: ["Oman Coffee Shop", "Starbucks Al Khuwair", "Paradise Cafe", "Boon Cafe", "Oman Joe Cafe"],
-                    special: { title: "🎭 Muscat Festival", desc: "Annual cultural festival in January-February.", details: ["Fireworks", "Folk Arts", "Music Shows", "Traditional Food", "Craft Exhibitions"] }
-                },
-                nizwa: {
-                    name: "Nizwa", desc: "City of rich heritage and its famous fort", icon: "🌹",
-                    highlights: ["Nizwa Fort", "Nizwa Souq", "Jebel Akhdar", "Falaj Daris", "Omani Halwa"],
-                    landmarks: ["Nizwa Fort", "Nizwa Souq", "Jebel Akhdar", "Falaj Daris", "Bait Al Redidah Fort"],
-                    food: ["Omani Halwa", "Omani Shuwa", "Qabooli", "Harees", "Arsseya"],
-                    stories: ["Nizwa Fort took 12 years to build", "Name Nizwa means 'to carry water'", "Capital of knowledge and heritage", "Expelled Portuguese", "Egg of Islam"],
-                    customs: ["Livestock Souq", "Halwa Making", "Falaj Irrigation", "Mud Houses", "Coffee with Halwa"],
-                    hotels: ["Alila Jebel Akhdar Resort", "Nizwa Heritage Inn", "Nizwa International Hotel", "Falaj Hotel", "Nizwa Rest House Resort"],
-                    cafes: ["Fort Cafe", "Al Bustan Cafe", "Old Nizwa Cafe", "Oasis Cafe", "Nizwa Coffee House"],
-                    special: { title: "🌹 Rose Season", desc: "March to May in Jebel Akhdar.", details: ["Rose Picking", "Rose Water Distillation", "Rose Spring Festival", "Rose Products", "Natural Perfumes"] }
-                },
-                salalah: {
-                    name: "Salalah", desc: "Magical Khareef paradise, land of frankincense", icon: "🌧️",
-                    highlights: ["Khareef Salalah", "Wadi Darbat", "Mughsail Beach", "Land of Frankincense", "Al Haffa Souq"],
-                    landmarks: ["Wadi Darbat", "Mughsail Beach", "Land of Frankincense", "Al Haffa Souq", "Jabal Samhan"],
-                    food: ["Mandi", "Grilled Fish", "Omani Honey", "Milk Halwa", "Dhofari Coffee"],
-                    stories: ["Story of Tubba and the People of the Grove", "Old Salalah Port", "Frankincense Trade", "Queen Bilqis", "Monsoon Winds"],
-                    customs: ["Khareef Salalah", "Frankincense", "Dhofari Dances", "Summer Festivals", "Incense Making"],
-                    hotels: ["Al Fanar Hotel - JW Marriott", "Hilton Salalah", "Crowne Plaza Salalah", "Al Marwa Hotel", "Salalah Gardens Resort"],
-                    cafes: ["Fog Cafe", "Frankincense Cafe", "Wadi Cafe", "Starbucks Salalah", "Dhofari Coffee House"],
-                    special: { title: "🌧️ Khareef Salalah", desc: "Monsoon season from June to September.", details: ["Fog & Rain", "Green Nature", "Festivals", "Waterfalls", "Cool Weather"] }
-                }
-            }
-        },
-        zh: {
-            heroTitle: "🌊 Summer | 您的AI导游",
-            heroDesc: "您的AI智能旅游指南 | 覆盖阿曼最佳目的地",
-            welcome: "✨ 欢迎使用 Summer — 您的阿曼智能导游 ✨",
-            backToCity: "🏠 返回城市",
-            backHome: "🏠 返回首页",
-            sections: {
-                landmarks: "🏛️ 地标与景点",
-                food: "🍽️ 传统美食",
-                stories: "📖 历史故事",
-                customs: "🎭 习俗与传统",
-                hotels: "🏨 最佳酒店",
-                cafes: "☕ 最佳咖啡馆",
-                special: "✨ 特别活动"
-            },
-            cities: {
-                muscat: {
-                    name: "马斯喀特", desc: "充满活力的阿曼首都", icon: "🎭",
-                    highlights: ["苏丹卡布斯大清真寺", "皇家歌剧院", "马特拉市集", "阿曼博物馆", "马特拉滨海大道"],
-                    landmarks: ["苏丹卡布斯大清真寺", "皇家歌剧院", "马特拉市集", "阿曼博物馆", "马特拉滨海大道"],
-                    food: ["阿曼舒瓦烤肉", "马吉布斯", "哈比萨", "巴拉利特", "阿曼哈尔瓦"],
-                    stories: ["1650年驱逐葡萄牙人", "阿曼海上舰队", "马斯喀特丝绸之路港口", "阿尔阿拉姆宫", "贾拉利和米拉尼堡"],
-                    customs: ["阿曼弯刀", "阿曼咖啡", "马斯喀特节", "传统服饰", "民间舞蹈"],
-                    hotels: ["马斯喀特君悦酒店", "马斯喀特喜来登酒店", "马斯喀特皇冠假日酒店", "马斯喀特洲际酒店", "马斯喀特四季酒店"],
-                    cafes: ["阿曼咖啡店", "星巴克阿尔库维尔", "天堂咖啡馆", "邦咖啡馆", "阿曼乔咖啡馆"],
-                    special: { title: "🎭 马斯喀特节", desc: "一月至二月的年度文化节。", details: ["烟花", "民间艺术", "音乐表演", "传统美食", "手工艺展"] }
-                },
-                nizwa: {
-                    name: "尼兹瓦", desc: "拥有丰富遗产和著名堡垒的城市", icon: "🌹",
-                    highlights: ["尼兹瓦堡", "尼兹瓦市集", "绿色山脈", "达里斯法拉吉", "阿曼哈尔瓦"],
-                    landmarks: ["尼兹瓦堡", "尼兹瓦市集", "绿色山脈", "达里斯法拉吉", "拜特阿尔雷达堡"],
-                    food: ["阿曼哈尔瓦", "阿曼舒瓦烤肉", "卡布利", "哈里斯", "阿尔西亚"],
-                    stories: ["尼兹瓦堡耗时12年建成", "尼兹瓦名称源于'尼扎'", "知识与遗产之都", "驱逐葡萄牙人", "伊斯兰之蛋"],
-                    customs: ["牲畜市集", "哈尔瓦制作", "法拉吉灌溉", "泥屋", "咖啡配哈尔瓦"],
-                    hotels: ["阿丽拉绿色山脈度假村", "尼兹瓦传统客栈", "尼兹瓦国际酒店", "法拉吉酒店", "尼兹瓦休闲度假村"],
-                    cafes: ["堡垒咖啡馆", "花园咖啡馆", "老尼兹瓦咖啡馆", "绿洲咖啡馆", "尼兹瓦咖啡屋"],
-                    special: { title: "🌹 玫瑰季节", desc: "三月至五月在绿色山脈。", details: ["玫瑰采摘", "玫瑰水蒸馏", "玫瑰春节", "玫瑰产品", "天然香水"] }
-                },
-                salalah: {
-                    name: "塞拉莱", desc: "神奇的季风天堂，乳香之地", icon: "🌧️",
-                    highlights: ["塞拉莱雨季", "达尔巴特河谷", "穆格赛尔海滩", "乳香之地", "哈法市集"],
-                    landmarks: ["达尔巴特河谷", "穆格赛尔海滩", "乳香之地", "哈法市集", "萨姆汉山"],
-                    food: ["曼迪", "烤鱼", "阿曼蜂蜜", "牛奶哈尔瓦", "佐法尔咖啡"],
-                    stories: ["图巴与树林居民的故事", "老塞拉莱港", "乳香贸易", "贝尔基斯女王", "季风风"],
-                    customs: ["塞拉莱雨季", "乳香", "佐法尔舞蹈", "夏季节庆", "香料制作"],
-                    hotels: ["阿尔法纳尔酒店 - JW万豪", "希尔顿塞拉莱", "皇冠假日塞拉莱", "阿尔马瓦酒店", "塞拉莱花园度假村"],
-                    cafes: ["雾咖啡馆", "乳香咖啡馆", "河谷咖啡馆", "星巴克塞拉莱", "佐法尔咖啡屋"],
-                    special: { title: "🌧️ 塞拉莱雨季", desc: "六月至九月的季风季节。", details: ["雾与雨", "绿色自然", "节庆", "瀑布", "凉爽天气"] }
-                }
-            }
-        }
-    };
-
+    // ==================== DETAILS DATA WITH ACTIVITIES ====================
     const detailsData = {
-        ar: {
-            "hotel-grand-hyatt-muscat": { title: "🏨 فندق جراند حياة مسقط", desc: "فندق فاخر 5 نجوم يقع في قلب مسقط.", location: "الخوير، مسقط", directions: "على شارع السلطان قابوس", price: "من 95 ر.ع.", bestTime: "طوال العام", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
-            "landmark-grand-mosque": { title: "🕌 الجامع الكبير السلطان قابوس", desc: "تحفة معمارية إسلامية، يتسع لأكثر من 20 ألف مصلي.", location: "مسقط", directions: "شارع السلطان قابوس، بجانب دار الأوبرا", price: "الدخول مجاني", bestTime: "السبت - الخميس 8ص - 11ص", mapLink: "https://maps.google.com/?q=Sultan+Qaboos+Grand+Mosque", rating: 4.9 },
-            "food-shuwa": { title: "🍖 الشواء العُماني", desc: "لحم يتبل بالتوابل ويدفن في تنور تحت الأرض.", location: "مطعم الأخطم، القرم", directions: "القرم، مسقط، بجانب فندق كراون بلازا", price: "الوجبة: 8 ر.ع.", bestTime: "المناسبات والأعياد", mapLink: "https://maps.google.com/?q=Al+Akhtham+Restaurant+Qurum", rating: 4.7 },
-            "cafe-oman-coffee": { title: "☕ مقهى عُمان للقهوة", desc: "قهوة عمانية أصيلة مع حلويات تقليدية.", location: "الخوير، مسقط", directions: "قريب من مجمع الخوير", price: "قهوة: 2 ر.ع.", bestTime: "الصباح والمساء", mapLink: "https://maps.google.com/?q=Oman+Coffee+Shop+Al+Khuwair", rating: 4.6 },
-            "special-fireworks": { title: "🎆 ألعاب نارية", desc: "عرض ألعاب نارية مذهلة يضيء سماء مسقط.", location: "حديقة النسيم، مسقط", directions: "بجانب دار الأوبرا", price: "مجاني", bestTime: "يناير - فبراير، 9 مساءً", mapLink: "https://maps.google.com/?q=Al+Naseem+Park+Muscat", rating: 4.9 },
-            "special-rose": { title: "🌹 موسم الورد", desc: "موسم قطف الورد في الجبل الأخضر.", location: "الجبل الأخضر، نزوى", directions: "45 دقيقة من نزوى", price: "2 ر.ع.", bestTime: "مارس - مايو", mapLink: "https://maps.google.com/?q=Jebel+Akhdar+Nizwa", rating: 4.9 },
-            "special-khareef": { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار في صلالة.", location: "صلالة، ظفار", directions: "مطار صلالة الدولي", price: "مجاني", bestTime: "يونيو - سبتمبر", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 }
+        "hotel-grand-hyatt-muscat": {
+            ar: { title: "🏨 فندق جراند حياة مسقط", desc: "فندق فاخر 5 نجوم يقع في قلب مسقط.", location: "الخوير، مسقط", directions: "على شارع السلطان قابوس", price: "من 95 ر.ع. / 380 ر.س", bestTime: "طوال العام", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
+            en: { title: "🏨 Grand Hyatt Muscat", desc: "5-star luxury hotel in the heart of Muscat.", location: "Al Khuwair, Muscat", directions: "On Sultan Qaboos Street", price: "From $247", bestTime: "All year round", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
+            zh: { title: "🏨 马斯喀特君悦酒店", desc: "位于马斯喀特市中心的五星级豪华酒店。", location: "阿尔库维尔，马斯喀特", directions: "位于苏丹卡布斯大街", price: "247美元起", bestTime: "全年", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 }
         },
-        en: {
-            "hotel-grand-hyatt-muscat": { title: "🏨 Grand Hyatt Muscat", desc: "5-star luxury hotel in the heart of Muscat.", location: "Al Khuwair, Muscat", directions: "On Sultan Qaboos Street", price: "From $247", bestTime: "All year round", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
-            "landmark-grand-mosque": { title: "🕌 Sultan Qaboos Grand Mosque", desc: "Islamic architectural masterpiece.", location: "Muscat", directions: "Sultan Qaboos Street, next to Opera House", price: "Free entry", bestTime: "Sat-Thu 8am-11am", mapLink: "https://maps.google.com/?q=Sultan+Qaboos+Grand+Mosque", rating: 4.9 },
-            "food-shuwa": { title: "🍖 Omani Shuwa", desc: "Meat marinated with spices and buried in an underground oven.", location: "Al Aktham Restaurant, Qurum", directions: "Qurum, Muscat, near Crowne Plaza Hotel", price: "Meal: $20.80", bestTime: "Festivals and holidays", mapLink: "https://maps.google.com/?q=Al+Akhtham+Restaurant+Qurum", rating: 4.7 },
-            "cafe-oman-coffee": { title: "☕ Oman Coffee Shop", desc: "Authentic Omani coffee with traditional sweets.", location: "Al Khuwair, Muscat", directions: "Near Al Khuwair Complex", price: "Coffee: $5.20", bestTime: "Morning and evening", mapLink: "https://maps.google.com/?q=Oman+Coffee+Shop+Al+Khuwair", rating: 4.6 },
-            "special-fireworks": { title: "🎆 Fireworks", desc: "Spectacular fireworks display in Muscat.", location: "Al Naseem Park, Muscat", directions: "Next to Royal Opera House", price: "Free", bestTime: "Jan-Feb, 9 PM", mapLink: "https://maps.google.com/?q=Al+Naseem+Park+Muscat", rating: 4.9 },
-            "special-rose": { title: "🌹 Rose Season", desc: "Rose picking season in Jebel Akhdar.", location: "Jebel Akhdar, Nizwa", directions: "45 min from Nizwa", price: "$5.20", bestTime: "March - May", mapLink: "https://maps.google.com/?q=Jebel+Akhdar+Nizwa", rating: 4.9 },
-            "special-khareef": { title: "🌧️ Khareef Salalah", desc: "Monsoon season in Salalah.", location: "Salalah, Dhofar", directions: "Salalah International Airport", price: "Free", bestTime: "June - September", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 }
+        "landmark-grand-mosque": {
+            ar: { title: "🕌 الجامع الكبير", desc: "تحفة معمارية إسلامية، يتسع لأكثر من 20 ألف مصلي.", location: "مسقط", directions: "شارع السلطان قابوس، بجانب دار الأوبرا", price: "الدخول مجاني", bestTime: "السبت - الخميس 8ص - 11ص", mapLink: "https://maps.google.com/?q=Sultan+Qaboos+Grand+Mosque", rating: 4.9, activities: "📸 تصوير فوتوغرافي | 🕌 جولة ثقافية | 🎧 استماع لتاريخ المسجد" },
+            en: { title: "🕌 Sultan Qaboos Grand Mosque", desc: "Islamic architectural masterpiece.", location: "Muscat", directions: "Sultan Qaboos Street, next to Opera House", price: "Free entry", bestTime: "Sat-Thu 8am-11am", mapLink: "https://maps.google.com/?q=Sultan+Qaboos+Grand+Mosque", rating: 4.9, activities: "📸 Photography | 🕌 Cultural tour | 🎧 Audio history" },
+            zh: { title: "🕌 苏丹卡布斯大清真寺", desc: "伊斯兰建筑杰作。", location: "马斯喀特", directions: "苏丹卡布斯大街，歌剧院旁边", price: "免费入场", bestTime: "周六至周四上午8点至11点", mapLink: "https://maps.google.com/?q=Sultan+Qaboos+Grand+Mosque", rating: 4.9, activities: "📸 摄影 | 🕌 文化之旅 | 🎧 历史音频" }
         },
-        zh: {
-            "hotel-grand-hyatt-muscat": { title: "🏨 马斯喀特君悦酒店", desc: "位于马斯喀特市中心的五星级豪华酒店。", location: "阿尔库维尔，马斯喀特", directions: "位于苏丹卡布斯大街", price: "247美元起", bestTime: "全年", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
-            "landmark-grand-mosque": { title: "🕌 苏丹卡布斯大清真寺", desc: "伊斯兰建筑杰作。", location: "马斯喀特", directions: "苏丹卡布斯大街，歌剧院旁边", price: "免费入场", bestTime: "周六至周四上午8点至11点", mapLink: "https://maps.google.com/?q=Sultan+Qaboos+Grand+Mosque", rating: 4.9 },
-            "food-shuwa": { title: "🍖 阿曼舒瓦烤肉", desc: "用香料腌制的肉埋在地下烤箱中过夜。", location: "Al Aktham餐厅，库鲁姆", directions: "库鲁姆，马斯喀特，靠近皇冠假日酒店", price: "餐费：151元", bestTime: "节日和假期", mapLink: "https://maps.google.com/?q=Al+Akhtham+Restaurant+Qurum", rating: 4.7 },
-            "cafe-oman-coffee": { title: "☕ 阿曼咖啡店", desc: "正宗阿曼咖啡配传统甜点。", location: "阿尔库维尔，马斯喀特", directions: "靠近阿尔库维尔综合大楼", price: "咖啡：38元", bestTime: "早晚", mapLink: "https://maps.google.com/?q=Oman+Coffee+Shop+Al+Khuwair", rating: 4.6 },
-            "special-fireworks": { title: "🎆 烟花", desc: "马斯喀特壮观的烟花表演。", location: "阿纳西姆公园，马斯喀特", directions: "皇家歌剧院旁边", price: "免费", bestTime: "一月至二月，晚上9点", mapLink: "https://maps.google.com/?q=Al+Naseem+Park+Muscat", rating: 4.9 },
-            "special-rose": { title: "🌹 玫瑰季节", desc: "绿色山脈的玫瑰采摘季节。", location: "绿色山脈，尼兹瓦", directions: "距尼兹瓦45分钟", price: "38元", bestTime: "三月至五月", mapLink: "https://maps.google.com/?q=Jebel+Akhdar+Nizwa", rating: 4.9 },
-            "special-khareef": { title: "🌧️ 塞拉莱雨季", desc: "塞拉莱的季风季节。", location: "塞拉莱，佐法尔", directions: "塞拉莱国际机场", price: "免费", bestTime: "六月至九月", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 }
+        "wadi-shab": {
+            ar: { title: "🏞️ وادي شاب", desc: "وادي خلاب بمياهه الفيروزية وكهفه الساحر.", location: "الشرقية، صور", directions: "بعد صور بحوالي 45 دقيقة", price: "الدخول مجاني (قارب صغير 1 ر.ع.)", bestTime: "أكتوبر - أبريل", mapLink: "https://maps.google.com/?q=Wadi+Shab", rating: 4.9, activities: "🥾 مشي لمسافات طويلة | 🏊 سباحة في المسابح الطبيعية | 📸 تصوير المناظر | 🧗 تسلق الصخور" },
+            en: { title: "🏞️ Wadi Shab", desc: "Stunning wadi with turquoise waters and a magical cave.", location: "Sharqiyah, Sur", directions: "45 minutes from Sur", price: "Free entry (small boat 1 OMR)", bestTime: "October - April", mapLink: "https://maps.google.com/?q=Wadi+Shab", rating: 4.9, activities: "🥾 Hiking | 🏊 Swimming in natural pools | 📸 Photography | 🧗 Rock climbing" },
+            zh: { title: "🏞️ 沙布干河", desc: "令人惊叹的干河，拥有碧绿的水域和神奇的洞穴。", location: "沙尔基亚，苏尔", directions: "距苏尔45分钟", price: "免费入场（小船1阿曼里亚尔）", bestTime: "十月至四月", mapLink: "https://maps.google.com/?q=Wadi+Shab", rating: 4.9, activities: "🥾 徒步旅行 | 🏊 天然泳池游泳 | 📸 摄影 | 🧗 攀岩" }
+        },
+        "special-fireworks": {
+            ar: { title: "🎆 ألعاب نارية", desc: "عرض ألعاب نارية مذهلة يضيء سماء مسقط.", location: "حديقة النسيم، مسقط", directions: "بجانب دار الأوبرا", price: "مجاني", bestTime: "يناير - فبراير، 9 مساءً", mapLink: "https://maps.google.com/?q=Al+Naseem+Park+Muscat", rating: 4.9 },
+            en: { title: "🎆 Fireworks", desc: "Spectacular fireworks display in Muscat.", location: "Al Naseem Park, Muscat", directions: "Next to Royal Opera House", price: "Free", bestTime: "Jan-Feb, 9 PM", mapLink: "https://maps.google.com/?q=Al+Naseem+Park+Muscat", rating: 4.9 },
+            zh: { title: "🎆 烟花", desc: "马斯喀特壮观的烟花表演。", location: "阿纳西姆公园，马斯喀特", directions: "皇家歌剧院旁边", price: "免费", bestTime: "一月至二月，晚上9点", mapLink: "https://maps.google.com/?q=Al+Naseem+Park+Muscat", rating: 4.9 }
+        },
+        "special-rose": {
+            ar: { title: "🌹 موسم الورد", desc: "موسم قطف الورد في الجبل الأخضر.", location: "الجبل الأخضر، نزوى", directions: "45 دقيقة من نزوى", price: "2 ر.ع. / 8 ر.س", bestTime: "مارس - مايو", mapLink: "https://maps.google.com/?q=Jebel+Akhdar+Nizwa", rating: 4.9 },
+            en: { title: "🌹 Rose Season", desc: "Rose picking season in Jebel Akhdar.", location: "Jebel Akhdar, Nizwa", directions: "45 min from Nizwa", price: "$5.20", bestTime: "March - May", mapLink: "https://maps.google.com/?q=Jebel+Akhdar+Nizwa", rating: 4.9 },
+            zh: { title: "🌹 玫瑰季节", desc: "绿色山脈的玫瑰采摘季节。", location: "绿色山脈，尼兹瓦", directions: "距尼兹瓦45分钟", price: "38元", bestTime: "三月至五月", mapLink: "https://maps.google.com/?q=Jebel+Akhdar+Nizwa", rating: 4.9 }
+        },
+        "special-khareef": {
+            ar: { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار في صلالة.", location: "صلالة، ظفار", directions: "مطار صلالة الدولي", price: "مجاني", bestTime: "يونيو - سبتمبر", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 },
+            en: { title: "🌧️ Khareef Salalah", desc: "Monsoon season in Salalah.", location: "Salalah, Dhofar", directions: "Salalah International Airport", price: "Free", bestTime: "June - September", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 },
+            zh: { title: "🌧️ 塞拉莱雨季", desc: "塞拉莱的季风季节。", location: "塞拉莱，佐法尔", directions: "塞拉莱国际机场", price: "免费", bestTime: "六月至九月", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 }
         }
     };
 
+    // ==================== CITY DATA ====================
+    const citiesData = {
+        muscat: {
+            nameAr: "مسقط", nameEn: "Muscat", nameZh: "马斯喀特",
+            icon: "🎭", category: "culture",
+            descAr: "عاصمة عُمان النابضة بالحياة", descEn: "The vibrant capital of Oman", descZh: "充满活力的阿曼首都",
+            highlights: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح", "متحف عُمان", "كورنيش مطرح"],
+            landmarks: [
+                { name: "الجامع الكبير", desc: "تحفة معمارية إسلامية وأحد أكبر المساجد في العالم", detailId: "landmark-grand-mosque" },
+                { name: "دار الأوبرا السلطانية", desc: "صرح ثقافي وفني عالمي المستوى", detailId: "landmark-grand-mosque" },
+                { name: "سوق مطرح", desc: "سوق تقليدي عريق يباع فيه اللبان والفضة", detailId: "landmark-grand-mosque" }
+            ],
+            food: ["الشواء العُماني", "المجبوس", "الخبيصة", "البلاليط", "الحلوى العُمانية"],
+            stories: ["طرد البرتغاليين عام 1650م", "أسطول البحار العُماني", "ميناء مسقط على طريق الحرير", "قصر العلم رمز النهضة", "قلعتي الجلالي والميراني"],
+            customs: ["الخنجر العُماني", "القهوة العُمانية", "مهرجان مسقط", "اللباس التقليدي", "الرقصات الشعبية"],
+            hotels: ["فندق جراند حياة مسقط"],
+            cafes: ["مقهى عُمان للقهوة"],
+            special: { titleAr: "🎭 مهرجان مسقط", titleEn: "🎭 Muscat Festival", titleZh: "🎭 马斯喀特节", descAr: "مهرجان ثقافي سنوي في يناير وفبراير.", descEn: "Annual cultural festival in January-February.", descZh: "一月至二月的年度文化节。", details: ["ألعاب نارية"] }
+        },
+        nizwa: {
+            nameAr: "نزوى", nameEn: "Nizwa", nameZh: "尼兹瓦",
+            icon: "🌹", category: "culture",
+            descAr: "مدينة التراث العريق وقلعتها الشهيرة", descEn: "City of rich heritage and its famous fort", descZh: "拥有丰富遗产和著名堡垒的城市",
+            highlights: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر", "فلج دارس", "الحلوى العمانية"],
+            landmarks: [
+                { name: "قلعة نزوى", desc: "قلعة تاريخية ببرج دائري ضخم", detailId: "landmark-grand-mosque" },
+                { name: "سوق نزوى", desc: "سوق تقليدي يشتهر بالخناجر والفضة", detailId: "landmark-grand-mosque" },
+                { name: "الجبل الأخضر", desc: "سلسلة جبلية خضراء تشتهر بالورد", detailId: "landmark-grand-mosque" }
+            ],
+            food: ["الحلوى العُمانية", "الشواء العُماني", "القبولي", "الهريس", "العرسية"],
+            stories: ["بناء قلعة نزوى استغرقت 12 سنة", "تسمية نزوى من 'نزا'", "عاصمة العلم والتراث", "طرد البرتغاليين", "بيضة الإسلام"],
+            customs: ["سوق الماشية", "صناعة الحلوى", "الفلاج", "البيوت الطينية", "القهوة مع الحلوى"],
+            hotels: ["منتجع الجبل الأخضر - أليلا"],
+            cafes: ["مقهى القلعة"],
+            special: { titleAr: "🌹 موسم الورد", titleEn: "🌹 Rose Season", titleZh: "🌹 玫瑰季节", descAr: "من مارس إلى مايو في الجبل الأخضر.", descEn: "March to May in Jebel Akhdar.", descZh: "三月至五月。", details: ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"] }
+        },
+        salalah: {
+            nameAr: "صلالة", nameEn: "Salalah", nameZh: "塞拉莱",
+            icon: "🌧️", category: "nature",
+            descAr: "جنة الخريف الساحرة، أرض اللبان", descEn: "Magical Khareef paradise, land of frankincense", descZh: "神奇的季风天堂，乳香之地",
+            highlights: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل", "أرض البخور", "سوق الحافة"],
+            landmarks: [
+                { name: "وادي دربات", desc: "وادي خلاب بشلالاته الموسمية", detailId: "wadi-shab" },
+                { name: "شاطئ المغسيل", desc: "شاطئ جميل بفوهاته المائية", detailId: "landmark-grand-mosque" },
+                { name: "أرض اللبان", desc: "موقع تراث عالمي", detailId: "landmark-grand-mosque" }
+            ],
+            food: ["المندي", "السمك المشوي", "العسل العماني", "حلوى الحليب", "القهوة الظفارية"],
+            stories: ["قصة تبع وأصحاب الأيكة", "ميناء صلالة القديم", "تجارة اللبان", "الملكة بلقيس", "الرياح الموسمية"],
+            customs: ["خريف صلالة", "اللبان", "الرقصات الظفارية", "مهرجانات صيفية", "صناعة البخور"],
+            hotels: ["فندق الفانات - جي دبليو ماريوت"],
+            cafes: ["مقهى الضباب"],
+            special: { titleAr: "🌧️ خريف صلالة", titleEn: "🌧️ Khareef Salalah", titleZh: "🌧️ 塞拉莱雨季", descAr: "موسم الضباب والأمطار من يونيو إلى سبتمبر.", descEn: "Monsoon season from June to September.", descZh: "六月至九月的季风季节。", details: ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"] }
+        }
+    };
+
+    const cityKeys = ["muscat", "nizwa", "salalah"];
     let currentLang = 'ar';
     let currentCityId = null;
     let currentDetailId = null;
+
+    // Translations
+    const translations = {
+        ar: { 
+            heroTitle: "🌊 سمر | Summer", heroDesc: "مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان", 
+            welcome: "✨ مرحباً بك في سمر — اكتشف عُمان بطريقة جديدة ✨",
+            whyTitle: "🇴🇲 لماذا تزور عُمان؟",
+            why1Title: "طبيعة متنوعة", why1Desc: "من الجبال الخضراء إلى الصحاري الذهبية والشواطئ الفيروزية",
+            why2Title: "صحاري ووديان", why2Desc: "رمال وهيبة، وادي شاب، جبل شمس — مغامرات لا تنسى",
+            why3Title: "تراث عريق", why3Desc: "قلاع وحصون وأسواق تقليدية تعود لآلاف السنين",
+            why4Title: "ثقافة وضيافة", why4Desc: "القهوة العمانية والتمر والخنجر — ترحيب أصيل",
+            seasonsTitle: "🌦️ الفصول والمواسم",
+            summerTitle: "الصيف", summerDesc: "هروب إلى الجبال (الجبل الأخضر) أو استمتع بخريف صلالة",
+            khareefTitle: "خريف صلالة", khareefDesc: "موسم الضباب والأمطار من يونيو إلى سبتمبر",
+            winterTitle: "الشتاء", winterDesc: "أفضل وقت للتخييم في الصحاري والوديان",
+            backToCity: "🏠 العودة للمدينة", backHome: "🏠 العودة للرئيسية",
+            sections: { landmarks: "🏛️ المعالم والأنشطة", food: "🍽️ الأكلات الشعبية", stories: "📖 القصص التاريخية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل الفنادق", cafes: "☕ أفضل المقاهي" } 
+        },
+        en: { 
+            heroTitle: "🌊 Summer | Your AI Guide", heroDesc: "Your AI Smart Tourism Guide | Covers the best destinations in Oman", 
+            welcome: "✨ Welcome to Summer — Discover Oman like never before ✨",
+            whyTitle: "🇴🇲 Why Visit Oman?",
+            why1Title: "Diverse Nature", why1Desc: "From green mountains to golden deserts and turquoise beaches",
+            why2Title: "Deserts & Wadis", why2Desc: "Wahiba Sands, Wadi Shab, Jebel Shams — unforgettable adventures",
+            why3Title: "Rich Heritage", why3Desc: "Forts, castles, and traditional souqs dating back thousands of years",
+            why4Title: "Culture & Hospitality", why4Desc: "Omani coffee, dates, and khanjar — authentic welcome",
+            seasonsTitle: "🌦️ Seasons & Events",
+            summerTitle: "Summer", summerDesc: "Escape to the mountains (Jebel Akhdar) or enjoy Salalah Khareef",
+            khareefTitle: "Salalah Khareef", khareefDesc: "Monsoon season from June to September",
+            winterTitle: "Winter", winterDesc: "Best time for camping in deserts and wadis",
+            backToCity: "🏠 Back to City", backHome: "🏠 Back to Home",
+            sections: { landmarks: "🏛️ Attractions & Activities", food: "🍽️ Traditional Food", stories: "📖 Historical Stories", customs: "🎭 Customs & Traditions", hotels: "🏨 Top Hotels", cafes: "☕ Top Cafes" } 
+        },
+        zh: { 
+            heroTitle: "🌊 Summer | 您的AI导游", heroDesc: "您的AI智能旅游指南 | 覆盖阿曼最佳目的地", 
+            welcome: "✨ 欢迎使用 Summer — 以前所未有的方式探索阿曼 ✨",
+            whyTitle: "🇴🇲 为什么访问阿曼？",
+            why1Title: "多样的自然", why1Desc: "从青山到金色沙漠和碧绿海滩",
+            why2Title: "沙漠与干河", why2Desc: "瓦希巴沙地、沙布干河、沙姆斯山 — 难忘的冒险",
+            why3Title: "丰富的遗产", why3Desc: "堡垒、城堡和传统市场，历史可追溯数千年",
+            why4Title: "文化与热情好客", why4Desc: "阿曼咖啡、椰枣和弯刀 — 正宗的欢迎",
+            seasonsTitle: "🌦️ 季节与活动",
+            summerTitle: "夏季", summerDesc: "逃到山区或享受塞拉莱雨季",
+            khareefTitle: "塞拉莱雨季", khareefDesc: "六月至九月的季风季节",
+            winterTitle: "冬季", winterDesc: "沙漠和干河露营的最佳时间",
+            backToCity: "🏠 返回城市", backHome: "🏠 返回首页",
+            sections: { landmarks: "🏛️ 景点与活动", food: "🍽️ 传统美食", stories: "📖 历史故事", customs: "🎭 习俗与传统", hotels: "🏨 最佳酒店", cafes: "☕ 最佳咖啡馆" } 
+        }
+    };
+
+    function getCityName(city) { return city[`name${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getCityDesc(city) { return city[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getSpecialTitle(city) { return city.special[`title${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+    function getSpecialDesc(city) { return city.special[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
 
     function renderStars(rating) {
         const fullStars = Math.floor(rating);
@@ -516,21 +576,27 @@
 
     function openDetailPage(detailId) {
         currentDetailId = detailId;
-        const detail = detailsData[currentLang][detailId];
+        const detail = detailsData[detailId];
         if (!detail) return;
-        const t = fullContent[currentLang];
+        const t = detail[currentLang];
+        const trans = translations[currentLang];
         const container = document.getElementById('detailPageContainer');
+        let activitiesHtml = '';
+        if (t.activities) {
+            activitiesHtml = `<div class="detail-info"><h3>🎯 ${currentLang === 'ar' ? 'الأنشطة' : (currentLang === 'en' ? 'Activities' : '活动')}</h3><p>${t.activities}</p></div>`;
+        }
         container.innerHTML = `
             <div class="detail-page active-detail">
-                <button class="back-btn" onclick="closeDetailPage()">🔙 ${t.backToCity}</button>
-                <div class="detail-header"><h2>${detail.title}</h2></div>
-                ${renderStars(detail.rating)}
-                <div class="detail-info"><h3>📝 ${currentLang === 'ar' ? 'الوصف' : (currentLang === 'en' ? 'Description' : '描述')}</h3><p>${detail.desc}</p></div>
-                <div class="detail-location"><h3>📍 ${currentLang === 'ar' ? 'الموقع' : (currentLang === 'en' ? 'Location' : '位置')}</h3><p>${detail.location}</p></div>
-                <div class="detail-info"><h3>🚗 ${currentLang === 'ar' ? 'الاتجاهات' : (currentLang === 'en' ? 'Directions' : '路线')}</h3><p>${detail.directions}</p></div>
-                <div class="detail-price">💰 ${detail.price}</div>
-                <div class="detail-info"><h3>⏰ ${currentLang === 'ar' ? 'أفضل وقت' : (currentLang === 'en' ? 'Best Time' : '最佳时间')}</h3><p>${detail.bestTime}</p></div>
-                <a href="${detail.mapLink}" target="_blank" class="map-link">🗺️ ${currentLang === 'ar' ? 'عرض على الخريطة' : (currentLang === 'en' ? 'View on Map' : '在地图上查看')}</a>
+                <button class="back-btn" onclick="closeDetailPage()">🔙 ${trans.backToCity}</button>
+                <div class="detail-header"><h2>${t.title}</h2></div>
+                ${renderStars(t.rating)}
+                <div class="detail-info"><h3>📝 ${currentLang === 'ar' ? 'الوصف' : (currentLang === 'en' ? 'Description' : '描述')}</h3><p>${t.desc}</p></div>
+                <div class="detail-location"><h3>📍 ${currentLang === 'ar' ? 'الموقع' : (currentLang === 'en' ? 'Location' : '位置')}</h3><p>${t.location}</p></div>
+                <div class="detail-info"><h3>🚗 ${currentLang === 'ar' ? 'الاتجاهات' : (currentLang === 'en' ? 'Directions' : '路线')}</h3><p>${t.directions}</p></div>
+                ${activitiesHtml}
+                <div class="detail-price">💰 ${t.price}</div>
+                <div class="detail-info"><h3>⏰ ${currentLang === 'ar' ? 'أفضل وقت' : (currentLang === 'en' ? 'Best Time' : '最佳时间')}</h3><p>${t.bestTime}</p></div>
+                <a href="${t.mapLink}" target="_blank" class="map-link">🗺️ ${currentLang === 'ar' ? 'عرض على الخريطة' : (currentLang === 'en' ? 'View on Map' : '在地图上查看')}</a>
             </div>
         `;
         document.getElementById('cityPagesContainer').style.display = 'none';
@@ -550,15 +616,13 @@
 
     function renderHome() {
         const grid = document.getElementById('citiesGrid');
-        const t = fullContent[currentLang];
-        const cities = t.cities;
-        grid.innerHTML = Object.keys(cities).map(key => {
-            const city = cities[key];
+        grid.innerHTML = cityKeys.map(key => {
+            const city = citiesData[key];
             return `<div class="city-card" onclick="openCity('${key}')">
                         <div class="card-icon">${city.icon}</div>
                         <div class="card-content">
-                            <h3>${city.name}</h3>
-                            <p>${city.desc}</p>
+                            <h3>${getCityName(city)}</h3>
+                            <p>${getCityDesc(city)}</p>
                             <div class="city-tags">${city.highlights.slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
                         </div>
                     </div>`;
@@ -566,41 +630,44 @@
         document.getElementById('mainPage').style.display = 'block';
         document.getElementById('cityPagesContainer').innerHTML = '';
         document.getElementById('detailPageContainer').innerHTML = '';
+        
+        // Fade-up animation observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     }
 
     function openCity(cityKey) {
         currentCityId = cityKey;
-        const t = fullContent[currentLang];
-        const city = t.cities[cityKey];
-        const sections = t.sections;
-        
+        const city = citiesData[cityKey];
+        const t = translations[currentLang];
         const container = document.getElementById('cityPagesContainer');
+        
         container.innerHTML = `
             <div class="city-page active-page">
                 <button class="back-btn" onclick="backHome()">🔙 ${t.backHome}</button>
-                <div class="city-header"><h2>${city.name}</h2></div>
+                <div class="city-header"><h2>${getCityName(city)}</h2></div>
                 
-                <div class="section special-section"><h3>${sections.special} <span class="animated-icon">${city.icon}</span></h3><p>${city.special.desc}</p>
-                    <div class="items-grid">${city.special.details.map((d, idx) => {
-                        let detailKey = '';
-                        if (cityKey === 'muscat') detailKey = 'special-fireworks';
-                        else if (cityKey === 'nizwa') detailKey = 'special-rose';
-                        else detailKey = 'special-khareef';
-                        return `<div class="item-card" onclick="openDetailPage('${detailKey}')"><h4>${d}</h4></div>`;
-                    }).join('')}</div>
+                <div class="section special-section"><h3>✨ ${getSpecialTitle(city)} <span class="animated-icon">${city.icon}</span></h3><p>${getSpecialDesc(city)}</p>
+                    <div class="items-grid">${city.special.details.map(d => `<div class="item-card" onclick="openDetailPage('special-fireworks')"><h4>${d}</h4></div>`).join('')}</div>
                 </div>
                 
-                <div class="section"><h3>${sections.landmarks}</h3><div class="items-grid">${city.landmarks.map(l => `<div class="item-card" onclick="openDetailPage('landmark-grand-mosque')"><h4>${l}</h4><p>${currentLang === 'ar' ? 'معلم سياحي مميز' : (currentLang === 'en' ? 'Distinctive landmark' : '独特的地标')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.landmarks}</h3><div class="items-grid">${city.landmarks.map(l => `<div class="item-card" onclick="openDetailPage('${l.detailId || 'landmark-grand-mosque'}')"><h4>${l.name || l}</h4><p>${l.desc || (currentLang === 'ar' ? 'معلم سياحي مميز' : (currentLang === 'en' ? 'Distinctive landmark' : '独特的地标'))}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${sections.food}</h3><div class="items-grid">${city.food.map(f => `<div class="item-card" onclick="openDetailPage('food-shuwa')"><h4>${f}</h4><p>${currentLang === 'ar' ? 'أكلة عمانية شهيرة' : (currentLang === 'en' ? 'Famous Omani dish' : '著名的阿曼菜')}</p>${renderStars(4.7)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.food}</h3><div class="items-grid">${city.food.map(f => `<div class="item-card" onclick="openDetailPage('food-shuwa')"><h4>${f}</h4><p>${currentLang === 'ar' ? 'أكلة عمانية شهيرة' : (currentLang === 'en' ? 'Famous Omani dish' : '著名的阿曼菜')}</p>${renderStars(4.7)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${sections.stories}</h3><div class="items-grid">${city.stories.map(s => `<div class="item-card"><h4>${s}</h4><p>${currentLang === 'ar' ? 'قصة تاريخية' : (currentLang === 'en' ? 'Historical story' : '历史故事')}</p>${renderStars(4.9)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.stories}</h3><div class="items-grid">${city.stories.map(s => `<div class="item-card"><h4>${s.split(':')[0]}</h4><p>${s.split(':')[1] || ''}</p>${renderStars(4.9)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${sections.customs}</h3><div class="items-grid">${city.customs.map(c => `<div class="item-card"><h4>${c}</h4><p>${currentLang === 'ar' ? 'تراث عماني أصيل' : (currentLang === 'en' ? 'Authentic Omani heritage' : '正宗的阿曼遗产')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.customs}</h3><div class="items-grid">${city.customs.map(c => `<div class="item-card"><h4>${c}</h4><p>${currentLang === 'ar' ? 'تراث عماني أصيل' : (currentLang === 'en' ? 'Authentic Omani heritage' : '正宗的阿曼遗产')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${sections.hotels}</h3><div class="items-grid">${city.hotels.map(h => `<div class="item-card" onclick="openDetailPage('hotel-grand-hyatt-muscat')"><h4>${h}</h4><p>${currentLang === 'ar' ? 'فندق ممتاز' : (currentLang === 'en' ? 'Excellent hotel' : '优质酒店')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.hotels}</h3><div class="items-grid">${city.hotels.map(h => `<div class="item-card" onclick="openDetailPage('hotel-grand-hyatt-muscat')"><h4>${h}</h4><p>${currentLang === 'ar' ? 'فندق 5 نجوم فاخر' : (currentLang === 'en' ? 'Luxury 5-star hotel' : '豪华五星级酒店')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${sections.cafes}</h3><div class="items-grid">${city.cafes.map(c => `<div class="item-card" onclick="openDetailPage('cafe-oman-coffee')"><h4>${c}</h4><p>${currentLang === 'ar' ? 'مقهى مميز' : (currentLang === 'en' ? 'Specialty cafe' : '特色咖啡馆')}</p>${renderStars(4.6)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.cafes}</h3><div class="items-grid">${city.cafes.map(c => `<div class="item-card" onclick="openDetailPage('cafe-oman-coffee')"><h4>${c}</h4><p>${currentLang === 'ar' ? 'مقهى مميز يقدم القهوة العمانية' : (currentLang === 'en' ? 'Specialty cafe serving Omani coffee' : '供应阿曼咖啡的特色咖啡馆')}</p>${renderStars(4.6)}</div>`).join('')}</div></div>
             </div>
         `;
         document.getElementById('mainPage').style.display = 'none';
@@ -616,11 +683,34 @@
     function setLanguage(lang) {
         currentLang = lang;
         document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        const t = fullContent[lang];
+        const t = translations[lang];
+        
+        // Update hero
         document.getElementById('heroTitle').innerHTML = t.heroTitle;
         document.getElementById('heroDesc').innerHTML = t.heroDesc;
         document.getElementById('welcomeMessage').innerHTML = t.welcome;
         
+        // Update Why Oman section
+        document.getElementById('whyTitle').innerHTML = t.whyTitle;
+        document.getElementById('why1Title').innerHTML = t.why1Title;
+        document.getElementById('why1Desc').innerHTML = t.why1Desc;
+        document.getElementById('why2Title').innerHTML = t.why2Title;
+        document.getElementById('why2Desc').innerHTML = t.why2Desc;
+        document.getElementById('why3Title').innerHTML = t.why3Title;
+        document.getElementById('why3Desc').innerHTML = t.why3Desc;
+        document.getElementById('why4Title').innerHTML = t.why4Title;
+        document.getElementById('why4Desc').innerHTML = t.why4Desc;
+        
+        // Update Seasons section
+        document.getElementById('seasonsTitle').innerHTML = t.seasonsTitle;
+        document.getElementById('summerTitle').innerHTML = t.summerTitle;
+        document.getElementById('summerDesc').innerHTML = t.summerDesc;
+        document.getElementById('khareefTitle').innerHTML = t.khareefTitle;
+        document.getElementById('khareefDesc').innerHTML = t.khareefDesc;
+        document.getElementById('winterTitle').innerHTML = t.winterTitle;
+        document.getElementById('winterDesc').innerHTML = t.winterDesc;
+        
+        // Update active language button
         document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
         if (lang === 'ar') document.querySelector('.lang-btn:first-child').classList.add('active');
         else if (lang === 'en') document.querySelector('.lang-btn:nth-child(2)').classList.add('active');
