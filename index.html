@@ -18,7 +18,6 @@
         body[dir="ltr"] { direction: ltr; text-align: left; }
         body[dir="rtl"] { direction: rtl; text-align: right; }
 
-        /* ========== ANIMATIONS ========== */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -32,23 +31,14 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.6; }
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
         
         .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-        /* ========== LANGUAGE BAR ========== */
         .language-bar {
             background-color: #0D47A1;
             padding: 0.8rem 2rem;
@@ -77,25 +67,24 @@
             transform: scale(1.05);
         }
 
-        /* ========== HERO SECTION ========== */
         .hero {
             background: linear-gradient(135deg, #0D47A1, #1E88E5, #0D47A1);
             background-size: 200% 200%;
             animation: gradientShift 6s ease infinite;
-            padding: 5rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
             color: white;
             margin-bottom: 2rem;
             border-bottom: 4px solid #D4AF37;
         }
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
             animation: fadeIn 1s ease;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
         }
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -106,7 +95,7 @@
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             margin-top: 1rem;
-            font-size: 1rem;
+            font-size: 0.9rem;
             border: 1px solid #D4AF37;
         }
         .ai-badge {
@@ -119,61 +108,6 @@
             animation: pulse 2s infinite;
         }
 
-        /* ========== AI RECOMMENDATIONS ========== */
-        .ai-recommendations {
-            background: linear-gradient(135deg, #0D47A1, #1E88E5);
-            margin: 2rem auto;
-            padding: 1.5rem;
-            border-radius: 32px;
-            max-width: 1200px;
-            color: white;
-        }
-        .ai-recommendations h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        .ai-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: #D4AF37;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        .rec-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .rec-btn {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid #D4AF37;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: white;
-        }
-        .rec-btn:hover {
-            background: #D4AF37;
-            color: #0D47A1;
-        }
-        .rec-result {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            display: none;
-        }
-        .rec-result.show {
-            display: block;
-            animation: fadeInUp 0.5s ease;
-        }
-
-        /* ========== WHY OMAN SECTION ========== */
         .why-oman {
             background: white;
             margin: 2rem auto;
@@ -209,7 +143,6 @@
         .why-card h3 { color: #0D47A1; margin-bottom: 0.5rem; }
         .why-card p { color: #1E88E5; font-size: 0.9rem; }
 
-        /* ========== SEASONS SECTION ========== */
         .seasons {
             background: white;
             margin: 2rem auto;
@@ -237,7 +170,6 @@
         .season-card h3 { color: #0D47A1; }
         .season-card p { color: #1E88E5; font-size: 0.85rem; }
 
-        /* ========== CITIES GRID ========== */
         .cities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -295,7 +227,6 @@
         }
         .tag:hover { background: #D4AF37; transform: translateY(-2px); }
 
-        /* ========== CITY PAGE ========== */
         .city-page {
             max-width: 1200px;
             margin: 2rem auto;
@@ -305,7 +236,7 @@
             display: none;
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            animation: slideFade 0.5s ease;
+            animation: fadeInUp 0.5s ease;
         }
         .active-page { display: block; }
         .city-header { text-align: center; margin-bottom: 2rem; }
@@ -388,6 +319,10 @@
             animation: float 3s ease-in-out infinite;
             font-size: 1.5rem;
         }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
 
         .back-btn {
             background: #D4AF37;
@@ -425,7 +360,7 @@
         .detail-price { font-size: 1.5rem; color: #D4AF37; font-weight: bold; margin: 1rem 0; }
         .detail-location { background: #E3F2FD; padding: 1rem; border-radius: 15px; margin: 1rem 0; }
 
-        /* AI Floating Button */
+        /* AI Floating Button & Chat */
         .ai-floating {
             position: fixed;
             bottom: 20px;
@@ -455,7 +390,7 @@
             position: fixed;
             bottom: 90px;
             left: 20px;
-            width: 320px;
+            width: 350px;
             background: white;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -474,7 +409,7 @@
         }
         .ai-chat-body {
             padding: 1rem;
-            height: 250px;
+            height: 350px;
             overflow-y: auto;
             font-size: 0.9rem;
         }
@@ -483,6 +418,34 @@
             padding: 0.5rem;
             border-radius: 15px;
             margin: 0.5rem 0;
+        }
+        .user-message {
+            background: #D4AF37;
+            color: #0D47A1;
+            padding: 0.5rem;
+            border-radius: 15px;
+            margin: 0.5rem 0;
+            text-align: left;
+        }
+        .suggestions-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .suggestion-btn {
+            background: #1E88E5;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .suggestion-btn:hover {
+            background: #D4AF37;
+            color: #0D47A1;
         }
         .ai-chat-input {
             display: flex;
@@ -508,7 +471,7 @@
             .city-header h2 { font-size: 1.8rem; }
             .section h3 { font-size: 1.4rem; }
             .why-grid, .seasons-grid { grid-template-columns: 1fr; }
-            .ai-chat { width: 280px; left: 10px; bottom: 80px; }
+            .ai-chat { width: 300px; left: 10px; bottom: 80px; }
         }
     </style>
 </head>
@@ -526,17 +489,6 @@
         <p id="heroDesc">مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان</p>
         <div class="hero-welcome" id="welcomeMessage">✨ مرحباً بك في سمر — اكتشف عُمان بطريقة جديدة ✨</div>
         <div class="ai-badge">🤖 مدعوم بالذكاء الاصطناعي</div>
-    </div>
-
-    <!-- AI Recommendations Section -->
-    <div class="ai-recommendations fade-up">
-        <h3><span class="ai-spinner"></span> 🤖 توصيات سمر الذكية</h3>
-        <div class="rec-buttons">
-            <button class="rec-btn" onclick="showRecommendation('culture')">🏛️ مهتم بالثقافة والتراث</button>
-            <button class="rec-btn" onclick="showRecommendation('nature')">🌿 مهتم بالطبيعة والمغامرات</button>
-            <button class="rec-btn" onclick="showRecommendation('food')">🍽️ مهتم بالأكلات والمطاعم</button>
-        </div>
-        <div id="recResult" class="rec-result"></div>
     </div>
 
     <div class="why-oman fade-up">
@@ -572,7 +524,8 @@
 <div class="ai-chat" id="aiChat">
     <div class="ai-chat-header">🤖 سمر | المساعد الذكي</div>
     <div class="ai-chat-body" id="aiChatBody">
-        <div class="ai-chat-message">👋 مرحباً! أنا سمر، مساعدك الذكي. اسألني عن أي مدينة، مطعم، أو فعالية في عمان!</div>
+        <div class="ai-chat-message">👋 مرحباً! أنا سمر، مساعدك الذكي. اسألني عن أي شيء في عمان!</div>
+        <div class="suggestions-grid" id="suggestionsGrid"></div>
     </div>
     <div class="ai-chat-input">
         <input type="text" id="aiChatInput" placeholder="اسأل سمر...">
@@ -599,12 +552,7 @@
             khareefTitle: "خريف صلالة", khareefDesc: "موسم الضباب والأمطار من يونيو إلى سبتمبر",
             winterTitle: "الشتاء", winterDesc: "أفضل وقت للتخييم في الصحاري والوديان",
             backToCity: "🏠 العودة للمدينة", backHome: "🏠 العودة للرئيسية",
-            sections: { landmarks: "🏛️ المعالم والأنشطة", food: "🍽️ الأكلات الشعبية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل الفنادق", cafes: "☕ أفضل المقاهي", restaurants: "🍽️ أفضل المطاعم" },
-            recMessages: {
-                culture: "🎭 بناءً على اهتمامك بالثقافة والتراث، نوصي بزيارة: مسقط (الجامع الكبير، دار الأوبرا، سوق مطرح)، نزوى (قلعة نزوى، سوق نزوى)، بهلا (قلعة بهلا - اليونسكو)",
-                nature: "🌿 بناءً على اهتمامك بالطبيعة والمغامرات، نوصي بزيارة: وادي شاب (السباحة والمشي)، الجبل الأخضر (موسم الورد)، رمال وهيبة (التخييم ومراقبة النجوم)، صلالة (خريف صلالة)",
-                food: "🍽️ بناءً على اهتمامك بالأكلات، نوصي بتجربة: الشواء العماني، المجبوس، الحلوى العمانية في مسقط، والمندي في صلالة"
-            }
+            sections: { landmarks: "🏛️ المعالم والأنشطة", food: "🍽️ الأكلات الشعبية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل الفنادق", cafes: "☕ أفضل المقاهي", restaurants: "🍽️ أفضل المطاعم" }
         },
         en: {
             heroTitle: "🌊 Summer | Your AI Guide",
@@ -620,12 +568,7 @@
             khareefTitle: "Salalah Khareef", khareefDesc: "Monsoon season from June to September",
             winterTitle: "Winter", winterDesc: "Best time for camping in deserts and wadis",
             backToCity: "🏠 Back to City", backHome: "🏠 Back to Home",
-            sections: { landmarks: "🏛️ Attractions & Activities", food: "🍽️ Traditional Food", customs: "🎭 Customs & Traditions", hotels: "🏨 Top Hotels", cafes: "☕ Top Cafes", restaurants: "🍽️ Best Restaurants" },
-            recMessages: {
-                culture: "🎭 Based on your interest in culture and heritage, we recommend visiting: Muscat (Grand Mosque, Opera House, Mutrah Souq), Nizwa (Nizwa Fort, Nizwa Souq), Bahla (Bahla Fort - UNESCO)",
-                nature: "🌿 Based on your interest in nature and adventures, we recommend: Wadi Shab (swimming & hiking), Jebel Akhdar (Rose Season), Wahiba Sands (camping & stargazing), Salalah (Khareef season)",
-                food: "🍽️ Based on your interest in food, we recommend trying: Omani Shuwa, Majboos, Omani Halwa in Muscat, and Mandi in Salalah"
-            }
+            sections: { landmarks: "🏛️ Attractions & Activities", food: "🍽️ Traditional Food", customs: "🎭 Customs & Traditions", hotels: "🏨 Top Hotels", cafes: "☕ Top Cafes", restaurants: "🍽️ Best Restaurants" }
         },
         zh: {
             heroTitle: "🌊 Summer | 您的AI导游",
@@ -641,18 +584,66 @@
             khareefTitle: "塞拉莱雨季", khareefDesc: "六月至九月的季风季节",
             winterTitle: "冬季", winterDesc: "沙漠和干河露营的最佳时间",
             backToCity: "🏠 返回城市", backHome: "🏠 返回首页",
-            sections: { landmarks: "🏛️ 景点与活动", food: "🍽️ 传统美食", customs: "🎭 习俗与传统", hotels: "🏨 最佳酒店", cafes: "☕ 最佳咖啡馆", restaurants: "🍽️ 最佳餐厅" },
-            recMessages: {
-                culture: "🎭 基于您对文化和遗产的兴趣，我们建议参观：马斯喀特（大清真寺、歌剧院、马托拉集市），尼兹瓦（尼兹瓦堡、尼兹瓦集市），巴赫拉（巴赫拉堡 - 联合国教科文组织）",
-                nature: "🌿 基于您对自然和冒险的兴趣，我们建议：沙布干河（游泳和徒步），绿色山脈（玫瑰季节），瓦希巴沙地（露营和观星），塞拉莱（季风季节）",
-                food: "🍽️ 基于您对美食的兴趣，我们建议尝试：阿曼舒瓦烤肉、马吉布斯、阿曼哈尔瓦（马斯喀特），以及曼迪（塞拉莱）"
-            }
+            sections: { landmarks: "🏛️ 景点与活动", food: "🍽️ 传统美食", customs: "🎭 习俗与传统", hotels: "🏨 最佳酒店", cafes: "☕ 最佳咖啡馆", restaurants: "🍽️ 最佳餐厅" }
+        }
+    };
+
+    // ==================== AI RESPONSES (10+ Smart Responses) ====================
+    const aiResponses = {
+        ar: {
+            default: "شكراً لسؤالك! 😊 أنا سمر، أساعدك في اكتشاف عمان. يمكنك سؤالي عن المدن، المطاعم، الفعاليات، أو أطلب مني اقتراح خيارات. ماذا تحب أن تعرف؟",
+            restaurantsMuscat: "🍽️ **أفضل ٥ مطاعم في مسقط:**\n1. P.F. Chang's (صيني - Avenues Mall)\n2. China Mood (صيني فاخر - Al Bustan Palace)\n3. Bait Al Luban (عماني تقليدي - القرم)\n4. Turkish House (تركي - الخوير)\n5. The Steakhouse (ستيك - الخوير)\n\nهل تريد معلومات أكثر عن أي مطعم؟",
+            placesNizwa: "🏛️ **أفضل أماكن سياحية في نزوى:**\n• قلعة نزوى (برج دائري ضخم)\n• سوق نزوى التقليدي (خناجر وفضة)\n• الجبل الأخضر (موسم الورد مارس-مايو)\n• فلج دارس (موقع تراث عالمي)\n• حصن بيت الرديدة\n\nهل تريد تفاصيل أكثر عن أي مكان؟",
+            khareefTiming: "🌧️ **موسم خريف صلالة** يبدأ من **يونيو** ويستمر حتى **سبتمبر**.\n\nخلال هذه الفترة، تتحول الطبيعة إلى خضرة جميلة، مع ضباب وأمطار خفيفة. أفضل وقت للزيارة هو يوليو وأغسطس.\n\nهل تريد اقتراحات لأماكن في صلالة؟",
+            omaniFood: "🍖 **أين تذوق الأكل العماني الشعبي؟**\n\n• مطعم الأخطم (القرم، مسقط) - الشواء العماني\n• مطعم بيت اللبن (القرم) - مجبوس وهريس\n• مطعم القلعة (نزوى) - حلوى عمانية\n• سوق مطرح (مسقط) - خبيصة وبلاليط\n\nهل تريد طريقة تحضير أي أكلة؟",
+            hotelSalalah: "🏨 **أفضل فنادق ٥ نجوم في صلالة:**\n\n1. فندق الفانات - جي دبليو ماريوت (منتجع فاخر)\n2. منتجع صلالة روتانا (إطلالة على البحر)\n3. منتجع كراون بلازا صلالة (قريب من شاطئ المغسيل)\n4. فندق صلالة بيتش (على البحر مباشرة)\n5. فندق هوليدي إن صلالة (خيار اقتصادي فاخر)\n\nهل تريد معرفة الأسعار؟",
+            eventsMuscat: "🎭 **الفعاليات في مسقط 2026:**\n\n• مهرجان مسقط (يناير-فبراير): عروض موسيقية، ألعاب نارية، أكشاك طعام\n• معرض عمان للكتاب (فبراير/مارس)\n• مهرجان صلالة السياحي (يوليو-أغسطس)\n• سباقات الهجن (أكتوبر-مارس)\n\nهل تريد مواعيد محددة؟",
+            wadiShabDirections: "🏞️ **كيف تصل إلى وادي شاب؟**\n\n• من مسقط: 1.5 ساعة بالسيارة (اتجاه صور)\n• من صور: 45 دقيقة\n• بعد الوصول: تحتاج قارب صغير (1 ريال) لعبور النهر\n• ثم تمشي 40 دقيقة لتصل إلى المسابح والكهف\n\n⚠️ نصيحة: أحضر ملابس سباحة وماء!",
+            omaniCustoms: "🎭 **العادات العمانية الأصيلة:**\n\n• الخنجر العماني: رمز الرجولة والشرف\n• القهوة العمانية: تقدم للضيوف مع التمر\n• الرزحة: رقصة شعبية بالسيوف\n• العازي: فن شعري تقليدي\n• الفلاج: نظام ري قديم (تراث عالمي)\n\nهل تريد معرفة المزيد عن أي عادة؟",
+            twoDayTrip: "🗺️ **رحلة مقترحة ليومين في عمان:**\n\n**اليوم الأول - مسقط:**\n• الصباح: الجامع الكبير\n• الظهر: متحف عمان + سوق مطرح\n• المساء: كورنيش مطرح + دار الأوبرا\n\n**اليوم الثاني - نزوى:**\n• الصباح: قلعة نزوى + سوق نزوى\n• الظهر: الجبل الأخضر (مدرجات الورد)\n• المساء: العودة لمسقط\n\nهل تريد تعديل الرحلة؟",
+            jebelAkhdarBestTime: "🌹 **أفضل وقت لزيارة الجبل الأخضر:**\n\n• **مارس - مايو**: موسم الورد (قطف الورد وتقطير ماء الورد)\n• **يونيو - أغسطس**: هروب من حر الصيف (أجواء معتدلة)\n• **سبتمبر - أكتوبر**: موسم الرمان\n\n⚠️ ملاحظة: الطريق جبلي، يفضل سيارة دفع رباعي.\n\nهل تريد معلومات عن الإقامة هناك؟",
+            generalHelp: "أنا هنا لمساعدتك! يمكنك سؤالي عن:\n• مدن عمان (مسقط، نزوى، صلالة)\n• مطاعم وفنادق\n• فعاليات ومواسم\n• عادات وتقاليد\n• وجهات سياحية\n\nماذا تريد أن تعرف؟"
+        },
+        en: {
+            default: "Thank you for your question! 😊 I'm Summer, your smart guide to Oman. Ask me about cities, restaurants, events, or ask for suggestions. What would you like to know?",
+            restaurantsMuscat: "🍽️ **Top 5 Restaurants in Muscat:**\n1. P.F. Chang's (Chinese - Avenues Mall)\n2. China Mood (Fine Chinese - Al Bustan Palace)\n3. Bait Al Luban (Traditional Omani - Qurum)\n4. Turkish House (Turkish - Al Khuwair)\n5. The Steakhouse (Steak - Al Khuwair)\n\nWant more details about any restaurant?",
+            placesNizwa: "🏛️ **Top attractions in Nizwa:**\n• Nizwa Fort (circular tower)\n• Nizwa Traditional Souq (daggers & silver)\n• Jebel Akhdar (Rose Season March-May)\n• Falaj Daris (UNESCO site)\n• Al Rudaidah Fort\n\nWant more details?",
+            khareefTiming: "🌧️ **Salalah Khareef season** runs from **June to September**.\n\nThe weather is cool with fog and light rain. Best time to visit is July-August.\n\nWant recommendations for places in Salalah?",
+            omaniFood: "🍖 **Where to try Omani food?**\n\n• Al Aktham Restaurant (Qurum, Muscat) - Shuwa\n• Bait Al Luban (Qurum) - Majboos\n• Nizwa Fort Restaurant (Nizwa) - Omani Halwa\n• Mutrah Souq (Muscat) - Khabeesa\n\nWant recipes?",
+            hotelSalalah: "🏨 **Top 5-star hotels in Salalah:**\n\n1. Al Fanar - JW Marriott (Luxury resort)\n2. Salalah Rotana Resort (Sea view)\n3. Crowne Plaza Salalah (Near Mughsail Beach)\n4. Salalah Beach Hotel (On the beach)\n5. Holiday Inn Salalah (Affordable luxury)\n\nWant prices?",
+            eventsMuscat: "🎭 **Events in Muscat 2026:**\n\n• Muscat Festival (Jan-Feb): Music, fireworks, food stalls\n• Oman Book Fair (Feb/Mar)\n• Salalah Tourism Festival (Jul-Aug)\n• Camel Racing (Oct-Mar)\n\nWant specific dates?",
+            wadiShabDirections: "🏞️ **How to get to Wadi Shab:**\n\n• From Muscat: 1.5 hours drive (towards Sur)\n• From Sur: 45 minutes\n• After arrival: Take a small boat (1 OMR)\n• Then hike 40 minutes to the pools and cave\n\n⚠️ Tip: Bring swimwear and water!",
+            omaniCustoms: "🎭 **Authentic Omani customs:**\n\n• Omani Khanjar: Symbol of honor\n• Omani Coffee: Served with dates\n• Al Razha: Traditional sword dance\n• Al Azi: Traditional poetry\n• Falaj: Ancient irrigation system\n\nWant to know more?",
+            twoDayTrip: "🗺️ **2-day Oman itinerary:**\n\n**Day 1 - Muscat:**\n• Morning: Grand Mosque\n• Afternoon: National Museum + Mutrah Souq\n• Evening: Mutrah Corniche + Opera House\n\n**Day 2 - Nizwa:**\n• Morning: Nizwa Fort + Souq\n• Afternoon: Jebel Akhdar (Rose terraces)\n• Evening: Return to Muscat\n\nWant to modify the trip?",
+            jebelAkhdarBestTime: "🌹 **Best time to visit Jebel Akhdar:**\n\n• **March-May**: Rose season\n• **June-August**: Escape summer heat\n• **September-October**: Pomegranate season\n\n⚠️ Note: Mountain road, 4x4 recommended.\n\nWant accommodation info?",
+            generalHelp: "I'm here to help! Ask me about:\n• Omani cities (Muscat, Nizwa, Salalah)\n• Restaurants & Hotels\n• Events & Seasons\n• Customs & Traditions\n• Tourist attractions\n\nWhat would you like to know?"
+        },
+        zh: {
+            default: "谢谢你的提问！😊 我是Summer，您的阿曼智能导游。请问您想了解城市、餐厅、活动，还是需要建议？",
+            restaurantsMuscat: "🍽️ **马斯喀特最佳5家餐厅：**\n1. P.F. Chang's (中餐 - Avenues Mall)\n2. China Mood (精致中餐 - Al Bustan Palace)\n3. Bait Al Luban (传统阿曼菜 - 库鲁姆)\n4. Turkish House (土耳其菜 - 阿尔库维尔)\n5. The Steakhouse (牛排 - 阿尔库维尔)\n\n需要更多信息吗？",
+            placesNizwa: "🏛️ **尼兹瓦最佳景点：**\n• 尼兹瓦堡（圆形塔）\n• 尼兹瓦传统集市（弯刀和银器）\n• 绿色山脈（玫瑰季节 3月-5月）\n• 法莱吉达里斯（联合国教科文组织）\n\n需要更多细节吗？",
+            khareefTiming: "🌧️ **塞拉莱季风季节**从**六月到九月**。\n\n天气凉爽，有雾和小雨。最佳游览时间是七月至八月。\n\n需要塞拉莱的景点推荐吗？",
+            omaniFood: "🍖 **在哪里品尝阿曼美食？**\n\n• Al Aktham餐厅（库鲁姆，马斯喀特）- 舒瓦烤肉\n• Bait Al Luban（库鲁姆）- 马吉布斯\n• 尼兹瓦堡餐厅（尼兹瓦）- 阿曼哈尔瓦\n• 马托拉集市（马斯喀特）- 哈比萨\n\n需要食谱吗？",
+            hotelSalalah: "🏨 **塞拉莱最佳五星级酒店：**\n\n1. Al Fanar - JW万豪酒店（豪华度假村）\n2. 塞拉莱罗塔纳度假村（海景）\n3. 塞拉莱皇冠假日酒店（靠近穆格赛尔海滩）\n4. 塞拉莱海滩酒店（在海滩上）\n5. 塞拉莱假日酒店（经济豪华）\n\n需要价格吗？",
+            eventsMuscat: "🎭 **2026年马斯喀特活动：**\n\n• 马斯喀特节（1月-2月）：音乐、烟花、美食摊位\n• 阿曼书展（2月/3月）\n• 塞拉莱旅游节（7月-8月）\n• 骆驼赛（10月-3月）\n\n需要具体日期吗？",
+            wadiShabDirections: "🏞️ **如何前往沙布干河：**\n\n• 从马斯喀特出发：1.5小时车程（往苏尔方向）\n• 从苏尔出发：45分钟\n• 到达后：乘小船（1阿曼里亚尔）过河\n• 然后徒步40分钟到达水池和洞穴\n\n⚠️ 提示：带上泳衣和水！",
+            omaniCustoms: "🎭 **正宗阿曼习俗：**\n\n• 阿曼弯刀：荣誉的象征\n• 阿曼咖啡：与椰枣一起供应\n• 阿尔拉兹哈：传统剑舞\n• 阿尔阿齐：传统诗歌\n• 法拉吉：古老灌溉系统\n\n想了解更多吗？",
+            twoDayTrip: "🗺️ **2天阿曼行程建议：**\n\n**第一天 - 马斯喀特：**\n• 上午：大清真寺\n• 下午：国家博物馆 + 马托拉集市\n• 晚上：马托拉滨海大道 + 歌剧院\n\n**第二天 - 尼兹瓦：**\n• 上午：尼兹瓦堡 + 集市\n• 下午：绿色山脈（玫瑰梯田）\n• 晚上：返回马斯喀特\n\n想修改行程吗？",
+            jebelAkhdarBestTime: "🌹 **游览绿色山脈的最佳时间：**\n\n• **3月-5月**：玫瑰季节\n• **6月-8月**：躲避夏季炎热\n• **9月-10月**：石榴季节\n\n⚠️ 注意：山路，建议四驱车。\n\n需要住宿信息吗？",
+            generalHelp: "我在这里帮助您！可以问我关于：\n• 阿曼城市（马斯喀特、尼兹瓦、塞拉莱）\n• 餐厅和酒店\n• 活动和季节\n• 习俗和传统\n• 旅游景点\n\n您想了解什么？"
         }
     };
 
     let currentLang = 'ar';
     let currentCityId = null;
     let currentDetailId = null;
+
+    // City data for homepage
+    const citiesHome = {
+        muscat: { icon: "🎭", nameAr: "مسقط", nameEn: "Muscat", nameZh: "马斯喀特", descAr: "عاصمة عُمان النابضة بالحياة", descEn: "The vibrant capital of Oman", descZh: "充满活力的阿曼首都", tags: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح"] },
+        nizwa: { icon: "🌹", nameAr: "نزوى", nameEn: "Nizwa", nameZh: "尼兹瓦", descAr: "مدينة التراث العريق وقلعتها الشهيرة", descEn: "City of rich heritage", descZh: "拥有丰富遗产的城市", tags: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر"] },
+        salalah: { icon: "🌧️", nameAr: "صلالة", nameEn: "Salalah", nameZh: "塞拉莱", descAr: "جنة الخريف الساحرة، أرض اللبان", descEn: "Magical Khareef paradise", descZh: "神奇的季风天堂", tags: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل"] }
+    };
 
     function renderStars(rating) {
         const fullStars = Math.floor(rating);
@@ -662,73 +653,141 @@
         return `<div class="stars">${stars} (${rating})</div>`;
     }
 
-    function showRecommendation(type) {
-        const t = translations[currentLang];
-        const resultDiv = document.getElementById('recResult');
-        resultDiv.innerHTML = `<div class="ai-chat-message">🤖 ${t.recMessages[type]}</div>`;
-        resultDiv.classList.add('show');
+    function renderSuggestions() {
+        const suggestions = [
+            "اقترح لي ٥ مطاعم في مسقط",
+            "وش أفضل أماكن سياحية في نزوى؟",
+            "متى موسم خريف صلالة؟",
+            "وين ألقى أكل عماني شعبي؟",
+            "اقترح فندق ٥ نجوم في صلالة",
+            "وش الفعاليات في مسقط هالسنة؟",
+            "كيف أوصل إلى وادي شاب؟",
+            "وش العادات العمانية الأصيلة؟",
+            "اقترح لي رحلة ليومين في عمان",
+            "وش أفضل وقت لزيارة الجبل الأخضر؟"
+        ];
+        const grid = document.getElementById('suggestionsGrid');
+        if (grid) {
+            grid.innerHTML = suggestions.map(s => `<button class="suggestion-btn" onclick="sendSuggestion('${s.replace(/'/g, "\\'")}')">💡 ${s}</button>`).join('');
+        }
     }
 
-    function toggleAIChat() {
-        const chat = document.getElementById('aiChat');
-        chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+    function sendSuggestion(text) {
+        document.getElementById('aiChatInput').value = text;
+        sendAIMessage();
     }
 
     function sendAIMessage() {
         const input = document.getElementById('aiChatInput');
         const msg = input.value.trim();
         if (!msg) return;
+        
         const chatBody = document.getElementById('aiChatBody');
-        chatBody.innerHTML += `<div style="text-align: left; background: #D4AF37; padding: 0.5rem; border-radius: 15px; margin: 0.5rem 0; color: #0D47A1;">👤 ${msg}</div>`;
+        chatBody.innerHTML += `<div class="user-message">👤 ${msg}</div>`;
         
-        // Simple AI response
-        let response = "شكراً لسؤالك! أنا سمر، أساعدك في اكتشاف عمان. يمكنك زيارة المدن من الصفحة الرئيسية أو سؤالي عن مدينة معينة.";
-        const lowerMsg = msg.toLowerCase();
-        if (lowerMsg.includes('مسقط') || lowerMsg.includes('muscat')) {
-            response = currentLang === 'ar' ? "مسقط: عاصمة عُمان. أبرز المعالم: الجامع الكبير، دار الأوبرا، سوق مطرح. مطاعم مميزة: P.F. Chang's، China Mood." :
-                      (currentLang === 'en' ? "Muscat: Capital of Oman. Top attractions: Grand Mosque, Royal Opera House, Mutrah Souq." :
-                      "马斯喀特：阿曼首都。主要景点：大清真寺、皇家歌剧院、马托拉集市。");
-        } else if (lowerMsg.includes('نزوى') || lowerMsg.includes('nizwa')) {
-            response = currentLang === 'ar' ? "نزوى: مدينة التراث. أبرز المعالم: قلعة نزوى، سوق نزوى، الجبل الأخضر (موسم الورد)." :
-                      (currentLang === 'en' ? "Nizwa: Heritage city. Top attractions: Nizwa Fort, Nizwa Souq, Jebel Akhdar (Rose Season)." :
-                      "尼兹瓦：遗产城市。主要景点：尼兹瓦堡、尼兹瓦集市、绿色山脈（玫瑰季节）。");
-        } else if (lowerMsg.includes('صلالة') || lowerMsg.includes('salalah')) {
-            response = currentLang === 'ar' ? "صلالة: جنة الخريف. أبرز المعالم: وادي دربات، شاطئ المغسيل، خريف صلالة (يونيو-سبتمبر)." :
-                      (currentLang === 'en' ? "Salalah: Khareef paradise. Top attractions: Wadi Darbat, Mughsail Beach, Khareef season (June-September)." :
-                      "塞拉莱：季风天堂。主要景点：达尔巴特干河、穆格赛尔海滩、季风季节（六月至九月）。");
-        }
+        let response = getAIResponse(msg);
         
-        chatBody.innerHTML += `<div class="ai-chat-message">🤖 ${response}</div>`;
+        chatBody.innerHTML += `<div class="ai-chat-message">🤖 ${response.replace(/\n/g, '<br>')}</div>`;
         chatBody.scrollTop = chatBody.scrollHeight;
         input.value = '';
+    }
+
+    function getAIResponse(question) {
+        const lowerQ = question.toLowerCase();
+        const responses = aiResponses[currentLang];
+        
+        if (lowerQ.includes('مطاعم') && (lowerQ.includes('مسقط') || lowerQ.includes('muscat'))) {
+            return responses.restaurantsMuscat;
+        }
+        if (lowerQ.includes('أفضل') && (lowerQ.includes('نزوى') || lowerQ.includes('nizwa'))) {
+            return responses.placesNizwa;
+        }
+        if (lowerQ.includes('موسم') && (lowerQ.includes('خريف') || lowerQ.includes('صلالة') || lowerQ.includes('salalah') || lowerQ.includes('khareef'))) {
+            return responses.khareefTiming;
+        }
+        if ((lowerQ.includes('أكل') || lowerQ.includes('عماني') || lowerQ.includes('شعبي') || lowerQ.includes('food')) && !lowerQ.includes('مطاعم')) {
+            return responses.omaniFood;
+        }
+        if (lowerQ.includes('فندق') && (lowerQ.includes('صلالة') || lowerQ.includes('salalah'))) {
+            return responses.hotelSalalah;
+        }
+        if ((lowerQ.includes('فعاليات') || lowerQ.includes('مهرجان')) && (lowerQ.includes('مسقط') || lowerQ.includes('muscat'))) {
+            return responses.eventsMuscat;
+        }
+        if ((lowerQ.includes('وادي شاب') || lowerQ.includes('wadi shab')) && (lowerQ.includes('كيف') || lowerQ.includes('اوصل') || lowerQ.includes('directions'))) {
+            return responses.wadiShabDirections;
+        }
+        if ((lowerQ.includes('عادات') || lowerQ.includes('تقاليد') || lowerQ.includes('customs'))) {
+            return responses.omaniCustoms;
+        }
+        if ((lowerQ.includes('رحلة') || lowerQ.includes('يومين') || lowerQ.includes('itinerary'))) {
+            return responses.twoDayTrip;
+        }
+        if ((lowerQ.includes('الجبل الأخضر') || lowerQ.includes('jebel akhdar')) && (lowerQ.includes('وقت') || lowerQ.includes('best time'))) {
+            return responses.jebelAkhdarBestTime;
+        }
+        if (lowerQ.includes('مساعدة') || lowerQ.includes('help') || lowerQ.includes('خيارات') || lowerQ.includes('options')) {
+            return responses.generalHelp;
+        }
+        
+        // Handle random questions
+        if (lowerQ.includes('كم') || lowerQ.includes('سعر') || lowerQ.includes('price')) {
+            return currentLang === 'ar' ? "الأسعار تختلف حسب الموسم والفندق. هل تريد استفسار عن فندق معين؟ 😊" :
+                   (currentLang === 'en' ? "Prices vary by season and hotel. Would you like to inquire about a specific hotel? 😊" :
+                   "价格因季节和酒店而异。您想咨询特定酒店吗？😊");
+        }
+        if (lowerQ.includes('طقس') || lowerQ.includes('weather')) {
+            return currentLang === 'ar' ? "عمان تتمتع بمناخ متنوع. الصيف حار (خاصة يونيو-أغسطس)، والشتاء معتدل. صلالة باردة خلال الخريف (يونيو-سبتمبر). 😊" :
+                   (currentLang === 'en' ? "Oman has diverse climate. Summer is hot (especially June-August), winter is mild. Salalah is cool during Khareef (June-September). 😊" :
+                   "阿曼气候多样。夏季炎热（尤其是六月至八月），冬季温和。塞拉莱在季风季节（六月至九月）凉爽。😊");
+        }
+        if (lowerQ.includes('تأشيرة') || lowerQ.includes('visa')) {
+            return currentLang === 'ar' ? "مواطني أكثر من 100 دولة يمكنهم الحصول على تأشيرة إلكترونية أو تأشيرة عند الوصول. يفضل مراجعة موقع الشرطة السلطانية العمانية للتفاصيل. 😊" :
+                   (currentLang === 'en' ? "Citizens of over 100 countries can get an eVisa or visa on arrival. Please check the Royal Oman Police website for details. 😊" :
+                   "超过100个国家的公民可以获得电子签证或落地签证。请查看阿曼皇家警察网站了解详情。😊");
+        }
+        
+        return responses.default;
+    }
+
+    function toggleAIChat() {
+        const chat = document.getElementById('aiChat');
+        if (chat.style.display === 'flex') {
+            chat.style.display = 'none';
+        } else {
+            chat.style.display = 'flex';
+            renderSuggestions();
+        }
     }
 
     function renderHome() {
         const grid = document.getElementById('citiesGrid');
         const t = translations[currentLang];
+        const cities = citiesHome;
+        
         grid.innerHTML = `
             <div class="city-card" onclick="openCity('muscat')">
-                <div class="card-icon">🎭</div>
+                <div class="card-icon">${cities.muscat.icon}</div>
                 <div class="card-content">
-                    <h3>${t.cities?.muscat?.name || "مسقط"}</h3>
-                    <p>${t.cities?.muscat?.desc || "عاصمة عُمان النابضة بالحياة"}</p>
-                    <div class="city-tags">${(t.cities?.muscat?.highlights || ["الجامع الكبير", "دار الأوبرا", "سوق مطرح"]).slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
+                    <h3>${cities.muscat[`name${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]}</h3>
+                    <p>${cities.muscat[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]}</p>
+                    <div class="city-tags">${cities.muscat.tags.map(h => `<span class="tag">${h}</span>`).join('')}</div>
                 </div>
             </div>
             <div class="city-card" onclick="openCity('nizwa')">
-                <div class="card-icon">🌹</div>
+                <div class="card-icon">${cities.nizwa.icon}</div>
                 <div class="card-content">
-                    <h3>${t.cities?.nizwa?.name || "نزوى"}</h3>
-                    <p>${t.cities?.nizwa?.desc || "مدينة التراث العريق وقلعتها الشهيرة"}</p>
-                    <div class="city-tags">${(t.cities?.nizwa?.highlights || ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر"]).slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
+                    <h3>${cities.nizwa[`name${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]}</h3>
+                    <p>${cities.nizwa[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]}</p>
+                    <div class="city-tags">${cities.nizwa.tags.map(h => `<span class="tag">${h}</span>`).join('')}</div>
                 </div>
             </div>
             <div class="city-card" onclick="openCity('salalah')">
-                <div class="card-icon">🌧️</div>
+                <div class="card-icon">${cities.salalah.icon}</div>
                 <div class="card-content">
-                    <h3>${t.cities?.salalah?.name || "صلالة"}</h3>
-                    <p>${t.cities?.salalah?.desc || "جنة الخريف الساحرة، أرض اللبان"}</p>
-                    <div class="city-tags">${(t.cities?.salalah?.highlights || ["خريف صلالة", "وادي دربات", "شاطئ المغسيل"]).slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
+                    <h3>${cities.salalah[`name${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]}</h3>
+                    <p>${cities.salalah[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]}</p>
+                    <div class="city-tags">${cities.salalah.tags.map(h => `<span class="tag">${h}</span>`).join('')}</div>
                 </div>
             </div>
         `;
@@ -750,64 +809,90 @@
         currentCityId = cityKey;
         const t = translations[currentLang];
         
-        const cityData = {
-            name: t.cities?.[cityKey]?.name || (cityKey === 'muscat' ? "مسقط" : (cityKey === 'nizwa' ? "نزوى" : "صلالة")),
-            desc: t.cities?.[cityKey]?.desc || ""
+        const cityNames = { muscat: "مسقط", nizwa: "نزوى", salalah: "صلالة" };
+        const cityName = currentLang === 'ar' ? cityNames[cityKey] : (currentLang === 'en' ? (cityKey === 'muscat' ? "Muscat" : (cityKey === 'nizwa' ? "Nizwa" : "Salalah")) : (cityKey === 'muscat' ? "马斯喀特" : (cityKey === 'nizwa' ? "尼兹瓦" : "塞拉莱")));
+        
+        const specialTitles = {
+            muscat: currentLang === 'ar' ? "🎭 مهرجان مسقط" : (currentLang === 'en' ? "🎭 Muscat Festival" : "🎭 马斯喀特节"),
+            nizwa: currentLang === 'ar' ? "🌹 موسم الورد" : (currentLang === 'en' ? "🌹 Rose Season" : "🌹 玫瑰季节"),
+            salalah: currentLang === 'ar' ? "🌧️ خريف صلالة" : (currentLang === 'en' ? "🌧️ Khareef Salalah" : "🌧️ 塞拉莱雨季")
         };
         
-        const specialData = {
-            title: cityKey === 'muscat' ? (t.special?.muscat?.title || "🎭 مهرجان مسقط") : (cityKey === 'nizwa' ? (t.special?.nizwa?.title || "🌹 موسم الورد") : (t.special?.salalah?.title || "🌧️ خريف صلالة")),
-            desc: cityKey === 'muscat' ? (t.special?.muscat?.desc || "مهرجان ثقافي سنوي في يناير وفبراير.") : (cityKey === 'nizwa' ? (t.special?.nizwa?.desc || "من مارس إلى مايو في الجبل الأخضر.") : (t.special?.salalah?.desc || "موسم الضباب والأمطار من يونيو إلى سبتمبر.")),
-            details: cityKey === 'muscat' ? (t.special?.muscat?.details || ["ألعاب نارية", "عروض موسيقية", "أكشاك طعام", "فعاليات عائلية", "معارض حرف"]) :
-                     (cityKey === 'nizwa' ? (t.special?.nizwa?.details || ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"]) :
-                     (t.special?.salalah?.details || ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"]))
+        const specialDescs = {
+            muscat: currentLang === 'ar' ? "مهرجان ثقافي سنوي في يناير وفبراير." : (currentLang === 'en' ? "Annual cultural festival in January-February." : "一月至二月的年度文化节。"),
+            nizwa: currentLang === 'ar' ? "من مارس إلى مايو في الجبل الأخضر." : (currentLang === 'en' ? "March to May in Jebel Akhdar." : "三月至五月。"),
+            salalah: currentLang === 'ar' ? "موسم الضباب والأمطار من يونيو إلى سبتمبر." : (currentLang === 'en' ? "Monsoon season from June to September." : "六月至九月的季风季节。")
         };
         
-        const restaurants = t.restaurants?.[cityKey] || [];
+        const specialDetails = {
+            muscat: ["ألعاب نارية", "عروض موسيقية", "أكشاك طعام", "فعاليات عائلية", "معارض حرف"],
+            nizwa: ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"],
+            salalah: ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"]
+        };
         
-        const landmarksList = cityKey === 'muscat' ? 
-            [{ name: "الجامع الكبير", desc: "تحفة معمارية إسلامية" }, { name: "دار الأوبرا السلطانية", desc: "صرح ثقافي عالمي" }, { name: "سوق مطرح", desc: "سوق تقليدي عريق" }, { name: "متحف عُمان", desc: "يروي تاريخ عُمان" }, { name: "كورنيش مطرح", desc: "إطلالة رائعة" }] :
-            (cityKey === 'nizwa' ? 
-            [{ name: "قلعة نزوى", desc: "قلعة تاريخية ببرج دائري" }, { name: "سوق نزوى", desc: "سوق تقليدي للخناجر" }, { name: "الجبل الأخضر", desc: "جبال خضراء ورد" }, { name: "فلج دارس", desc: "موقع تراث عالمي" }, { name: "حصن بيت الرديدة", desc: "حصن تاريخي" }] :
-            [{ name: "وادي دربات", desc: "شلالات موسمية" }, { name: "شاطئ المغسيل", desc: "فوهات مائية" }, { name: "أرض اللبان", desc: "موقع تراث عالمي" }, { name: "سوق الحافة", desc: "سوق شعبي" }, { name: "جبل صمرحان", desc: "إطلالات رائعة" }]);
+        const landmarksList = {
+            muscat: [{ name: currentLang === 'ar' ? "الجامع الكبير" : (currentLang === 'en' ? "Grand Mosque" : "大清真寺"), desc: currentLang === 'ar' ? "تحفة معمارية إسلامية" : (currentLang === 'en' ? "Islamic masterpiece" : "伊斯兰杰作") },
+                     { name: currentLang === 'ar' ? "دار الأوبرا السلطانية" : (currentLang === 'en' ? "Royal Opera House" : "皇家歌剧院"), desc: currentLang === 'ar' ? "صرح ثقافي عالمي" : (currentLang === 'en' ? "World-class cultural venue" : "世界级文化场所") },
+                     { name: currentLang === 'ar' ? "سوق مطرح" : (currentLang === 'en' ? "Mutrah Souq" : "马托拉集市"), desc: currentLang === 'ar' ? "سوق تقليدي عريق" : (currentLang === 'en' ? "Traditional market" : "传统市场") }],
+            nizwa: [{ name: currentLang === 'ar' ? "قلعة نزوى" : (currentLang === 'en' ? "Nizwa Fort" : "尼兹瓦堡"), desc: currentLang === 'ar' ? "قلعة تاريخية ببرج دائري" : (currentLang === 'en' ? "Historic fort with circular tower" : "带圆形塔的历史堡垒") },
+                    { name: currentLang === 'ar' ? "سوق نزوى" : (currentLang === 'en' ? "Nizwa Souq" : "尼兹瓦集市"), desc: currentLang === 'ar' ? "سوق تقليدي للخناجر" : (currentLang === 'en' ? "Traditional dagger market" : "传统弯刀市场") },
+                    { name: currentLang === 'ar' ? "الجبل الأخضر" : (currentLang === 'en' ? "Jebel Akhdar" : "绿色山脈"), desc: currentLang === 'ar' ? "جبال خضراء ورد" : (currentLang === 'en' ? "Green mountains with roses" : "有玫瑰的绿色山脉") }],
+            salalah: [{ name: currentLang === 'ar' ? "وادي دربات" : (currentLang === 'en' ? "Wadi Darbat" : "达尔巴特干河"), desc: currentLang === 'ar' ? "شلالات موسمية" : (currentLang === 'en' ? "Seasonal waterfalls" : "季节性瀑布") },
+                      { name: currentLang === 'ar' ? "شاطئ المغسيل" : (currentLang === 'en' ? "Mughsail Beach" : "穆格赛尔海滩"), desc: currentLang === 'ar' ? "فوهات مائية" : (currentLang === 'en' ? "Blowholes" : "喷水洞") },
+                      { name: currentLang === 'ar' ? "أرض اللبان" : (currentLang === 'en' ? "Land of Frankincense" : "乳香之地"), desc: currentLang === 'ar' ? "موقع تراث عالمي" : (currentLang === 'en' ? "UNESCO site" : "联合国教科文组织遗址") }]
+        };
         
-        const foodList = cityKey === 'muscat' ? ["الشواء العُماني", "المجبوس", "الخبيصة", "البلاليط", "الحلوى العُمانية"] :
-                         (cityKey === 'nizwa' ? ["الحلوى العُمانية", "الشواء العُماني", "القبولي", "الهريس", "العرسية"] :
-                         ["المندي", "السمك المشوي", "العسل العماني", "حلوى الحليب", "القهوة الظفارية"]);
+        const foodList = {
+            muscat: ["الشواء العُماني", "المجبوس", "الخبيصة", "البلاليط", "الحلوى العُمانية"],
+            nizwa: ["الحلوى العُمانية", "الشواء العُماني", "القبولي", "الهريس", "العرسية"],
+            salalah: ["المندي", "السمك المشوي", "العسل العماني", "حلوى الحليب", "القهوة الظفارية"]
+        };
         
-        const customsList = cityKey === 'muscat' ? ["الخنجر العُماني", "القهوة العُمانية", "مهرجان مسقط", "اللباس التقليدي", "الرقصات الشعبية"] :
-                             (cityKey === 'nizwa' ? ["سوق الماشية", "صناعة الحلوى", "الفلاج", "البيوت الطينية", "القهوة مع الحلوى"] :
-                             ["خريف صلالة", "اللبان", "الرقصات الظفارية", "مهرجانات صيفية", "صناعة البخور"]);
+        const customsList = {
+            muscat: ["الخنجر العُماني", "القهوة العُمانية", "مهرجان مسقط", "اللباس التقليدي", "الرقصات الشعبية"],
+            nizwa: ["سوق الماشية", "صناعة الحلوى", "الفلاج", "البيوت الطينية", "القهوة مع الحلوى"],
+            salalah: ["خريف صلالة", "اللبان", "الرقصات الظفارية", "مهرجانات صيفية", "صناعة البخور"]
+        };
         
-        const hotelsList = cityKey === 'muscat' ? ["فندق جراند حياة مسقط", "فندق شانغريلا", "فندق كراون بلازا", "فندق شيراتون", "فندق انتركونتيننتال"] :
-                           (cityKey === 'nizwa' ? ["منتجع الجبل الأخضر", "فندق نزوى أوتيل", "فندق عنتر نزوى", "منتجع بيت البارندي", "فندق الجبل الأخضر"] :
-                           ["فندق الفانات", "منتجع صلالة روتانا", "فندق هوليدي إن", "منتجع كراون بلازا", "فندق صلالة بيتش"]);
+        const hotelsList = {
+            muscat: ["فندق جراند حياة مسقط", "فندق شانغريلا", "فندق كراون بلازا", "فندق شيراتون", "فندق انتركونتيننتال"],
+            nizwa: ["منتجع الجبل الأخضر", "فندق نزوى أوتيل", "فندق عنتر نزوى", "منتجع بيت البارندي", "فندق الجبل الأخضر"],
+            salalah: ["فندق الفانات", "منتجع صلالة روتانا", "فندق هوليدي إن", "منتجع كراون بلازا", "فندق صلالة بيتش"]
+        };
         
-        const cafesList = cityKey === 'muscat' ? ["مقهى عُمان للقهوة", "ستاربكس - القرم", "مقهى بون", "مقهى الكتب", "مقهى زين"] :
-                          (cityKey === 'nizwa' ? ["مقهى القلعة", "مقهى السوق التقليدي", "مقهى الواحة", "مقهى البيت العماني", "مقهى الجبل"] :
-                          ["مقهى الضباب", "مقهى اللبان", "مقهى الخريف", "مقهى الوادي", "مقهى الشاطئ"]);
+        const cafesList = {
+            muscat: ["مقهى عُمان للقهوة", "ستاربكس - القرم", "مقهى بون", "مقهى الكتب", "مقهى زين"],
+            nizwa: ["مقهى القلعة", "مقهى السوق التقليدي", "مقهى الواحة", "مقهى البيت العماني", "مقهى الجبل"],
+            salalah: ["مقهى الضباب", "مقهى اللبان", "مقهى الخريف", "مقهى الوادي", "مقهى الشاطئ"]
+        };
+        
+        const restaurants = {
+            muscat: [{ name: "P.F. Chang's", location: "Avenues Mall", rating: 4.5, cuisine: "صيني", price: "متوسط" }],
+            nizwa: [{ name: "Great Wall Hot Pot", location: "نزوى", rating: 4.9, cuisine: "صيني", price: "متوسط" }],
+            salalah: [{ name: "China Palace", location: "صلالة", rating: 4.2, cuisine: "صيني", price: "متوسط" }]
+        };
         
         const container = document.getElementById('cityPagesContainer');
         container.innerHTML = `
             <div class="city-page active-page">
                 <button class="back-btn" onclick="backHome()">🔙 ${t.backHome}</button>
-                <div class="city-header"><h2>${cityData.name}</h2></div>
+                <div class="city-header"><h2>${cityName}</h2></div>
                 
-                <div class="section special-section"><h3>✨ ${specialData.title} <span class="animated-icon">${cityKey === 'muscat' ? '🎭' : (cityKey === 'nizwa' ? '🌹' : '🌧️')}</span></h3><p>${specialData.desc}</p>
-                    <div class="items-grid">${specialData.details.map(d => `<div class="item-card"><h4>${d}</h4></div>`).join('')}</div>
+                <div class="section special-section"><h3>✨ ${specialTitles[cityKey]} <span class="animated-icon">${cityKey === 'muscat' ? '🎭' : (cityKey === 'nizwa' ? '🌹' : '🌧️')}</span></h3><p>${specialDescs[cityKey]}</p>
+                    <div class="items-grid">${specialDetails[cityKey].map(d => `<div class="item-card"><h4>${d}</h4></div>`).join('')}</div>
                 </div>
                 
-                <div class="section"><h3>${t.sections.landmarks}</h3><div class="items-grid">${landmarksList.map(l => `<div class="item-card"><h4>${l.name}</h4><p>${l.desc}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.landmarks}</h3><div class="items-grid">${landmarksList[cityKey].map(l => `<div class="item-card"><h4>${l.name}</h4><p>${l.desc}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${t.sections.food}</h3><div class="items-grid">${foodList.map(f => `<div class="item-card"><h4>${f}</h4><p>${currentLang === 'ar' ? 'أكلة عمانية شهيرة' : (currentLang === 'en' ? 'Famous Omani dish' : '著名的阿曼菜')}</p>${renderStars(4.7)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.food}</h3><div class="items-grid">${foodList[cityKey].map(f => `<div class="item-card"><h4>${f}</h4><p>${currentLang === 'ar' ? 'أكلة عمانية شهيرة' : (currentLang === 'en' ? 'Famous Omani dish' : '著名的阿曼菜')}</p>${renderStars(4.7)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${t.sections.restaurants}</h3><div class="items-grid">${restaurants.map(r => `<div class="item-card"><h4>🍽️ ${r.name}</h4><p>${r.cuisine} | ${currentLang === 'ar' ? 'السعر' : (currentLang === 'en' ? 'Price' : '价格')}: ${r.price} | 📍 ${r.location}</p>${renderStars(r.rating)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.restaurants}</h3><div class="items-grid">${restaurants[cityKey].map(r => `<div class="item-card"><h4>🍽️ ${r.name}</h4><p>${r.cuisine} | ${currentLang === 'ar' ? 'السعر' : (currentLang === 'en' ? 'Price' : '价格')}: ${r.price} | 📍 ${r.location}</p>${renderStars(r.rating)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${t.sections.customs}</h3><div class="items-grid">${customsList.map(c => `<div class="item-card"><h4>${c}</h4><p>${currentLang === 'ar' ? 'تراث عماني أصيل' : (currentLang === 'en' ? 'Authentic Omani heritage' : '正宗的阿曼遗产')}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.customs}</h3><div class="items-grid">${customsList[cityKey].map(c => `<div class="item-card"><h4>${c}</h4><p>${currentLang === 'ar' ? 'تراث عماني أصيل' : (currentLang === 'en' ? 'Authentic Omani heritage' : '正宗的阿曼遗产')}</p></div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${t.sections.hotels}</h3><div class="items-grid">${hotelsList.map(h => `<div class="item-card"><h4>🏨 ${h}</h4><p>${currentLang === 'ar' ? 'فندق فاخر' : (currentLang === 'en' ? 'Luxury hotel' : '豪华酒店')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.hotels}</h3><div class="items-grid">${hotelsList[cityKey].map(h => `<div class="item-card"><h4>🏨 ${h}</h4><p>${currentLang === 'ar' ? 'فندق فاخر' : (currentLang === 'en' ? 'Luxury hotel' : '豪华酒店')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${t.sections.cafes}</h3><div class="items-grid">${cafesList.map(c => `<div class="item-card"><h4>☕ ${c}</h4><p>${currentLang === 'ar' ? 'مقهى مميز' : (currentLang === 'en' ? 'Specialty cafe' : '特色咖啡馆')}</p>${renderStars(4.6)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.cafes}</h3><div class="items-grid">${cafesList[cityKey].map(c => `<div class="item-card"><h4>☕ ${c}</h4><p>${currentLang === 'ar' ? 'مقهى مميز' : (currentLang === 'en' ? 'Specialty cafe' : '特色咖啡馆')}</p>${renderStars(4.6)}</div>`).join('')}</div></div>
             </div>
         `;
         document.getElementById('mainPage').style.display = 'none';
@@ -855,59 +940,6 @@
         } else { 
             renderHome(); 
         }
-    }
-
-    // City data fallback
-    if (!translations.ar.cities) {
-        translations.ar.cities = {
-            muscat: { name: "مسقط", desc: "عاصمة عُمان النابضة بالحياة", highlights: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح"] },
-            nizwa: { name: "نزوى", desc: "مدينة التراث العريق وقلعتها الشهيرة", highlights: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر"] },
-            salalah: { name: "صلالة", desc: "جنة الخريف الساحرة، أرض اللبان", highlights: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل"] }
-        };
-        translations.ar.special = {
-            muscat: { title: "🎭 مهرجان مسقط", desc: "مهرجان ثقافي سنوي في يناير وفبراير.", details: ["ألعاب نارية", "عروض موسيقية", "أكشاك طعام", "فعاليات عائلية", "معارض حرف"] },
-            nizwa: { title: "🌹 موسم الورد", desc: "من مارس إلى مايو في الجبل الأخضر.", details: ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"] },
-            salalah: { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار من يونيو إلى سبتمبر.", details: ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"] }
-        };
-        translations.ar.restaurants = {
-            muscat: [{ name: "P.F. Chang's", location: "Avenues Mall، مسقط", rating: 4.5, cuisine: "صيني", price: "متوسط" }],
-            nizwa: [{ name: "Great Wall Hot Pot", location: "نزوى", rating: 4.9, cuisine: "صيني", price: "متوسط" }],
-            salalah: [{ name: "China Palace", location: "صلالة", rating: 4.2, cuisine: "صيني", price: "متوسط" }]
-        };
-    }
-    if (!translations.en.cities) {
-        translations.en.cities = {
-            muscat: { name: "Muscat", desc: "The vibrant capital of Oman", highlights: ["Grand Mosque", "Royal Opera House", "Mutrah Souq"] },
-            nizwa: { name: "Nizwa", desc: "City of rich heritage", highlights: ["Nizwa Fort", "Nizwa Souq", "Jebel Akhdar"] },
-            salalah: { name: "Salalah", desc: "Magical Khareef paradise", highlights: ["Khareef Season", "Wadi Darbat", "Mughsail Beach"] }
-        };
-        translations.en.special = {
-            muscat: { title: "🎭 Muscat Festival", desc: "Annual cultural festival in Jan-Feb.", details: ["Fireworks", "Music shows", "Food stalls", "Family activities", "Handicrafts"] },
-            nizwa: { title: "🌹 Rose Season", desc: "March to May in Jebel Akhdar.", details: ["Rose picking", "Rose water", "Spring Rose Festival", "Rose products", "Natural perfumes"] },
-            salalah: { title: "🌧️ Khareef Salalah", desc: "Monsoon season from June to September.", details: ["Fog and rain", "Green nature", "Festivals", "Waterfalls", "Cool weather"] }
-        };
-        translations.en.restaurants = {
-            muscat: [{ name: "P.F. Chang's", location: "Avenues Mall, Muscat", rating: 4.5, cuisine: "Chinese", price: "Medium" }],
-            nizwa: [{ name: "Great Wall Hot Pot", location: "Nizwa", rating: 4.9, cuisine: "Chinese", price: "Medium" }],
-            salalah: [{ name: "China Palace", location: "Salalah", rating: 4.2, cuisine: "Chinese", price: "Medium" }]
-        };
-    }
-    if (!translations.zh.cities) {
-        translations.zh.cities = {
-            muscat: { name: "马斯喀特", desc: "充满活力的阿曼首都", highlights: ["大清真寺", "皇家歌剧院", "马托拉集市"] },
-            nizwa: { name: "尼兹瓦", desc: "拥有丰富遗产的城市", highlights: ["尼兹瓦堡", "尼兹瓦集市", "绿色山脈"] },
-            salalah: { name: "塞拉莱", desc: "神奇的季风天堂", highlights: ["季风季节", "达尔巴特干河", "穆格赛尔海滩"] }
-        };
-        translations.zh.special = {
-            muscat: { title: "🎭 马斯喀特节", desc: "一月至二月的年度文化节。", details: ["烟花", "音乐表演", "美食摊位", "家庭活动", "手工艺品"] },
-            nizwa: { title: "🌹 玫瑰季节", desc: "三月至五月。", details: ["采摘玫瑰", "玫瑰水蒸馏", "春季玫瑰节", "玫瑰产品", "天然香水"] },
-            salalah: { title: "🌧️ 塞拉莱雨季", desc: "六月至九月的季风季节。", details: ["雾和雨", "绿色自然", "节日", "瀑布", "凉爽天气"] }
-        };
-        translations.zh.restaurants = {
-            muscat: [{ name: "P.F. Chang's", location: "马斯喀特Avenues Mall", rating: 4.5, cuisine: "中餐", price: "中等" }],
-            nizwa: [{ name: "Great Wall Hot Pot", location: "尼兹瓦", rating: 4.9, cuisine: "中餐", price: "中等" }],
-            salalah: [{ name: "China Palace", location: "塞拉莱", rating: 4.2, cuisine: "中餐", price: "中等" }]
-        };
     }
 
     renderHome();
