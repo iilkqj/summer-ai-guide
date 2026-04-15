@@ -8,28 +8,29 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
-            color: #1b5e20;
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 50%, #90CAF9 100%);
+            color: #0D47A1;
             line-height: 1.6;
         }
         body[dir="ltr"] { direction: ltr; text-align: left; }
         body[dir="rtl"] { direction: rtl; text-align: right; }
 
+        /* Language Bar */
         .language-bar {
-            background-color: #1a5c3e;
+            background-color: #0D47A1;
             padding: 0.8rem 2rem;
             display: flex;
             justify-content: flex-end;
             gap: 1rem;
             flex-wrap: wrap;
-            border-bottom: 3px solid #d4af37;
+            border-bottom: 3px solid #D4AF37;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
         .lang-btn {
-            background-color: #2e7d5e;
-            color: #f5e6d3;
+            background-color: #1E88E5;
+            color: white;
             border: none;
             padding: 0.4rem 1.2rem;
             border-radius: 30px;
@@ -37,41 +38,24 @@
             font-weight: bold;
             transition: all 0.3s ease;
         }
-        .lang-btn:hover { background-color: #d4af37; color: #1a5c3e; transform: scale(1.05); }
+        .lang-btn:hover { background-color: #D4AF37; color: #0D47A1; transform: scale(1.05); }
 
-        .back-btn {
-            background: #d4af37;
-            color: #1a5c3e;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            margin: 10px auto;
-            display: block;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        .back-btn:hover {
-            background: #1a5c3e;
-            color: #d4af37;
-            transform: scale(1.05);
-        }
-
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #1a5c3e, #2e7d5e);
+            background: linear-gradient(135deg, #0D47A1, #1E88E5);
             padding: 4rem 2rem;
             text-align: center;
             color: white;
             margin-bottom: 2rem;
-            border-bottom: 3px solid #d4af37;
+            border-bottom: 3px solid #D4AF37;
         }
         .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
         .hero p { font-size: 1.2rem; max-width: 800px; margin: 0 auto; }
 
+        /* Cities Grid */
         .cities-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 2rem;
             padding: 2rem;
             max-width: 1400px;
@@ -85,21 +69,22 @@
             transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .city-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .city-card:hover { transform: translateY(-10px); box-shadow: 0 20px 35px rgba(0,0,0,0.2); }
         .card-icon {
-            height: 160px;
-            background: linear-gradient(135deg, #a5d6a7, #81c784);
+            height: 180px;
+            background: linear-gradient(135deg, #1E88E5, #0D47A1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4.5rem;
+            font-size: 5rem;
         }
         .card-content { padding: 1.5rem; }
-        .card-content h3 { color: #1a5c3e; font-size: 1.6rem; margin-bottom: 0.5rem; }
-        .card-content p { color: #2e7d5e; margin-bottom: 1rem; }
+        .card-content h3 { color: #0D47A1; font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .card-content p { color: #1E88E5; margin-bottom: 1rem; }
         .city-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .tag { background: #e8f5e9; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #1a5c3e; }
+        .tag { background: #E3F2FD; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #0D47A1; }
 
+        /* City Page */
         .city-page {
             max-width: 1200px;
             margin: 2rem auto;
@@ -107,37 +92,79 @@
             background: rgba(255,255,255,0.95);
             border-radius: 30px;
             display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .active-page { display: block; }
         .city-header { text-align: center; margin-bottom: 2rem; }
-        .city-header h2 { font-size: 2.5rem; color: #1a5c3e; border-bottom: 4px solid #d4af37; display: inline-block; }
+        .city-header h2 { font-size: 2.5rem; color: #0D47A1; border-bottom: 4px solid #D4AF37; display: inline-block; }
+
         .section {
-            background: #fef8ef;
+            background: #F8F9FA;
             border-radius: 20px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
+            border: 1px solid #E3F2FD;
         }
-        .section h3 { color: #1a5c3e; font-size: 1.6rem; margin-bottom: 1rem; border-right: 5px solid #d4af37; padding-right: 1rem; }
-        body[dir="ltr"] .section h3 { border-right: none; border-left: 5px solid #d4af37; padding-right: 0; padding-left: 1rem; }
-        .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+        .section h3 { color: #0D47A1; font-size: 1.6rem; margin-bottom: 1rem; border-right: 5px solid #D4AF37; padding-right: 1rem; }
+        body[dir="ltr"] .section h3 { border-right: none; border-left: 5px solid #D4AF37; padding-right: 0; padding-left: 1rem; }
+
+        .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
         .item-card {
             background: white;
-            padding: 1rem;
+            padding: 1.2rem;
             border-radius: 15px;
-            border: 1px solid #c8e6c9;
+            border: 1px solid #E3F2FD;
             transition: all 0.3s;
             cursor: pointer;
         }
         .item-card:hover {
-            transform: translateY(-3px);
-            border-color: #d4af37;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            border-color: #D4AF37;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
-        .item-card h4 { color: #1a5c3e; margin-bottom: 0.5rem; }
-        .special-section { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border: 2px solid #d4af37; }
+        .item-card h4 { color: #0D47A1; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .item-card p { color: #1E88E5; font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+        /* Star Rating */
+        .stars {
+            color: #D4AF37;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Map Link */
+        .map-link {
+            display: inline-block;
+            background: #1E88E5;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .map-link:hover { background: #0D47A1; }
+
+        .special-section { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border: 2px solid #D4AF37; }
         .animated-icon { display: inline-block; animation: float 2s infinite; font-size: 1.5rem; }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
-        .footer { background: #1a5c3e; color: #e8f5e9; text-align: center; padding: 1.5rem; margin-top: 2rem; }
+
+        .back-btn {
+            background: #D4AF37;
+            color: #0D47A1;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px auto;
+            display: block;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover { background: #0D47A1; color: #D4AF37; transform: scale(1.05); }
+
+        .footer { background: #0D47A1; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; }
 
         .detail-page {
             max-width: 900px;
@@ -150,12 +177,12 @@
         }
         .detail-page.active-detail { display: block; }
         .detail-header { text-align: center; margin-bottom: 2rem; }
-        .detail-header h2 { font-size: 2rem; color: #1a5c3e; border-bottom: 4px solid #d4af37; display: inline-block; }
+        .detail-header h2 { font-size: 2rem; color: #0D47A1; border-bottom: 4px solid #D4AF37; display: inline-block; }
         .detail-info { margin-bottom: 1.5rem; }
-        .detail-info h3 { color: #1a5c3e; margin-bottom: 0.5rem; }
-        .detail-info p { color: #2e7d5e; line-height: 1.8; }
-        .detail-price { font-size: 1.5rem; color: #d4af37; font-weight: bold; margin: 1rem 0; }
-        .detail-location { background: #e8f5e9; padding: 1rem; border-radius: 15px; margin: 1rem 0; }
+        .detail-info h3 { color: #0D47A1; margin-bottom: 0.5rem; }
+        .detail-info p { color: #1E88E5; line-height: 1.8; }
+        .detail-price { font-size: 1.5rem; color: #D4AF37; font-weight: bold; margin: 1rem 0; }
+        .detail-location { background: #E3F2FD; padding: 1rem; border-radius: 15px; margin: 1rem 0; }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
@@ -174,7 +201,7 @@
 
 <div id="mainPage">
     <div class="hero">
-        <h1 id="heroTitle">🌴 سمر | Summer</h1>
+        <h1 id="heroTitle">🌊 سمر | Summer</h1>
         <p id="heroDesc">مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان</p>
     </div>
     <div class="cities-grid" id="citiesGrid"></div>
@@ -186,31 +213,31 @@
 <div class="footer"><p>© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان</p></div>
 
 <script>
-    // ==================== COMPLETE DETAILS DATA WITH FULL TRANSLATIONS ====================
+    // ==================== DETAILS DATA ====================
     const detailsData = {
         "hotel-grand-hyatt-muscat": {
-            ar: { title: "🏨 فندق جراند حياة مسقط", desc: "فندق فاخر 5 نجوم يقع في قلب مسقط، يوفر إطلالات رائعة على البحر.", location: "الخوير، مسقط", directions: "على شارع السلطان قابوس، بالقرب من مجمع الخوير.", price: "من 95 ر.ع. / 380 ر.س", bestTime: "طوال العام" },
-            en: { title: "🏨 Grand Hyatt Muscat", desc: "5-star luxury hotel in the heart of Muscat with stunning sea views.", location: "Al Khuwair, Muscat", directions: "On Sultan Qaboos Street, near Al Khuwair Complex.", price: "From $247", bestTime: "All year round" },
-            zh: { title: "🏨 马斯喀特君悦酒店", desc: "位于马斯喀特市中心的五星级豪华酒店，享有壮丽海景。", location: "阿尔库维尔，马斯喀特", directions: "位于苏丹卡布斯大街，靠近阿尔库维尔综合大楼。", price: "247美元起", bestTime: "全年" }
+            ar: { title: "🏨 فندق جراند حياة مسقط", desc: "فندق فاخر 5 نجوم يقع في قلب مسقط.", location: "الخوير، مسقط", directions: "على شارع السلطان قابوس", price: "من 95 ر.ع. / 380 ر.س", bestTime: "طوال العام", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
+            en: { title: "🏨 Grand Hyatt Muscat", desc: "5-star luxury hotel in the heart of Muscat.", location: "Al Khuwair, Muscat", directions: "On Sultan Qaboos Street", price: "From $247", bestTime: "All year round", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
+            zh: { title: "🏨 马斯喀特君悦酒店", desc: "位于马斯喀特市中心的五星级豪华酒店。", location: "阿尔库维尔，马斯喀特", directions: "位于苏丹卡布斯大街", price: "247美元起", bestTime: "全年", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 }
         },
         "special-fireworks": {
-            ar: { title: "🎆 ألعاب نارية - مهرجان مسقط", desc: "عرض ألعاب نارية مذهلة يضيء سماء مسقط في ختام المهرجان.", location: "حديقة النسيم العامة، مسقط", directions: "تقع بجانب دار الأوبرا السلطانية.", price: "مجاني", bestTime: "يناير - فبراير، الساعة 9 مساءً" },
-            en: { title: "🎆 Fireworks - Muscat Festival", desc: "Spectacular fireworks display lighting up the Muscat sky at the festival's conclusion.", location: "Al Naseem Public Park, Muscat", directions: "Located next to the Royal Opera House.", price: "Free", bestTime: "January - February, 9 PM" },
-            zh: { title: "🎆 烟花 - 马斯喀特节", desc: "壮观的烟花表演在节日结束时照亮马斯喀特的天空。", location: "阿纳西姆公园，马斯喀特", directions: "位于皇家歌剧院旁边。", price: "免费", bestTime: "一月至二月，晚上9点" }
+            ar: { title: "🎆 ألعاب نارية", desc: "عرض ألعاب نارية مذهلة يضيء سماء مسقط.", location: "حديقة النسيم، مسقط", directions: "بجانب دار الأوبرا", price: "مجاني", bestTime: "يناير - فبراير، 9 مساءً", mapLink: "https://maps.google.com/?q=Al+Naseem+Park+Muscat", rating: 4.9 },
+            en: { title: "🎆 Fireworks", desc: "Spectacular fireworks display in Muscat.", location: "Al Naseem Park, Muscat", directions: "Next to Royal Opera House", price: "Free", bestTime: "Jan-Feb, 9 PM", mapLink: "https://maps.google.com/?q=Al+Naseem+Park+Muscat", rating: 4.9 },
+            zh: { title: "🎆 烟花", desc: "马斯喀特壮观的烟花表演。", location: "阿纳西姆公园，马斯喀特", directions: "皇家歌剧院旁边", price: "免费", bestTime: "一月至二月，晚上9点", mapLink: "https://maps.google.com/?q=Al+Naseem+Park+Muscat", rating: 4.9 }
         },
         "special-rose": {
-            ar: { title: "🌹 موسم الورد في الجبل الأخضر", desc: "من مارس إلى مايو، يتفتح الورد الجبلي بآلاف الألوان والعطور.", location: "الجبل الأخضر، نزوى", directions: "على بعد 45 دقيقة من مدينة نزوى عبر طريق جبلي.", price: "الدخول للمهرجان: 2 ر.ع. / 8 ر.س", bestTime: "مارس - مايو" },
-            en: { title: "🌹 Rose Season in Jebel Akhdar", desc: "From March to May, the mountain roses bloom with thousands of colors and scents.", location: "Jebel Akhdar, Nizwa", directions: "45 minutes from Nizwa city via mountain road.", price: "Festival entry: $5.20", bestTime: "March - May" },
-            zh: { title: "🌹 绿色山脈的玫瑰季节", desc: "三月至五月，高山玫瑰绽放，成千上万的颜色和香味。", location: "绿色山脈，尼兹瓦", directions: "经山路距尼兹瓦市45分钟车程。", price: "节日入场费：38元", bestTime: "三月至五月" }
+            ar: { title: "🌹 موسم الورد", desc: "موسم قطف الورد في الجبل الأخضر.", location: "الجبل الأخضر، نزوى", directions: "45 دقيقة من نزوى", price: "2 ر.ع. / 8 ر.س", bestTime: "مارس - مايو", mapLink: "https://maps.google.com/?q=Jebel+Akhdar+Nizwa", rating: 4.9 },
+            en: { title: "🌹 Rose Season", desc: "Rose picking season in Jebel Akhdar.", location: "Jebel Akhdar, Nizwa", directions: "45 min from Nizwa", price: "$5.20", bestTime: "March - May", mapLink: "https://maps.google.com/?q=Jebel+Akhdar+Nizwa", rating: 4.9 },
+            zh: { title: "🌹 玫瑰季节", desc: "绿色山脈的玫瑰采摘季节。", location: "绿色山脈，尼兹瓦", directions: "距尼兹瓦45分钟", price: "38元", bestTime: "三月至五月", mapLink: "https://maps.google.com/?q=Jebel+Akhdar+Nizwa", rating: 4.9 }
         },
         "special-khareef": {
-            ar: { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار من يونيو إلى سبتمبر، تتحول الطبيعة إلى خضرة.", location: "صلالة، ظفار", directions: "يمكن الوصول عبر مطار صلالة الدولي أو الطريق الساحلي.", price: "الدخول مجاني (بعض المواقع 1-2 ر.ع.)", bestTime: "يونيو - سبتمبر" },
-            en: { title: "🌧️ Khareef Salalah", desc: "Monsoon season from June to September, nature turns lush green.", location: "Salalah, Dhofar", directions: "Accessible via Salalah International Airport or coastal road.", price: "Free entry (some sites $2.60-$5.20)", bestTime: "June - September" },
-            zh: { title: "🌧️ 塞拉莱雨季", desc: "六月至九月的季风季节，大自然变成郁郁葱葱的绿色。", location: "塞拉莱，佐法尔", directions: "可通过塞拉莱国际机场或沿海公路到达。", price: "免费入场（部分景点19-38元）", bestTime: "六月至九月" }
+            ar: { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار في صلالة.", location: "صلالة، ظفار", directions: "مطار صلالة الدولي", price: "مجاني", bestTime: "يونيو - سبتمبر", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 },
+            en: { title: "🌧️ Khareef Salalah", desc: "Monsoon season in Salalah.", location: "Salalah, Dhofar", directions: "Salalah International Airport", price: "Free", bestTime: "June - September", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 },
+            zh: { title: "🌧️ 塞拉莱雨季", desc: "塞拉莱的季风季节。", location: "塞拉莱，佐法尔", directions: "塞拉莱国际机场", price: "免费", bestTime: "六月至九月", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 }
         }
     };
 
-    // ==================== CITY DATA WITH FULL TRANSLATIONS ====================
+    // ==================== CITY DATA ====================
     const citiesData = {
         muscat: {
             nameAr: "مسقط", nameEn: "Muscat", nameZh: "马斯喀特",
@@ -218,9 +245,9 @@
             descAr: "عاصمة عُمان النابضة بالحياة", descEn: "The vibrant capital of Oman", descZh: "充满活力的阿曼首都",
             highlights: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح", "متحف عُمان", "كورنيش مطرح"],
             landmarks: ["الجامع الكبير: تحفة معمارية إسلامية", "دار الأوبرا السلطانية: صرح ثقافي عالمي", "سوق مطرح: سوق تقليدي عريق", "متحف عُمان: يروي تاريخ عُمان", "كورنيش مطرح: إطلالة رائعة"],
-            food: ["الشواء العُماني: لحم يدفن في تنور", "المجبوس: أرز باللحم", "الخبيصة: حلوى شعبية", "البلاليط: شعيرية محلاة", "الحلوى العُمانية: هدية تذكارية"],
+            food: ["الشواء العُماني", "المجبوس", "الخبيصة", "البلاليط", "الحلوى العُمانية"],
             stories: ["طرد البرتغاليين عام 1650م", "أسطول البحار العُماني", "ميناء مسقط على طريق الحرير", "قصر العلم رمز النهضة", "قلعتي الجلالي والميراني"],
-            customs: ["الخنجر العُماني: رمز الرجولة", "القهوة العُمانية: تقدم مع التمر", "مهرجان مسقط: فعاليات سنوية", "اللباس التقليدي: الدشداشة", "الرقصات الشعبية: الرزحة"],
+            customs: ["الخنجر العُماني", "القهوة العُمانية", "مهرجان مسقط", "اللباس التقليدي", "الرقصات الشعبية"],
             hotels: ["فندق جراند حياة مسقط", "شانغريلا - بر الجصة", "كراون بلازا مسقط", "شيراتون عُمان", "انتركونتيننتال مسقط"],
             cafes: ["مقهى عُمان للقهوة", "ستاربكس - القرم", "مقهى بون", "مقهى الكتب", "مقهى زين"],
             special: { titleAr: "🎭 مهرجان مسقط", titleEn: "🎭 Muscat Festival", titleZh: "🎭 马斯喀特节", descAr: "مهرجان ثقافي سنوي في يناير وفبراير.", descEn: "Annual cultural festival in January-February.", descZh: "一月至二月的年度文化节。", details: ["ألعاب نارية"] }
@@ -231,9 +258,9 @@
             descAr: "مدينة التراث العريق وقلعتها الشهيرة", descEn: "City of rich heritage and its famous fort", descZh: "拥有丰富遗产和著名堡垒的城市",
             highlights: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر", "فلج دارس", "الحلوى العمانية"],
             landmarks: ["قلعة نزوى: بناها الإمام سلطان بن سيف", "سوق نزوى: يشتهر بالخناجر", "الجبل الأخضر: جبال خضراء", "فلج دارس: موقع تراث عالمي", "حصن بيت الرديدة: حصن تاريخي"],
-            food: ["الحلوى العُمانية: تشتهر بها نزوى", "الشواء العُماني: الطبق الوطني", "القبولي: أرز بالتوابل", "الهريس: قمح مع لحم", "العرسية: أرز مهروس"],
+            food: ["الحلوى العُمانية", "الشواء العُماني", "القبولي", "الهريس", "العرسية"],
             stories: ["بناء قلعة نزوى استغرقت 12 سنة", "تسمية نزوى من 'نزا'", "عاصمة العلم والتراث", "طرد البرتغاليين", "بيضة الإسلام"],
-            customs: ["سوق الماشية: كل جمعة", "صناعة الحلوى", "الفلاج: نظام ري قديم", "البيوت الطينية", "القهوة مع الحلوى"],
+            customs: ["سوق الماشية", "صناعة الحلوى", "الفلاج", "البيوت الطينية", "القهوة مع الحلوى"],
             hotels: ["منتجع الجبل الأخضر - أليلا", "فندق نزوى أوتيل", "فندق عنتر نزوى", "منتجع بيت البارندي", "فندق الجبل الأخضر"],
             cafes: ["مقهى القلعة", "مقهى السوق التقليدي", "مقهى الواحة", "مقهى البيت العماني", "مقهى الجبل"],
             special: { titleAr: "🌹 موسم الورد", titleEn: "🌹 Rose Season", titleZh: "🌹 玫瑰季节", descAr: "من مارس إلى مايو في الجبل الأخضر.", descEn: "March to May in Jebel Akhdar.", descZh: "三月至五月。", details: ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"] }
@@ -244,9 +271,9 @@
             descAr: "جنة الخريف الساحرة، أرض اللبان", descEn: "Magical Khareef paradise, land of frankincense", descZh: "神奇的季风天堂，乳香之地",
             highlights: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل", "أرض البخور", "سوق الحافة"],
             landmarks: ["وادي دربات: شلالات موسمية", "شاطئ المغسيل: فوهات مائية", "أرض اللبان: موقع يونسكو", "سوق الحافة: لبان وعسل", "جبل صمرحان: إطلالات"],
-            food: ["المندي: لحم وأرز", "السمك المشوي: طازج", "العسل العماني: جبلي", "حلوى الحليب: تقليدية", "القهوة الظفارية: بنكهة اللبان"],
+            food: ["المندي", "السمك المشوي", "العسل العماني", "حلوى الحليب", "القهوة الظفارية"],
             stories: ["قصة تبع وأصحاب الأيكة", "ميناء صلالة القديم", "تجارة اللبان", "الملكة بلقيس", "الرياح الموسمية"],
-            customs: ["خريف صلالة: ضباب وأمطار", "اللبان: عطور وعلاج", "الرقصات الظفارية", "مهرجانات صيفية", "صناعة البخور"],
+            customs: ["خريف صلالة", "اللبان", "الرقصات الظفارية", "مهرجانات صيفية", "صناعة البخور"],
             hotels: ["فندق الفانات - جي دبليو ماريوت", "منتجع صلالة روتانا", "فندق هوليدي إن صلالة", "منتجع كراون بلازا صلالة", "فندق صلالة بيتش"],
             cafes: ["مقهى الضباب", "مقهى اللبان", "مقهى الخريف", "مقهى الوادي", "مقهى الشاطئ"],
             special: { titleAr: "🌧️ خريف صلالة", titleEn: "🌧️ Khareef Salalah", titleZh: "🌧️ 塞拉莱雨季", descAr: "موسم الضباب والأمطار من يونيو إلى سبتمبر.", descEn: "Monsoon season from June to September.", descZh: "六月至九月的季风季节。", details: ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"] }
@@ -259,11 +286,11 @@
     let currentDetailId = null;
 
     const translations = {
-        ar: { heroTitle: "🌴 سمر | Summer", heroDesc: "مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان", backToCity: "🏠 العودة للمدينة", backHome: "🏠 العودة للرئيسية",
+        ar: { heroTitle: "🌊 سمر | Summer", heroDesc: "مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان", backToCity: "🏠 العودة للمدينة", backHome: "🏠 العودة للرئيسية",
               sections: { landmarks: "🏛️ المعالم السياحية", food: "🍽️ الأكلات الشعبية", stories: "📖 القصص التاريخية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل 5 فنادق", cafes: "☕ أفضل 5 مقاهي" } },
-        en: { heroTitle: "🌴 Summer | Your AI Guide", heroDesc: "Your AI Smart Tourism Guide | Covers the best destinations in Oman", backToCity: "🏠 Back to City", backHome: "🏠 Back to Home",
+        en: { heroTitle: "🌊 Summer | Your AI Guide", heroDesc: "Your AI Smart Tourism Guide | Covers the best destinations in Oman", backToCity: "🏠 Back to City", backHome: "🏠 Back to Home",
               sections: { landmarks: "🏛️ Landmarks & Attractions", food: "🍽️ Traditional Food", stories: "📖 Historical Stories", customs: "🎭 Customs & Traditions", hotels: "🏨 Top 5 Hotels", cafes: "☕ Top 5 Cafes" } },
-        zh: { heroTitle: "🌴 Summer | 您的AI导游", heroDesc: "您的AI智能旅游指南 | 覆盖阿曼最佳目的地", backToCity: "🏠 返回城市", backHome: "🏠 返回首页",
+        zh: { heroTitle: "🌊 Summer | 您的AI导游", heroDesc: "您的AI智能旅游指南 | 覆盖阿曼最佳目的地", backToCity: "🏠 返回城市", backHome: "🏠 返回首页",
               sections: { landmarks: "🏛️ 地标与景点", food: "🍽️ 传统美食", stories: "📖 历史故事", customs: "🎭 习俗与传统", hotels: "🏨 最佳酒店", cafes: "☕ 最佳咖啡馆" } }
     };
 
@@ -271,6 +298,16 @@
     function getCityDesc(city) { return city[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
     function getSpecialTitle(city) { return city.special[`title${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
     function getSpecialDesc(city) { return city.special[`desc${currentLang === 'ar' ? 'Ar' : (currentLang === 'en' ? 'En' : 'Zh')}`]; }
+
+    function renderStars(rating) {
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5;
+        let stars = '';
+        for (let i = 0; i < fullStars; i++) stars += '★';
+        if (halfStar) stars += '½';
+        for (let i = 0; i < 5 - Math.ceil(rating); i++) stars += '☆';
+        return `<div class="stars">${stars} (${rating})</div>`;
+    }
 
     function openDetailPage(detailId) {
         currentDetailId = detailId;
@@ -283,11 +320,13 @@
             <div class="detail-page active-detail">
                 <button class="back-btn" onclick="closeDetailPage()">🔙 ${trans.backToCity}</button>
                 <div class="detail-header"><h2>${t.title}</h2></div>
+                ${renderStars(t.rating)}
                 <div class="detail-info"><h3>📝 ${currentLang === 'ar' ? 'الوصف' : (currentLang === 'en' ? 'Description' : '描述')}</h3><p>${t.desc}</p></div>
                 <div class="detail-location"><h3>📍 ${currentLang === 'ar' ? 'الموقع' : (currentLang === 'en' ? 'Location' : '位置')}</h3><p>${t.location}</p></div>
                 <div class="detail-info"><h3>🚗 ${currentLang === 'ar' ? 'الاتجاهات' : (currentLang === 'en' ? 'Directions' : '路线')}</h3><p>${t.directions}</p></div>
                 <div class="detail-price">💰 ${t.price}</div>
                 <div class="detail-info"><h3>⏰ ${currentLang === 'ar' ? 'أفضل وقت' : (currentLang === 'en' ? 'Best Time' : '最佳时间')}</h3><p>${t.bestTime}</p></div>
+                <a href="${t.mapLink}" target="_blank" class="map-link">🗺️ ${currentLang === 'ar' ? 'عرض على الخريطة' : (currentLang === 'en' ? 'View on Map' : '在地图上查看')}</a>
             </div>
         `;
         document.getElementById('cityPagesContainer').style.display = 'none';
@@ -336,11 +375,11 @@
                     <div class="items-grid">${city.special.details.map((d, idx) => `<div class="item-card" onclick="openDetailPage('special-fireworks')"><h4>${d}</h4></div>`).join('')}</div>
                 </div>
                 <div class="section"><h3>${t.sections.landmarks}</h3><div class="items-grid">${city.landmarks.map(l => `<div class="item-card"><h4>${l.split(':')[0]}</h4><p>${l.split(':')[1] || ''}</p></div>`).join('')}</div></div>
-                <div class="section"><h3>${t.sections.food}</h3><div class="items-grid">${city.food.map(f => `<div class="item-card"><h4>${f.split(':')[0]}</h4><p>${f.split(':')[1] || ''}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.food}</h3><div class="items-grid">${city.food.map(f => `<div class="item-card"><h4>${f}</h4><p>${currentLang === 'ar' ? 'أكلة عمانية شهيرة' : (currentLang === 'en' ? 'Famous Omani dish' : '著名的阿曼菜')}</p></div>`).join('')}</div></div>
                 <div class="section"><h3>${t.sections.stories}</h3><div class="items-grid">${city.stories.map(s => `<div class="item-card"><h4>${s.split(':')[0]}</h4><p>${s.split(':')[1] || ''}</p></div>`).join('')}</div></div>
-                <div class="section"><h3>${t.sections.customs}</h3><div class="items-grid">${city.customs.map(c => `<div class="item-card"><h4>${c.split(':')[0]}</h4><p>${c.split(':')[1] || ''}</p></div>`).join('')}</div></div>
-                <div class="section"><h3>${t.sections.hotels}</h3><div class="items-grid">${city.hotels.map((h, idx) => `<div class="item-card" onclick="openDetailPage('hotel-grand-hyatt-muscat')"><h4>${h}</h4><p>${currentLang === 'ar' ? 'فندق 5 نجوم' : (currentLang === 'en' ? '5-star hotel' : '五星级酒店')}</p></div>`).join('')}</div></div>
-                <div class="section"><h3>${t.sections.cafes}</h3><div class="items-grid">${city.cafes.map(c => `<div class="item-card"><h4>${c}</h4><p>${currentLang === 'ar' ? 'مقهى مميز' : (currentLang === 'en' ? 'Specialty cafe' : '特色咖啡馆')}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.customs}</h3><div class="items-grid">${city.customs.map(c => `<div class="item-card"><h4>${c}</h4><p>${currentLang === 'ar' ? 'تراث عماني أصيل' : (currentLang === 'en' ? 'Authentic Omani heritage' : '正宗的阿曼遗产')}</p></div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.hotels}</h3><div class="items-grid">${city.hotels.map((h, idx) => `<div class="item-card" onclick="openDetailPage('hotel-grand-hyatt-muscat')"><h4>${h}</h4><p>${currentLang === 'ar' ? 'فندق 5 نجوم' : (currentLang === 'en' ? '5-star hotel' : '五星级酒店')}</p>${renderStars(4.7)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${t.sections.cafes}</h3><div class="items-grid">${city.cafes.map(c => `<div class="item-card"><h4>${c}</h4><p>${currentLang === 'ar' ? 'مقهى مميز' : (currentLang === 'en' ? 'Specialty cafe' : '特色咖啡馆')}</p>${renderStars(4.5)}</div>`).join('')}</div></div>
             </div>
         `;
         document.getElementById('mainPage').style.display = 'none';
@@ -351,16 +390,6 @@
     function backHome() { 
         currentCityId = null;
         renderHome(); 
-    }
-
-    function goBack() {
-        if (currentDetailId) {
-            closeDetailPage();
-        } else if (currentCityId) {
-            backHome();
-        } else {
-            window.history.back();
-        }
     }
 
     function setLanguage(lang) {
