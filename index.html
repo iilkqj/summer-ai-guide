@@ -2,18 +2,42 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>سمر | Summer - دليلك السياحي الذكي في عُمان</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 50%, #90CAF9 100%);
             color: #0D47A1;
             line-height: 1.6;
+            overflow-x: hidden;
         }
+        
         body[dir="ltr"] { direction: ltr; text-align: left; }
         body[dir="rtl"] { direction: rtl; text-align: right; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
 
         .language-bar {
             background-color: #0D47A1;
@@ -37,18 +61,44 @@
             font-weight: bold;
             transition: all 0.3s ease;
         }
-        .lang-btn:hover { background-color: #D4AF37; color: #0D47A1; transform: scale(1.05); }
+        .lang-btn:hover, .lang-btn.active {
+            background-color: #D4AF37;
+            color: #0D47A1;
+            transform: scale(1.05);
+        }
 
         .hero {
-            background: linear-gradient(135deg, #0D47A1, #1E88E5);
-            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0D47A1, #1E88E5, #0D47A1);
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+            padding: 5rem 2rem;
             text-align: center;
             color: white;
             margin-bottom: 2rem;
-            border-bottom: 3px solid #D4AF37;
+            border-bottom: 4px solid #D4AF37;
         }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; max-width: 800px; margin: 0 auto; }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            animation: fadeIn 1s ease;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+        .hero-welcome {
+            background: rgba(212, 175, 55, 0.15);
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-top: 1rem;
+            font-size: 1rem;
+            border: 1px solid #D4AF37;
+        }
 
         .cities-grid {
             display: grid;
@@ -60,55 +110,106 @@
         }
         .city-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
         }
-        .city-card:hover { transform: translateY(-10px); box-shadow: 0 20px 35px rgba(0,0,0,0.2); }
+        .city-card:nth-child(1) { animation-delay: 0.1s; }
+        .city-card:nth-child(2) { animation-delay: 0.2s; }
+        .city-card:nth-child(3) { animation-delay: 0.3s; }
+        .city-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+            border-color: #D4AF37;
+        }
         .card-icon {
-            height: 180px;
+            height: 200px;
             background: linear-gradient(135deg, #1E88E5, #0D47A1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
+            font-size: 5.5rem;
+            transition: transform 0.3s ease;
         }
+        .city-card:hover .card-icon { transform: scale(1.05); }
         .card-content { padding: 1.5rem; }
-        .card-content h3 { color: #0D47A1; font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .card-content h3 { color: #0D47A1; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .card-content h3::first-letter { font-size: 2.5rem; color: #D4AF37; }
         .card-content p { color: #1E88E5; margin-bottom: 1rem; }
         .city-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .tag { background: #E3F2FD; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #0D47A1; }
+        .tag {
+            background: #E3F2FD;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #0D47A1;
+            transition: all 0.3s;
+        }
+        .tag:hover { background: #D4AF37; transform: translateY(-2px); }
 
         .city-page {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 2rem;
             background: white;
-            border-radius: 30px;
+            border-radius: 32px;
             display: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            animation: fadeInUp 0.5s ease;
         }
         .active-page { display: block; }
         .city-header { text-align: center; margin-bottom: 2rem; }
-        .city-header h2 { font-size: 2.5rem; color: #0D47A1; border-bottom: 4px solid #D4AF37; display: inline-block; }
+        .city-header h2 {
+            font-size: 2.8rem;
+            color: #0D47A1;
+            border-bottom: 4px solid #D4AF37;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
 
         .section {
             background: #F8F9FA;
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border-radius: 24px;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
             border: 1px solid #E3F2FD;
+            transition: all 0.3s;
         }
-        .section h3 { color: #0D47A1; font-size: 1.6rem; margin-bottom: 1rem; border-right: 5px solid #D4AF37; padding-right: 1rem; }
-        body[dir="ltr"] .section h3 { border-right: none; border-left: 5px solid #D4AF37; padding-right: 0; padding-left: 1rem; }
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-color: #D4AF37;
+        }
+        .section h3 {
+            color: #0D47A1;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-right: 5px solid #D4AF37;
+            padding-right: 1rem;
+        }
+        body[dir="ltr"] .section h3 {
+            border-right: none;
+            border-left: 5px solid #D4AF37;
+            padding-right: 0;
+            padding-left: 1rem;
+        }
 
-        .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
         .item-card {
             background: white;
             padding: 1.2rem;
-            border-radius: 15px;
+            border-radius: 20px;
             border: 1px solid #E3F2FD;
             transition: all 0.3s;
             cursor: pointer;
@@ -116,7 +217,7 @@
         .item-card:hover {
             transform: translateY(-5px);
             border-color: #D4AF37;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         .item-card h4 { color: #0D47A1; margin-bottom: 0.5rem; font-size: 1.1rem; }
         .item-card p { color: #1E88E5; font-size: 0.9rem; margin-bottom: 0.5rem; }
@@ -131,12 +232,19 @@
             text-decoration: none;
             font-size: 0.8rem;
             margin-top: 0.5rem;
+            transition: all 0.3s;
         }
-        .map-link:hover { background: #0D47A1; }
+        .map-link:hover { background: #0D47A1; transform: scale(1.05); }
 
-        .special-section { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border: 2px solid #D4AF37; }
-        .animated-icon { display: inline-block; animation: float 2s infinite; font-size: 1.5rem; }
-        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+        .special-section {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            border: 2px solid #D4AF37;
+        }
+        .animated-icon {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+            font-size: 1.5rem;
+        }
 
         .back-btn {
             background: #D4AF37;
@@ -160,11 +268,12 @@
             margin: 2rem auto;
             padding: 2rem;
             background: white;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 32px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
             display: none;
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
-        .detail-page.active-detail { display: block; }
+        .detail-page.active-detail { display: block; animation: fadeInUp 0.4s ease; }
         .detail-header { text-align: center; margin-bottom: 2rem; }
         .detail-header h2 { font-size: 2rem; color: #0D47A1; border-bottom: 4px solid #D4AF37; display: inline-block; }
         .detail-info { margin-bottom: 1.5rem; }
@@ -174,9 +283,12 @@
         .detail-location { background: #E3F2FD; padding: 1rem; border-radius: 15px; margin: 1rem 0; }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .cities-grid { padding: 1rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .cities-grid { padding: 1rem; gap: 1rem; }
             .city-header h2 { font-size: 1.8rem; }
+            .section h3 { font-size: 1.4rem; }
+            .city-card h3 { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -192,6 +304,7 @@
     <div class="hero">
         <h1 id="heroTitle">🌊 سمر | Summer</h1>
         <p id="heroDesc">مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان</p>
+        <div class="hero-welcome" id="welcomeMessage">✨ مرحباً بك في سمر — دليلك الذكي إلى عُمان ✨</div>
     </div>
     <div class="cities-grid" id="citiesGrid"></div>
 </div>
@@ -202,11 +315,12 @@
 <div class="footer"><p>© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان</p></div>
 
 <script>
-    // ==================== MULTILINGUAL CONTENT ====================
-    const content = {
+    // ==================== FULL MULTILINGUAL CONTENT ====================
+    const fullContent = {
         ar: {
             heroTitle: "🌊 سمر | Summer",
             heroDesc: "مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان",
+            welcome: "✨ مرحباً بك في سمر — دليلك الذكي إلى عُمان ✨",
             backToCity: "🏠 العودة للمدينة",
             backHome: "🏠 العودة للرئيسية",
             sections: {
@@ -219,7 +333,9 @@
                 special: "✨ فعاليات خاصة"
             },
             cities: {
-                muscat: { name: "مسقط", desc: "عاصمة عُمان النابضة بالحياة", icon: "🎭", highlights: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح", "متحف عُمان", "كورنيش مطرح"],
+                muscat: {
+                    name: "مسقط", desc: "عاصمة عُمان النابضة بالحياة", icon: "🎭",
+                    highlights: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح", "متحف عُمان", "كورنيش مطرح"],
                     landmarks: ["الجامع الكبير السلطان قابوس", "دار الأوبرا السلطانية", "سوق مطرح", "متحف عُمان", "كورنيش مطرح"],
                     food: ["الشواء العُماني", "المجبوس", "الخبيصة", "البلاليط", "الحلوى العُمانية"],
                     stories: ["طرد البرتغاليين عام 1650م", "أسطول البحار العُماني", "ميناء مسقط على طريق الحرير", "قصر العلم رمز النهضة", "قلعتي الجلالي والميراني"],
@@ -228,7 +344,9 @@
                     cafes: ["مقهى عُمان للقهوة", "ستاربكس الخوير", "مقهى بارادايس", "مقهى بون", "مقهى عُمان جو"],
                     special: { title: "🎭 مهرجان مسقط", desc: "مهرجان ثقافي سنوي في يناير وفبراير.", details: ["ألعاب نارية", "فنون شعبية", "عروض موسيقية", "أكلات تقليدية", "معارض حرفية"] }
                 },
-                nizwa: { name: "نزوى", desc: "مدينة التراث العريق وقلعتها الشهيرة", icon: "🌹", highlights: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر", "فلج دارس", "الحلوى العمانية"],
+                nizwa: {
+                    name: "نزوى", desc: "مدينة التراث العريق وقلعتها الشهيرة", icon: "🌹",
+                    highlights: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر", "فلج دارس", "الحلوى العمانية"],
                     landmarks: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر", "فلج دارس", "حصن بيت الرديدة"],
                     food: ["الحلوى العُمانية", "الشواء العُماني", "القبولي", "الهريس", "العرسية"],
                     stories: ["بناء قلعة نزوى استغرقت 12 سنة", "تسمية نزوى من 'نزا'", "عاصمة العلم والتراث", "طرد البرتغاليين", "بيضة الإسلام"],
@@ -237,7 +355,9 @@
                     cafes: ["مقهى القلعة", "مقهى البستان", "كافيه نزوى القديم", "مقهى الواحة", "بيت القهوة نزوى"],
                     special: { title: "🌹 موسم الورد", desc: "من مارس إلى مايو في الجبل الأخضر.", details: ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"] }
                 },
-                salalah: { name: "صلالة", desc: "جنة الخريف الساحرة، أرض اللبان", icon: "🌧️", highlights: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل", "أرض البخور", "سوق الحافة"],
+                salalah: {
+                    name: "صلالة", desc: "جنة الخريف الساحرة، أرض اللبان", icon: "🌧️",
+                    highlights: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل", "أرض البخور", "سوق الحافة"],
                     landmarks: ["وادي دربات", "شاطئ المغسيل", "أرض اللبان", "سوق الحافة", "جبل صمرحان"],
                     food: ["المندي", "السمك المشوي", "العسل العماني", "حلوى الحليب", "القهوة الظفارية"],
                     stories: ["قصة تبع وأصحاب الأيكة", "ميناء صلالة القديم", "تجارة اللبان", "الملكة بلقيس", "الرياح الموسمية"],
@@ -251,6 +371,7 @@
         en: {
             heroTitle: "🌊 Summer | Your AI Guide",
             heroDesc: "Your AI Smart Tourism Guide | Covers the best destinations in Oman",
+            welcome: "✨ Welcome to Summer — Your Smart Guide to Oman ✨",
             backToCity: "🏠 Back to City",
             backHome: "🏠 Back to Home",
             sections: {
@@ -263,7 +384,9 @@
                 special: "✨ Special Events"
             },
             cities: {
-                muscat: { name: "Muscat", desc: "The vibrant capital of Oman", icon: "🎭", highlights: ["Sultan Qaboos Grand Mosque", "Royal Opera House", "Mutrah Souq", "Oman Museum", "Mutrah Corniche"],
+                muscat: {
+                    name: "Muscat", desc: "The vibrant capital of Oman", icon: "🎭",
+                    highlights: ["Sultan Qaboos Grand Mosque", "Royal Opera House", "Mutrah Souq", "Oman Museum", "Mutrah Corniche"],
                     landmarks: ["Sultan Qaboos Grand Mosque", "Royal Opera House", "Mutrah Souq", "Oman Museum", "Mutrah Corniche"],
                     food: ["Omani Shuwa", "Majboos", "Khabeesa", "Balaleet", "Omani Halwa"],
                     stories: ["Expulsion of the Portuguese in 1650", "Omani Maritime Fleet", "Muscat Port on Silk Road", "Al Alam Palace", "Al Jalali & Al Mirani Forts"],
@@ -272,7 +395,9 @@
                     cafes: ["Oman Coffee Shop", "Starbucks Al Khuwair", "Paradise Cafe", "Boon Cafe", "Oman Joe Cafe"],
                     special: { title: "🎭 Muscat Festival", desc: "Annual cultural festival in January-February.", details: ["Fireworks", "Folk Arts", "Music Shows", "Traditional Food", "Craft Exhibitions"] }
                 },
-                nizwa: { name: "Nizwa", desc: "City of rich heritage and its famous fort", icon: "🌹", highlights: ["Nizwa Fort", "Nizwa Souq", "Jebel Akhdar", "Falaj Daris", "Omani Halwa"],
+                nizwa: {
+                    name: "Nizwa", desc: "City of rich heritage and its famous fort", icon: "🌹",
+                    highlights: ["Nizwa Fort", "Nizwa Souq", "Jebel Akhdar", "Falaj Daris", "Omani Halwa"],
                     landmarks: ["Nizwa Fort", "Nizwa Souq", "Jebel Akhdar", "Falaj Daris", "Bait Al Redidah Fort"],
                     food: ["Omani Halwa", "Omani Shuwa", "Qabooli", "Harees", "Arsseya"],
                     stories: ["Nizwa Fort took 12 years to build", "Name Nizwa means 'to carry water'", "Capital of knowledge and heritage", "Expelled Portuguese", "Egg of Islam"],
@@ -281,7 +406,9 @@
                     cafes: ["Fort Cafe", "Al Bustan Cafe", "Old Nizwa Cafe", "Oasis Cafe", "Nizwa Coffee House"],
                     special: { title: "🌹 Rose Season", desc: "March to May in Jebel Akhdar.", details: ["Rose Picking", "Rose Water Distillation", "Rose Spring Festival", "Rose Products", "Natural Perfumes"] }
                 },
-                salalah: { name: "Salalah", desc: "Magical Khareef paradise, land of frankincense", icon: "🌧️", highlights: ["Khareef Salalah", "Wadi Darbat", "Mughsail Beach", "Land of Frankincense", "Al Haffa Souq"],
+                salalah: {
+                    name: "Salalah", desc: "Magical Khareef paradise, land of frankincense", icon: "🌧️",
+                    highlights: ["Khareef Salalah", "Wadi Darbat", "Mughsail Beach", "Land of Frankincense", "Al Haffa Souq"],
                     landmarks: ["Wadi Darbat", "Mughsail Beach", "Land of Frankincense", "Al Haffa Souq", "Jabal Samhan"],
                     food: ["Mandi", "Grilled Fish", "Omani Honey", "Milk Halwa", "Dhofari Coffee"],
                     stories: ["Story of Tubba and the People of the Grove", "Old Salalah Port", "Frankincense Trade", "Queen Bilqis", "Monsoon Winds"],
@@ -295,6 +422,7 @@
         zh: {
             heroTitle: "🌊 Summer | 您的AI导游",
             heroDesc: "您的AI智能旅游指南 | 覆盖阿曼最佳目的地",
+            welcome: "✨ 欢迎使用 Summer — 您的阿曼智能导游 ✨",
             backToCity: "🏠 返回城市",
             backHome: "🏠 返回首页",
             sections: {
@@ -307,7 +435,9 @@
                 special: "✨ 特别活动"
             },
             cities: {
-                muscat: { name: "马斯喀特", desc: "充满活力的阿曼首都", icon: "🎭", highlights: ["苏丹卡布斯大清真寺", "皇家歌剧院", "马特拉市集", "阿曼博物馆", "马特拉滨海大道"],
+                muscat: {
+                    name: "马斯喀特", desc: "充满活力的阿曼首都", icon: "🎭",
+                    highlights: ["苏丹卡布斯大清真寺", "皇家歌剧院", "马特拉市集", "阿曼博物馆", "马特拉滨海大道"],
                     landmarks: ["苏丹卡布斯大清真寺", "皇家歌剧院", "马特拉市集", "阿曼博物馆", "马特拉滨海大道"],
                     food: ["阿曼舒瓦烤肉", "马吉布斯", "哈比萨", "巴拉利特", "阿曼哈尔瓦"],
                     stories: ["1650年驱逐葡萄牙人", "阿曼海上舰队", "马斯喀特丝绸之路港口", "阿尔阿拉姆宫", "贾拉利和米拉尼堡"],
@@ -316,7 +446,9 @@
                     cafes: ["阿曼咖啡店", "星巴克阿尔库维尔", "天堂咖啡馆", "邦咖啡馆", "阿曼乔咖啡馆"],
                     special: { title: "🎭 马斯喀特节", desc: "一月至二月的年度文化节。", details: ["烟花", "民间艺术", "音乐表演", "传统美食", "手工艺展"] }
                 },
-                nizwa: { name: "尼兹瓦", desc: "拥有丰富遗产和著名堡垒的城市", icon: "🌹", highlights: ["尼兹瓦堡", "尼兹瓦市集", "绿色山脈", "达里斯法拉吉", "阿曼哈尔瓦"],
+                nizwa: {
+                    name: "尼兹瓦", desc: "拥有丰富遗产和著名堡垒的城市", icon: "🌹",
+                    highlights: ["尼兹瓦堡", "尼兹瓦市集", "绿色山脈", "达里斯法拉吉", "阿曼哈尔瓦"],
                     landmarks: ["尼兹瓦堡", "尼兹瓦市集", "绿色山脈", "达里斯法拉吉", "拜特阿尔雷达堡"],
                     food: ["阿曼哈尔瓦", "阿曼舒瓦烤肉", "卡布利", "哈里斯", "阿尔西亚"],
                     stories: ["尼兹瓦堡耗时12年建成", "尼兹瓦名称源于'尼扎'", "知识与遗产之都", "驱逐葡萄牙人", "伊斯兰之蛋"],
@@ -325,7 +457,9 @@
                     cafes: ["堡垒咖啡馆", "花园咖啡馆", "老尼兹瓦咖啡馆", "绿洲咖啡馆", "尼兹瓦咖啡屋"],
                     special: { title: "🌹 玫瑰季节", desc: "三月至五月在绿色山脈。", details: ["玫瑰采摘", "玫瑰水蒸馏", "玫瑰春节", "玫瑰产品", "天然香水"] }
                 },
-                salalah: { name: "塞拉莱", desc: "神奇的季风天堂，乳香之地", icon: "🌧️", highlights: ["塞拉莱雨季", "达尔巴特河谷", "穆格赛尔海滩", "乳香之地", "哈法市集"],
+                salalah: {
+                    name: "塞拉莱", desc: "神奇的季风天堂，乳香之地", icon: "🌧️",
+                    highlights: ["塞拉莱雨季", "达尔巴特河谷", "穆格赛尔海滩", "乳香之地", "哈法市集"],
                     landmarks: ["达尔巴特河谷", "穆格赛尔海滩", "乳香之地", "哈法市集", "萨姆汉山"],
                     food: ["曼迪", "烤鱼", "阿曼蜂蜜", "牛奶哈尔瓦", "佐法尔咖啡"],
                     stories: ["图巴与树林居民的故事", "老塞拉莱港", "乳香贸易", "贝尔基斯女王", "季风风"],
@@ -340,7 +474,7 @@
 
     const detailsData = {
         ar: {
-            "hotel-grand-hyatt": { title: "🏨 فندق جراند حياة مسقط", desc: "فندق فاخر 5 نجوم يقع في قلب مسقط.", location: "الخوير، مسقط", directions: "على شارع السلطان قابوس", price: "من 95 ر.ع.", bestTime: "طوال العام", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
+            "hotel-grand-hyatt-muscat": { title: "🏨 فندق جراند حياة مسقط", desc: "فندق فاخر 5 نجوم يقع في قلب مسقط.", location: "الخوير، مسقط", directions: "على شارع السلطان قابوس", price: "من 95 ر.ع.", bestTime: "طوال العام", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
             "landmark-grand-mosque": { title: "🕌 الجامع الكبير السلطان قابوس", desc: "تحفة معمارية إسلامية، يتسع لأكثر من 20 ألف مصلي.", location: "مسقط", directions: "شارع السلطان قابوس، بجانب دار الأوبرا", price: "الدخول مجاني", bestTime: "السبت - الخميس 8ص - 11ص", mapLink: "https://maps.google.com/?q=Sultan+Qaboos+Grand+Mosque", rating: 4.9 },
             "food-shuwa": { title: "🍖 الشواء العُماني", desc: "لحم يتبل بالتوابل ويدفن في تنور تحت الأرض.", location: "مطعم الأخطم، القرم", directions: "القرم، مسقط، بجانب فندق كراون بلازا", price: "الوجبة: 8 ر.ع.", bestTime: "المناسبات والأعياد", mapLink: "https://maps.google.com/?q=Al+Akhtham+Restaurant+Qurum", rating: 4.7 },
             "cafe-oman-coffee": { title: "☕ مقهى عُمان للقهوة", desc: "قهوة عمانية أصيلة مع حلويات تقليدية.", location: "الخوير، مسقط", directions: "قريب من مجمع الخوير", price: "قهوة: 2 ر.ع.", bestTime: "الصباح والمساء", mapLink: "https://maps.google.com/?q=Oman+Coffee+Shop+Al+Khuwair", rating: 4.6 },
@@ -349,7 +483,7 @@
             "special-khareef": { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار في صلالة.", location: "صلالة، ظفار", directions: "مطار صلالة الدولي", price: "مجاني", bestTime: "يونيو - سبتمبر", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 }
         },
         en: {
-            "hotel-grand-hyatt": { title: "🏨 Grand Hyatt Muscat", desc: "5-star luxury hotel in the heart of Muscat.", location: "Al Khuwair, Muscat", directions: "On Sultan Qaboos Street", price: "From $247", bestTime: "All year round", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
+            "hotel-grand-hyatt-muscat": { title: "🏨 Grand Hyatt Muscat", desc: "5-star luxury hotel in the heart of Muscat.", location: "Al Khuwair, Muscat", directions: "On Sultan Qaboos Street", price: "From $247", bestTime: "All year round", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
             "landmark-grand-mosque": { title: "🕌 Sultan Qaboos Grand Mosque", desc: "Islamic architectural masterpiece.", location: "Muscat", directions: "Sultan Qaboos Street, next to Opera House", price: "Free entry", bestTime: "Sat-Thu 8am-11am", mapLink: "https://maps.google.com/?q=Sultan+Qaboos+Grand+Mosque", rating: 4.9 },
             "food-shuwa": { title: "🍖 Omani Shuwa", desc: "Meat marinated with spices and buried in an underground oven.", location: "Al Aktham Restaurant, Qurum", directions: "Qurum, Muscat, near Crowne Plaza Hotel", price: "Meal: $20.80", bestTime: "Festivals and holidays", mapLink: "https://maps.google.com/?q=Al+Akhtham+Restaurant+Qurum", rating: 4.7 },
             "cafe-oman-coffee": { title: "☕ Oman Coffee Shop", desc: "Authentic Omani coffee with traditional sweets.", location: "Al Khuwair, Muscat", directions: "Near Al Khuwair Complex", price: "Coffee: $5.20", bestTime: "Morning and evening", mapLink: "https://maps.google.com/?q=Oman+Coffee+Shop+Al+Khuwair", rating: 4.6 },
@@ -358,7 +492,7 @@
             "special-khareef": { title: "🌧️ Khareef Salalah", desc: "Monsoon season in Salalah.", location: "Salalah, Dhofar", directions: "Salalah International Airport", price: "Free", bestTime: "June - September", mapLink: "https://maps.google.com/?q=Salalah+Dhofar", rating: 4.9 }
         },
         zh: {
-            "hotel-grand-hyatt": { title: "🏨 马斯喀特君悦酒店", desc: "位于马斯喀特市中心的五星级豪华酒店。", location: "阿尔库维尔，马斯喀特", directions: "位于苏丹卡布斯大街", price: "247美元起", bestTime: "全年", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
+            "hotel-grand-hyatt-muscat": { title: "🏨 马斯喀特君悦酒店", desc: "位于马斯喀特市中心的五星级豪华酒店。", location: "阿尔库维尔，马斯喀特", directions: "位于苏丹卡布斯大街", price: "247美元起", bestTime: "全年", mapLink: "https://maps.google.com/?q=Grand+Hyatt+Muscat", rating: 4.8 },
             "landmark-grand-mosque": { title: "🕌 苏丹卡布斯大清真寺", desc: "伊斯兰建筑杰作。", location: "马斯喀特", directions: "苏丹卡布斯大街，歌剧院旁边", price: "免费入场", bestTime: "周六至周四上午8点至11点", mapLink: "https://maps.google.com/?q=Sultan+Qaboos+Grand+Mosque", rating: 4.9 },
             "food-shuwa": { title: "🍖 阿曼舒瓦烤肉", desc: "用香料腌制的肉埋在地下烤箱中过夜。", location: "Al Aktham餐厅，库鲁姆", directions: "库鲁姆，马斯喀特，靠近皇冠假日酒店", price: "餐费：151元", bestTime: "节日和假期", mapLink: "https://maps.google.com/?q=Al+Akhtham+Restaurant+Qurum", rating: 4.7 },
             "cafe-oman-coffee": { title: "☕ 阿曼咖啡店", desc: "正宗阿曼咖啡配传统甜点。", location: "阿尔库维尔，马斯喀特", directions: "靠近阿尔库维尔综合大楼", price: "咖啡：38元", bestTime: "早晚", mapLink: "https://maps.google.com/?q=Oman+Coffee+Shop+Al+Khuwair", rating: 4.6 },
@@ -384,7 +518,7 @@
         currentDetailId = detailId;
         const detail = detailsData[currentLang][detailId];
         if (!detail) return;
-        const t = content[currentLang];
+        const t = fullContent[currentLang];
         const container = document.getElementById('detailPageContainer');
         container.innerHTML = `
             <div class="detail-page active-detail">
@@ -416,7 +550,7 @@
 
     function renderHome() {
         const grid = document.getElementById('citiesGrid');
-        const t = content[currentLang];
+        const t = fullContent[currentLang];
         const cities = t.cities;
         grid.innerHTML = Object.keys(cities).map(key => {
             const city = cities[key];
@@ -436,7 +570,7 @@
 
     function openCity(cityKey) {
         currentCityId = cityKey;
-        const t = content[currentLang];
+        const t = fullContent[currentLang];
         const city = t.cities[cityKey];
         const sections = t.sections;
         
@@ -464,7 +598,7 @@
                 
                 <div class="section"><h3>${sections.customs}</h3><div class="items-grid">${city.customs.map(c => `<div class="item-card"><h4>${c}</h4><p>${currentLang === 'ar' ? 'تراث عماني أصيل' : (currentLang === 'en' ? 'Authentic Omani heritage' : '正宗的阿曼遗产')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
                 
-                <div class="section"><h3>${sections.hotels}</h3><div class="items-grid">${city.hotels.map(h => `<div class="item-card" onclick="openDetailPage('hotel-grand-hyatt')"><h4>${h}</h4><p>${currentLang === 'ar' ? 'فندق ممتاز' : (currentLang === 'en' ? 'Excellent hotel' : '优质酒店')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
+                <div class="section"><h3>${sections.hotels}</h3><div class="items-grid">${city.hotels.map(h => `<div class="item-card" onclick="openDetailPage('hotel-grand-hyatt-muscat')"><h4>${h}</h4><p>${currentLang === 'ar' ? 'فندق ممتاز' : (currentLang === 'en' ? 'Excellent hotel' : '优质酒店')}</p>${renderStars(4.8)}</div>`).join('')}</div></div>
                 
                 <div class="section"><h3>${sections.cafes}</h3><div class="items-grid">${city.cafes.map(c => `<div class="item-card" onclick="openDetailPage('cafe-oman-coffee')"><h4>${c}</h4><p>${currentLang === 'ar' ? 'مقهى مميز' : (currentLang === 'en' ? 'Specialty cafe' : '特色咖啡馆')}</p>${renderStars(4.6)}</div>`).join('')}</div></div>
             </div>
@@ -482,9 +616,16 @@
     function setLanguage(lang) {
         currentLang = lang;
         document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-        const t = content[lang];
+        const t = fullContent[lang];
         document.getElementById('heroTitle').innerHTML = t.heroTitle;
         document.getElementById('heroDesc').innerHTML = t.heroDesc;
+        document.getElementById('welcomeMessage').innerHTML = t.welcome;
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        if (lang === 'ar') document.querySelector('.lang-btn:first-child').classList.add('active');
+        else if (lang === 'en') document.querySelector('.lang-btn:nth-child(2)').classList.add('active');
+        else if (lang === 'zh') document.querySelector('.lang-btn:last-child').classList.add('active');
+        
         if (currentDetailId) {
             openDetailPage(currentDetailId);
         } else if (currentCityId) { 
@@ -495,6 +636,7 @@
     }
 
     renderHome();
+    document.querySelector('.lang-btn:first-child').classList.add('active');
 </script>
 </body>
 </html>
