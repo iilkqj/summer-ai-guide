@@ -18,6 +18,7 @@
         body[dir="ltr"] { direction: ltr; text-align: left; }
         body[dir="rtl"] { direction: rtl; text-align: right; }
 
+        /* ========== ANIMATIONS ========== */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -35,14 +36,19 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
-        @keyframes slideFade {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
         .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+        /* ========== LANGUAGE BAR ========== */
         .language-bar {
             background-color: #0D47A1;
             padding: 0.8rem 2rem;
@@ -71,6 +77,7 @@
             transform: scale(1.05);
         }
 
+        /* ========== HERO SECTION ========== */
         .hero {
             background: linear-gradient(135deg, #0D47A1, #1E88E5, #0D47A1);
             background-size: 200% 200%;
@@ -102,7 +109,71 @@
             font-size: 1rem;
             border: 1px solid #D4AF37;
         }
+        .ai-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            animation: pulse 2s infinite;
+        }
 
+        /* ========== AI RECOMMENDATIONS ========== */
+        .ai-recommendations {
+            background: linear-gradient(135deg, #0D47A1, #1E88E5);
+            margin: 2rem auto;
+            padding: 1.5rem;
+            border-radius: 32px;
+            max-width: 1200px;
+            color: white;
+        }
+        .ai-recommendations h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .ai-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #D4AF37;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .rec-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .rec-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid #D4AF37;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+        }
+        .rec-btn:hover {
+            background: #D4AF37;
+            color: #0D47A1;
+        }
+        .rec-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            display: none;
+        }
+        .rec-result.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        /* ========== WHY OMAN SECTION ========== */
         .why-oman {
             background: white;
             margin: 2rem auto;
@@ -138,6 +209,7 @@
         .why-card h3 { color: #0D47A1; margin-bottom: 0.5rem; }
         .why-card p { color: #1E88E5; font-size: 0.9rem; }
 
+        /* ========== SEASONS SECTION ========== */
         .seasons {
             background: white;
             margin: 2rem auto;
@@ -165,6 +237,7 @@
         .season-card h3 { color: #0D47A1; }
         .season-card p { color: #1E88E5; font-size: 0.85rem; }
 
+        /* ========== CITIES GRID ========== */
         .cities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -222,6 +295,7 @@
         }
         .tag:hover { background: #D4AF37; transform: translateY(-2px); }
 
+        /* ========== CITY PAGE ========== */
         .city-page {
             max-width: 1200px;
             margin: 2rem auto;
@@ -351,6 +425,82 @@
         .detail-price { font-size: 1.5rem; color: #D4AF37; font-weight: bold; margin: 1rem 0; }
         .detail-location { background: #E3F2FD; padding: 1rem; border-radius: 15px; margin: 1rem 0; }
 
+        /* AI Floating Button */
+        .ai-floating {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #0D47A1, #1E88E5);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 2px solid #D4AF37;
+            animation: pulse 2s infinite;
+        }
+        .ai-floating:hover {
+            transform: scale(1.1);
+            background: #D4AF37;
+            color: #0D47A1;
+        }
+
+        .ai-chat {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            width: 320px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+            border: 1px solid #D4AF37;
+        }
+        .ai-chat-header {
+            background: #0D47A1;
+            color: white;
+            padding: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .ai-chat-body {
+            padding: 1rem;
+            height: 250px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+        .ai-chat-message {
+            background: #E3F2FD;
+            padding: 0.5rem;
+            border-radius: 15px;
+            margin: 0.5rem 0;
+        }
+        .ai-chat-input {
+            display: flex;
+            border-top: 1px solid #E3F2FD;
+        }
+        .ai-chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            outline: none;
+        }
+        .ai-chat-input button {
+            background: #D4AF37;
+            border: none;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
             .hero p { font-size: 1rem; }
@@ -358,6 +508,7 @@
             .city-header h2 { font-size: 1.8rem; }
             .section h3 { font-size: 1.4rem; }
             .why-grid, .seasons-grid { grid-template-columns: 1fr; }
+            .ai-chat { width: 280px; left: 10px; bottom: 80px; }
         }
     </style>
 </head>
@@ -374,6 +525,18 @@
         <h1 id="heroTitle">🌊 سمر | Summer</h1>
         <p id="heroDesc">مرشدك السياحي الذكي بالذكاء الاصطناعي | يغطي أفضل الوجهات في عُمان</p>
         <div class="hero-welcome" id="welcomeMessage">✨ مرحباً بك في سمر — اكتشف عُمان بطريقة جديدة ✨</div>
+        <div class="ai-badge">🤖 مدعوم بالذكاء الاصطناعي</div>
+    </div>
+
+    <!-- AI Recommendations Section -->
+    <div class="ai-recommendations fade-up">
+        <h3><span class="ai-spinner"></span> 🤖 توصيات سمر الذكية</h3>
+        <div class="rec-buttons">
+            <button class="rec-btn" onclick="showRecommendation('culture')">🏛️ مهتم بالثقافة والتراث</button>
+            <button class="rec-btn" onclick="showRecommendation('nature')">🌿 مهتم بالطبيعة والمغامرات</button>
+            <button class="rec-btn" onclick="showRecommendation('food')">🍽️ مهتم بالأكلات والمطاعم</button>
+        </div>
+        <div id="recResult" class="rec-result"></div>
     </div>
 
     <div class="why-oman fade-up">
@@ -401,6 +564,22 @@
 <div id="cityPagesContainer"></div>
 <div id="detailPageContainer"></div>
 
+<!-- AI Floating Button -->
+<div class="ai-floating" onclick="toggleAIChat()">
+    🤖
+</div>
+
+<div class="ai-chat" id="aiChat">
+    <div class="ai-chat-header">🤖 سمر | المساعد الذكي</div>
+    <div class="ai-chat-body" id="aiChatBody">
+        <div class="ai-chat-message">👋 مرحباً! أنا سمر، مساعدك الذكي. اسألني عن أي مدينة، مطعم، أو فعالية في عمان!</div>
+    </div>
+    <div class="ai-chat-input">
+        <input type="text" id="aiChatInput" placeholder="اسأل سمر...">
+        <button onclick="sendAIMessage()">إرسال</button>
+    </div>
+</div>
+
 <div class="footer"><p>© 2026 سمر | Summer - دليلك السياحي الذكي في عُمان</p></div>
 
 <script>
@@ -421,68 +600,10 @@
             winterTitle: "الشتاء", winterDesc: "أفضل وقت للتخييم في الصحاري والوديان",
             backToCity: "🏠 العودة للمدينة", backHome: "🏠 العودة للرئيسية",
             sections: { landmarks: "🏛️ المعالم والأنشطة", food: "🍽️ الأكلات الشعبية", customs: "🎭 العادات والتقاليد", hotels: "🏨 أفضل الفنادق", cafes: "☕ أفضل المقاهي", restaurants: "🍽️ أفضل المطاعم" },
-            cities: {
-                muscat: { name: "مسقط", desc: "عاصمة عُمان النابضة بالحياة", highlights: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح", "متحف عُمان", "كورنيش مطرح"] },
-                nizwa: { name: "نزوى", desc: "مدينة التراث العريق وقلعتها الشهيرة", highlights: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر", "فلج دارس", "الحلوى العمانية"] },
-                salalah: { name: "صلالة", desc: "جنة الخريف الساحرة، أرض اللبان", highlights: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل", "أرض البخور", "سوق الحافة"] }
-            },
-            special: {
-                muscat: { title: "🎭 مهرجان مسقط", desc: "مهرجان ثقافي سنوي في يناير وفبراير.", details: ["ألعاب نارية", "عروض موسيقية", "أكشاك طعام", "فعاليات عائلية", "معارض حرف"] },
-                nizwa: { title: "🌹 موسم الورد", desc: "من مارس إلى مايو في الجبل الأخضر.", details: ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"] },
-                salalah: { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار من يونيو إلى سبتمبر.", details: ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"] }
-            },
-            restaurants: {
-                muscat: [
-                    { name: "P.F. Chang's", location: "Avenues Mall، مسقط", rating: 4.5, cuisine: "صيني", price: "متوسط" },
-                    { name: "China Mood", location: "Al Bustan Palace، مسقط", rating: 4.7, cuisine: "صيني فاخر", price: "مرتفع" },
-                    { name: "功夫 (Kungfu)", location: "Qurum Fun Zone، مسقط", rating: 4.8, cuisine: "صيني حار", price: "متوسط" },
-                    { name: "Bait Al Luban", location: "القرم، مسقط", rating: 4.6, cuisine: "عماني تقليدي", price: "متوسط" },
-                    { name: "Al Angham", location: "دار الأوبرا، مسقط", rating: 4.8, cuisine: "عماني فاخر", price: "مرتفع" },
-                    { name: "Turkish House", location: "الخوير، مسقط", rating: 4.4, cuisine: "تركي", price: "متوسط" },
-                    { name: "Mercato Italian", location: "القرم، مسقط", rating: 4.5, cuisine: "إيطالي", price: "مرتفع" },
-                    { name: "The Steakhouse", location: "الخوير، مسقط", rating: 4.6, cuisine: "ستيك", price: "مرتفع" },
-                    { name: "Seafood Paradise", location: "القرم، مسقط", rating: 4.4, cuisine: "مأكولات بحرية", price: "متوسط" },
-                    { name: "Mumbai Masala", location: "الخوير، مسقط", rating: 4.3, cuisine: "هندي", price: "متوسط" },
-                    { name: "Al Manar", location: "الخوير، مسقط", rating: 4.2, cuisine: "لبناني", price: "متوسط" },
-                    { name: "The Crab House", location: "القرم، مسقط", rating: 4.5, cuisine: "مأكولات بحرية", price: "مرتفع" },
-                    { name: "Thai Corner", location: "الخوير، مسقط", rating: 4.3, cuisine: "تايلندي", price: "متوسط" },
-                    { name: "Sushi House", location: "القرم، مسقط", rating: 4.4, cuisine: "ياباني", price: "مرتفع" },
-                    { name: "Al Mukhtar", location: "الخوير، مسقط", rating: 4.1, cuisine: "سوري", price: "رخيص" }
-                ],
-                nizwa: [
-                    { name: "Great Wall Hot Pot", location: "نزوى", rating: 4.9, cuisine: "صيني (هوت بوت)", price: "متوسط" },
-                    { name: "Peppercorns Restaurant", location: "نزوى", rating: 4.3, cuisine: "صيني/هندي", price: "متوسط" },
-                    { name: "Nizwa Fort Restaurant", location: "نزوى", rating: 4.4, cuisine: "عماني", price: "متوسط" },
-                    { name: "Al Maidhan", location: "نزوى", rating: 4.2, cuisine: "عربي", price: "متوسط" },
-                    { name: "Bahjat Nizwa", location: "نزوى", rating: 4.1, cuisine: "هندي", price: "رخيص" },
-                    { name: "Al Diyar", location: "نزوى", rating: 4.0, cuisine: "تركي", price: "متوسط" },
-                    { name: "Oasis Cafe", location: "نزوى", rating: 4.2, cuisine: "مقهى", price: "رخيص" },
-                    { name: "Al Khayal", location: "نزوى", rating: 4.1, cuisine: "عماني", price: "متوسط" },
-                    { name: "Royal Nizwa", location: "نزوى", rating: 4.3, cuisine: "عالمي", price: "متوسط" },
-                    { name: "Jabal Cafe", location: "الجبل الأخضر، نزوى", rating: 4.5, cuisine: "مقهى", price: "رخيص" },
-                    { name: "Al Sabla", location: "نزوى", rating: 4.0, cuisine: "عماني", price: "رخيص" },
-                    { name: "Nizwa View", location: "نزوى", rating: 4.2, cuisine: "عالمي", price: "متوسط" },
-                    { name: "Al Hajar", location: "نزوى", rating: 4.1, cuisine: "عربي", price: "متوسط" },
-                    { name: "Mountain Taste", location: "الجبل الأخضر، نزوى", rating: 4.3, cuisine: "عماني", price: "متوسط" },
-                    { name: "Falaj Cafe", location: "نزوى", rating: 4.0, cuisine: "مقهى", price: "رخيص" }
-                ],
-                salalah: [
-                    { name: "China Palace Restaurant", location: "صلالة", rating: 4.2, cuisine: "صيني", price: "متوسط" },
-                    { name: "Khareef Salalah Restaurant", location: "صلالة", rating: 4.1, cuisine: "صيني/عربي", price: "متوسط" },
-                    { name: "Al Ghad Restaurant", location: "صلالة", rating: 4.0, cuisine: "صيني/هندي", price: "متوسط" },
-                    { name: "Al Mina Restaurant", location: "صلالة", rating: 4.3, cuisine: "مأكولات بحرية", price: "متوسط" },
-                    { name: "Al Haffa Cafeteria", location: "صلالة", rating: 4.0, cuisine: "عماني", price: "رخيص" },
-                    { name: "Salalah Garden", location: "صلالة", rating: 4.2, cuisine: "عالمي", price: "متوسط" },
-                    { name: "Al Baleed", location: "صلالة", rating: 4.4, cuisine: "عماني", price: "متوسط" },
-                    { name: "Al Marjan", location: "صلالة", rating: 4.1, cuisine: "مأكولات بحرية", price: "متوسط" },
-                    { name: "Dhofar Restaurant", location: "صلالة", rating: 4.0, cuisine: "هندي", price: "رخيص" },
-                    { name: "Salalah Beach Restaurant", location: "صلالة", rating: 4.3, cuisine: "عالمي", price: "مرتفع" },
-                    { name: "Al Fanar", location: "صلالة", rating: 4.2, cuisine: "مأكولات بحرية", price: "متوسط" },
-                    { name: "Mughsail Restaurant", location: "شاطئ المغسيل، صلالة", rating: 4.1, cuisine: "عماني", price: "متوسط" },
-                    { name: "Al Khareef", location: "صلالة", rating: 4.0, cuisine: "عربي", price: "متوسط" },
-                    { name: "Salalah Grand", location: "صلالة", rating: 4.2, cuisine: "عالمي", price: "مرتفع" },
-                    { name: "Taqa Restaurant", location: "طاقة، صلالة", rating: 4.1, cuisine: "عماني", price: "رخيص" }
-                ]
+            recMessages: {
+                culture: "🎭 بناءً على اهتمامك بالثقافة والتراث، نوصي بزيارة: مسقط (الجامع الكبير، دار الأوبرا، سوق مطرح)، نزوى (قلعة نزوى، سوق نزوى)، بهلا (قلعة بهلا - اليونسكو)",
+                nature: "🌿 بناءً على اهتمامك بالطبيعة والمغامرات، نوصي بزيارة: وادي شاب (السباحة والمشي)، الجبل الأخضر (موسم الورد)، رمال وهيبة (التخييم ومراقبة النجوم)، صلالة (خريف صلالة)",
+                food: "🍽️ بناءً على اهتمامك بالأكلات، نوصي بتجربة: الشواء العماني، المجبوس، الحلوى العمانية في مسقط، والمندي في صلالة"
             }
         },
         en: {
@@ -500,68 +621,10 @@
             winterTitle: "Winter", winterDesc: "Best time for camping in deserts and wadis",
             backToCity: "🏠 Back to City", backHome: "🏠 Back to Home",
             sections: { landmarks: "🏛️ Attractions & Activities", food: "🍽️ Traditional Food", customs: "🎭 Customs & Traditions", hotels: "🏨 Top Hotels", cafes: "☕ Top Cafes", restaurants: "🍽️ Best Restaurants" },
-            cities: {
-                muscat: { name: "Muscat", desc: "The vibrant capital of Oman", highlights: ["Grand Mosque", "Royal Opera House", "Mutrah Souq", "National Museum", "Mutrah Corniche"] },
-                nizwa: { name: "Nizwa", desc: "City of rich heritage and its famous fort", highlights: ["Nizwa Fort", "Nizwa Souq", "Jebel Akhdar", "Falaj Daris", "Omani Halwa"] },
-                salalah: { name: "Salalah", desc: "Magical Khareef paradise, land of frankincense", highlights: ["Khareef Season", "Wadi Darbat", "Mughsail Beach", "Land of Frankincense", "Al Husn Souq"] }
-            },
-            special: {
-                muscat: { title: "🎭 Muscat Festival", desc: "Annual cultural festival in January-February.", details: ["Fireworks", "Music shows", "Food stalls", "Family activities", "Handicrafts"] },
-                nizwa: { title: "🌹 Rose Season", desc: "March to May in Jebel Akhdar.", details: ["Rose picking", "Rose water distillation", "Spring Rose Festival", "Rose products", "Natural perfumes"] },
-                salalah: { title: "🌧️ Khareef Salalah", desc: "Monsoon season from June to September.", details: ["Fog and rain", "Green nature", "Festivals", "Waterfalls", "Cool weather"] }
-            },
-            restaurants: {
-                muscat: [
-                    { name: "P.F. Chang's", location: "Avenues Mall, Muscat", rating: 4.5, cuisine: "Chinese", price: "Medium" },
-                    { name: "China Mood", location: "Al Bustan Palace, Muscat", rating: 4.7, cuisine: "Fine Chinese", price: "High" },
-                    { name: "Kungfu", location: "Qurum Fun Zone, Muscat", rating: 4.8, cuisine: "Spicy Chinese", price: "Medium" },
-                    { name: "Bait Al Luban", location: "Qurum, Muscat", rating: 4.6, cuisine: "Traditional Omani", price: "Medium" },
-                    { name: "Al Angham", location: "Opera House, Muscat", rating: 4.8, cuisine: "Fine Omani", price: "High" },
-                    { name: "Turkish House", location: "Al Khuwair, Muscat", rating: 4.4, cuisine: "Turkish", price: "Medium" },
-                    { name: "Mercato Italian", location: "Qurum, Muscat", rating: 4.5, cuisine: "Italian", price: "High" },
-                    { name: "The Steakhouse", location: "Al Khuwair, Muscat", rating: 4.6, cuisine: "Steakhouse", price: "High" },
-                    { name: "Seafood Paradise", location: "Qurum, Muscat", rating: 4.4, cuisine: "Seafood", price: "Medium" },
-                    { name: "Mumbai Masala", location: "Al Khuwair, Muscat", rating: 4.3, cuisine: "Indian", price: "Medium" },
-                    { name: "Al Manar", location: "Al Khuwair, Muscat", rating: 4.2, cuisine: "Lebanese", price: "Medium" },
-                    { name: "The Crab House", location: "Qurum, Muscat", rating: 4.5, cuisine: "Seafood", price: "High" },
-                    { name: "Thai Corner", location: "Al Khuwair, Muscat", rating: 4.3, cuisine: "Thai", price: "Medium" },
-                    { name: "Sushi House", location: "Qurum, Muscat", rating: 4.4, cuisine: "Japanese", price: "High" },
-                    { name: "Al Mukhtar", location: "Al Khuwair, Muscat", rating: 4.1, cuisine: "Syrian", price: "Low" }
-                ],
-                nizwa: [
-                    { name: "Great Wall Hot Pot", location: "Nizwa", rating: 4.9, cuisine: "Chinese (Hot Pot)", price: "Medium" },
-                    { name: "Peppercorns Restaurant", location: "Nizwa", rating: 4.3, cuisine: "Chinese/Indian", price: "Medium" },
-                    { name: "Nizwa Fort Restaurant", location: "Nizwa", rating: 4.4, cuisine: "Omani", price: "Medium" },
-                    { name: "Al Maidhan", location: "Nizwa", rating: 4.2, cuisine: "Arabic", price: "Medium" },
-                    { name: "Bahjat Nizwa", location: "Nizwa", rating: 4.1, cuisine: "Indian", price: "Low" },
-                    { name: "Al Diyar", location: "Nizwa", rating: 4.0, cuisine: "Turkish", price: "Medium" },
-                    { name: "Oasis Cafe", location: "Nizwa", rating: 4.2, cuisine: "Cafe", price: "Low" },
-                    { name: "Al Khayal", location: "Nizwa", rating: 4.1, cuisine: "Omani", price: "Medium" },
-                    { name: "Royal Nizwa", location: "Nizwa", rating: 4.3, cuisine: "International", price: "Medium" },
-                    { name: "Jabal Cafe", location: "Jebel Akhdar, Nizwa", rating: 4.5, cuisine: "Cafe", price: "Low" },
-                    { name: "Al Sabla", location: "Nizwa", rating: 4.0, cuisine: "Omani", price: "Low" },
-                    { name: "Nizwa View", location: "Nizwa", rating: 4.2, cuisine: "International", price: "Medium" },
-                    { name: "Al Hajar", location: "Nizwa", rating: 4.1, cuisine: "Arabic", price: "Medium" },
-                    { name: "Mountain Taste", location: "Jebel Akhdar, Nizwa", rating: 4.3, cuisine: "Omani", price: "Medium" },
-                    { name: "Falaj Cafe", location: "Nizwa", rating: 4.0, cuisine: "Cafe", price: "Low" }
-                ],
-                salalah: [
-                    { name: "China Palace Restaurant", location: "Salalah", rating: 4.2, cuisine: "Chinese", price: "Medium" },
-                    { name: "Khareef Salalah Restaurant", location: "Salalah", rating: 4.1, cuisine: "Chinese/Arabic", price: "Medium" },
-                    { name: "Al Ghad Restaurant", location: "Salalah", rating: 4.0, cuisine: "Chinese/Indian", price: "Medium" },
-                    { name: "Al Mina Restaurant", location: "Salalah", rating: 4.3, cuisine: "Seafood", price: "Medium" },
-                    { name: "Al Haffa Cafeteria", location: "Salalah", rating: 4.0, cuisine: "Omani", price: "Low" },
-                    { name: "Salalah Garden", location: "Salalah", rating: 4.2, cuisine: "International", price: "Medium" },
-                    { name: "Al Baleed", location: "Salalah", rating: 4.4, cuisine: "Omani", price: "Medium" },
-                    { name: "Al Marjan", location: "Salalah", rating: 4.1, cuisine: "Seafood", price: "Medium" },
-                    { name: "Dhofar Restaurant", location: "Salalah", rating: 4.0, cuisine: "Indian", price: "Low" },
-                    { name: "Salalah Beach Restaurant", location: "Salalah", rating: 4.3, cuisine: "International", price: "High" },
-                    { name: "Al Fanar", location: "Salalah", rating: 4.2, cuisine: "Seafood", price: "Medium" },
-                    { name: "Mughsail Restaurant", location: "Mughsail Beach, Salalah", rating: 4.1, cuisine: "Omani", price: "Medium" },
-                    { name: "Al Khareef", location: "Salalah", rating: 4.0, cuisine: "Arabic", price: "Medium" },
-                    { name: "Salalah Grand", location: "Salalah", rating: 4.2, cuisine: "International", price: "High" },
-                    { name: "Taqa Restaurant", location: "Taqa, Salalah", rating: 4.1, cuisine: "Omani", price: "Low" }
-                ]
+            recMessages: {
+                culture: "🎭 Based on your interest in culture and heritage, we recommend visiting: Muscat (Grand Mosque, Opera House, Mutrah Souq), Nizwa (Nizwa Fort, Nizwa Souq), Bahla (Bahla Fort - UNESCO)",
+                nature: "🌿 Based on your interest in nature and adventures, we recommend: Wadi Shab (swimming & hiking), Jebel Akhdar (Rose Season), Wahiba Sands (camping & stargazing), Salalah (Khareef season)",
+                food: "🍽️ Based on your interest in food, we recommend trying: Omani Shuwa, Majboos, Omani Halwa in Muscat, and Mandi in Salalah"
             }
         },
         zh: {
@@ -579,68 +642,10 @@
             winterTitle: "冬季", winterDesc: "沙漠和干河露营的最佳时间",
             backToCity: "🏠 返回城市", backHome: "🏠 返回首页",
             sections: { landmarks: "🏛️ 景点与活动", food: "🍽️ 传统美食", customs: "🎭 习俗与传统", hotels: "🏨 最佳酒店", cafes: "☕ 最佳咖啡馆", restaurants: "🍽️ 最佳餐厅" },
-            cities: {
-                muscat: { name: "马斯喀特", desc: "充满活力的阿曼首都", highlights: ["大清真寺", "皇家歌剧院", "马托拉集市", "国家博物馆", "马托拉滨海大道"] },
-                nizwa: { name: "尼兹瓦", desc: "拥有丰富遗产和著名堡垒的城市", highlights: ["尼兹瓦堡", "尼兹瓦集市", "绿色山脈", "法莱吉达里斯", "阿曼哈尔瓦"] },
-                salalah: { name: "塞拉莱", desc: "神奇的季风天堂，乳香之地", highlights: ["季风季节", "达尔巴特干河", "穆格赛尔海滩", "乳香之地", "阿尔胡森集市"] }
-            },
-            special: {
-                muscat: { title: "🎭 马斯喀特节", desc: "一月至二月的年度文化节。", details: ["烟花", "音乐表演", "美食摊位", "家庭活动", "手工艺品"] },
-                nizwa: { title: "🌹 玫瑰季节", desc: "三月至五月。", details: ["采摘玫瑰", "玫瑰水蒸馏", "春季玫瑰节", "玫瑰产品", "天然香水"] },
-                salalah: { title: "🌧️ 塞拉莱雨季", desc: "六月至九月的季风季节。", details: ["雾和雨", "绿色自然", "节日", "瀑布", "凉爽天气"] }
-            },
-            restaurants: {
-                muscat: [
-                    { name: "P.F. Chang's", location: "马斯喀特Avenues Mall", rating: 4.5, cuisine: "中餐", price: "中等" },
-                    { name: "China Mood", location: "马斯喀特Al Bustan Palace", rating: 4.7, cuisine: "精致中餐", price: "高" },
-                    { name: "功夫 (Kungfu)", location: "马斯喀特Qurum Fun Zone", rating: 4.8, cuisine: "麻辣中餐", price: "中等" },
-                    { name: "Bait Al Luban", location: "库鲁姆，马斯喀特", rating: 4.6, cuisine: "传统阿曼菜", price: "中等" },
-                    { name: "Al Angham", location: "歌剧院，马斯喀特", rating: 4.8, cuisine: "精致阿曼菜", price: "高" },
-                    { name: "Turkish House", location: "阿尔库维尔，马斯喀特", rating: 4.4, cuisine: "土耳其菜", price: "中等" },
-                    { name: "Mercato Italian", location: "库鲁姆，马斯喀特", rating: 4.5, cuisine: "意大利菜", price: "高" },
-                    { name: "The Steakhouse", location: "阿尔库维尔，马斯喀特", rating: 4.6, cuisine: "牛排馆", price: "高" },
-                    { name: "Seafood Paradise", location: "库鲁姆，马斯喀特", rating: 4.4, cuisine: "海鲜", price: "中等" },
-                    { name: "Mumbai Masala", location: "阿尔库维尔，马斯喀特", rating: 4.3, cuisine: "印度菜", price: "中等" },
-                    { name: "Al Manar", location: "阿尔库维尔，马斯喀特", rating: 4.2, cuisine: "黎巴嫩菜", price: "中等" },
-                    { name: "The Crab House", location: "库鲁姆，马斯喀特", rating: 4.5, cuisine: "海鲜", price: "高" },
-                    { name: "Thai Corner", location: "阿尔库维尔，马斯喀特", rating: 4.3, cuisine: "泰国菜", price: "中等" },
-                    { name: "Sushi House", location: "库鲁姆，马斯喀特", rating: 4.4, cuisine: "日本菜", price: "高" },
-                    { name: "Al Mukhtar", location: "阿尔库维尔，马斯喀特", rating: 4.1, cuisine: "叙利亚菜", price: "低" }
-                ],
-                nizwa: [
-                    { name: "Great Wall Hot Pot", location: "尼兹瓦", rating: 4.9, cuisine: "中餐（火锅）", price: "中等" },
-                    { name: "Peppercorns Restaurant", location: "尼兹瓦", rating: 4.3, cuisine: "中餐/印度菜", price: "中等" },
-                    { name: "Nizwa Fort Restaurant", location: "尼兹瓦", rating: 4.4, cuisine: "阿曼菜", price: "中等" },
-                    { name: "Al Maidhan", location: "尼兹瓦", rating: 4.2, cuisine: "阿拉伯菜", price: "中等" },
-                    { name: "Bahjat Nizwa", location: "尼兹瓦", rating: 4.1, cuisine: "印度菜", price: "低" },
-                    { name: "Al Diyar", location: "尼兹瓦", rating: 4.0, cuisine: "土耳其菜", price: "中等" },
-                    { name: "Oasis Cafe", location: "尼兹瓦", rating: 4.2, cuisine: "咖啡馆", price: "低" },
-                    { name: "Al Khayal", location: "尼兹瓦", rating: 4.1, cuisine: "阿曼菜", price: "中等" },
-                    { name: "Royal Nizwa", location: "尼兹瓦", rating: 4.3, cuisine: "国际美食", price: "中等" },
-                    { name: "Jabal Cafe", location: "绿色山脈，尼兹瓦", rating: 4.5, cuisine: "咖啡馆", price: "低" },
-                    { name: "Al Sabla", location: "尼兹瓦", rating: 4.0, cuisine: "阿曼菜", price: "低" },
-                    { name: "Nizwa View", location: "尼兹瓦", rating: 4.2, cuisine: "国际美食", price: "中等" },
-                    { name: "Al Hajar", location: "尼兹瓦", rating: 4.1, cuisine: "阿拉伯菜", price: "中等" },
-                    { name: "Mountain Taste", location: "绿色山脈，尼兹瓦", rating: 4.3, cuisine: "阿曼菜", price: "中等" },
-                    { name: "Falaj Cafe", location: "尼兹瓦", rating: 4.0, cuisine: "咖啡馆", price: "低" }
-                ],
-                salalah: [
-                    { name: "China Palace Restaurant", location: "塞拉莱", rating: 4.2, cuisine: "中餐", price: "中等" },
-                    { name: "Khareef Salalah Restaurant", location: "塞拉莱", rating: 4.1, cuisine: "中餐/阿拉伯菜", price: "中等" },
-                    { name: "Al Ghad Restaurant", location: "塞拉莱", rating: 4.0, cuisine: "中餐/印度菜", price: "中等" },
-                    { name: "Al Mina Restaurant", location: "塞拉莱", rating: 4.3, cuisine: "海鲜", price: "中等" },
-                    { name: "Al Haffa Cafeteria", location: "塞拉莱", rating: 4.0, cuisine: "阿曼菜", price: "低" },
-                    { name: "Salalah Garden", location: "塞拉莱", rating: 4.2, cuisine: "国际美食", price: "中等" },
-                    { name: "Al Baleed", location: "塞拉莱", rating: 4.4, cuisine: "阿曼菜", price: "中等" },
-                    { name: "Al Marjan", location: "塞拉莱", rating: 4.1, cuisine: "海鲜", price: "中等" },
-                    { name: "Dhofar Restaurant", location: "塞拉莱", rating: 4.0, cuisine: "印度菜", price: "低" },
-                    { name: "Salalah Beach Restaurant", location: "塞拉莱", rating: 4.3, cuisine: "国际美食", price: "高" },
-                    { name: "Al Fanar", location: "塞拉莱", rating: 4.2, cuisine: "海鲜", price: "中等" },
-                    { name: "Mughsail Restaurant", location: "穆格赛尔海滩，塞拉莱", rating: 4.1, cuisine: "阿曼菜", price: "中等" },
-                    { name: "Al Khareef", location: "塞拉莱", rating: 4.0, cuisine: "阿拉伯菜", price: "中等" },
-                    { name: "Salalah Grand", location: "塞拉莱", rating: 4.2, cuisine: "国际美食", price: "高" },
-                    { name: "Taqa Restaurant", location: "塔卡，塞拉莱", rating: 4.1, cuisine: "阿曼菜", price: "低" }
-                ]
+            recMessages: {
+                culture: "🎭 基于您对文化和遗产的兴趣，我们建议参观：马斯喀特（大清真寺、歌剧院、马托拉集市），尼兹瓦（尼兹瓦堡、尼兹瓦集市），巴赫拉（巴赫拉堡 - 联合国教科文组织）",
+                nature: "🌿 基于您对自然和冒险的兴趣，我们建议：沙布干河（游泳和徒步），绿色山脈（玫瑰季节），瓦希巴沙地（露营和观星），塞拉莱（季风季节）",
+                food: "🍽️ 基于您对美食的兴趣，我们建议尝试：阿曼舒瓦烤肉、马吉布斯、阿曼哈尔瓦（马斯喀特），以及曼迪（塞拉莱）"
             }
         }
     };
@@ -657,6 +662,47 @@
         return `<div class="stars">${stars} (${rating})</div>`;
     }
 
+    function showRecommendation(type) {
+        const t = translations[currentLang];
+        const resultDiv = document.getElementById('recResult');
+        resultDiv.innerHTML = `<div class="ai-chat-message">🤖 ${t.recMessages[type]}</div>`;
+        resultDiv.classList.add('show');
+    }
+
+    function toggleAIChat() {
+        const chat = document.getElementById('aiChat');
+        chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function sendAIMessage() {
+        const input = document.getElementById('aiChatInput');
+        const msg = input.value.trim();
+        if (!msg) return;
+        const chatBody = document.getElementById('aiChatBody');
+        chatBody.innerHTML += `<div style="text-align: left; background: #D4AF37; padding: 0.5rem; border-radius: 15px; margin: 0.5rem 0; color: #0D47A1;">👤 ${msg}</div>`;
+        
+        // Simple AI response
+        let response = "شكراً لسؤالك! أنا سمر، أساعدك في اكتشاف عمان. يمكنك زيارة المدن من الصفحة الرئيسية أو سؤالي عن مدينة معينة.";
+        const lowerMsg = msg.toLowerCase();
+        if (lowerMsg.includes('مسقط') || lowerMsg.includes('muscat')) {
+            response = currentLang === 'ar' ? "مسقط: عاصمة عُمان. أبرز المعالم: الجامع الكبير، دار الأوبرا، سوق مطرح. مطاعم مميزة: P.F. Chang's، China Mood." :
+                      (currentLang === 'en' ? "Muscat: Capital of Oman. Top attractions: Grand Mosque, Royal Opera House, Mutrah Souq." :
+                      "马斯喀特：阿曼首都。主要景点：大清真寺、皇家歌剧院、马托拉集市。");
+        } else if (lowerMsg.includes('نزوى') || lowerMsg.includes('nizwa')) {
+            response = currentLang === 'ar' ? "نزوى: مدينة التراث. أبرز المعالم: قلعة نزوى، سوق نزوى، الجبل الأخضر (موسم الورد)." :
+                      (currentLang === 'en' ? "Nizwa: Heritage city. Top attractions: Nizwa Fort, Nizwa Souq, Jebel Akhdar (Rose Season)." :
+                      "尼兹瓦：遗产城市。主要景点：尼兹瓦堡、尼兹瓦集市、绿色山脈（玫瑰季节）。");
+        } else if (lowerMsg.includes('صلالة') || lowerMsg.includes('salalah')) {
+            response = currentLang === 'ar' ? "صلالة: جنة الخريف. أبرز المعالم: وادي دربات، شاطئ المغسيل، خريف صلالة (يونيو-سبتمبر)." :
+                      (currentLang === 'en' ? "Salalah: Khareef paradise. Top attractions: Wadi Darbat, Mughsail Beach, Khareef season (June-September)." :
+                      "塞拉莱：季风天堂。主要景点：达尔巴特干河、穆格赛尔海滩、季风季节（六月至九月）。");
+        }
+        
+        chatBody.innerHTML += `<div class="ai-chat-message">🤖 ${response}</div>`;
+        chatBody.scrollTop = chatBody.scrollHeight;
+        input.value = '';
+    }
+
     function renderHome() {
         const grid = document.getElementById('citiesGrid');
         const t = translations[currentLang];
@@ -664,25 +710,25 @@
             <div class="city-card" onclick="openCity('muscat')">
                 <div class="card-icon">🎭</div>
                 <div class="card-content">
-                    <h3>${t.cities.muscat.name}</h3>
-                    <p>${t.cities.muscat.desc}</p>
-                    <div class="city-tags">${t.cities.muscat.highlights.slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
+                    <h3>${t.cities?.muscat?.name || "مسقط"}</h3>
+                    <p>${t.cities?.muscat?.desc || "عاصمة عُمان النابضة بالحياة"}</p>
+                    <div class="city-tags">${(t.cities?.muscat?.highlights || ["الجامع الكبير", "دار الأوبرا", "سوق مطرح"]).slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
                 </div>
             </div>
             <div class="city-card" onclick="openCity('nizwa')">
                 <div class="card-icon">🌹</div>
                 <div class="card-content">
-                    <h3>${t.cities.nizwa.name}</h3>
-                    <p>${t.cities.nizwa.desc}</p>
-                    <div class="city-tags">${t.cities.nizwa.highlights.slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
+                    <h3>${t.cities?.nizwa?.name || "نزوى"}</h3>
+                    <p>${t.cities?.nizwa?.desc || "مدينة التراث العريق وقلعتها الشهيرة"}</p>
+                    <div class="city-tags">${(t.cities?.nizwa?.highlights || ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر"]).slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
                 </div>
             </div>
             <div class="city-card" onclick="openCity('salalah')">
                 <div class="card-icon">🌧️</div>
                 <div class="card-content">
-                    <h3>${t.cities.salalah.name}</h3>
-                    <p>${t.cities.salalah.desc}</p>
-                    <div class="city-tags">${t.cities.salalah.highlights.slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
+                    <h3>${t.cities?.salalah?.name || "صلالة"}</h3>
+                    <p>${t.cities?.salalah?.desc || "جنة الخريف الساحرة، أرض اللبان"}</p>
+                    <div class="city-tags">${(t.cities?.salalah?.highlights || ["خريف صلالة", "وادي دربات", "شاطئ المغسيل"]).slice(0,3).map(h => `<span class="tag">${h}</span>`).join('')}</div>
                 </div>
             </div>
         `;
@@ -703,17 +749,27 @@
     function openCity(cityKey) {
         currentCityId = cityKey;
         const t = translations[currentLang];
-        const cityData = t.cities[cityKey];
-        const specialData = t.special[cityKey];
-        const restaurants = t.restaurants[cityKey];
         
-        const landmarksList = [
-            { name: cityKey === 'muscat' ? "الجامع الكبير" : (cityKey === 'nizwa' ? "قلعة نزوى" : "وادي دربات"), desc: cityKey === 'muscat' ? "تحفة معمارية إسلامية" : (cityKey === 'nizwa' ? "قلعة تاريخية" : "شلالات موسمية") },
-            { name: cityKey === 'muscat' ? "دار الأوبرا السلطانية" : (cityKey === 'nizwa' ? "سوق نزوى" : "شاطئ المغسيل"), desc: cityKey === 'muscat' ? "صرح ثقافي عالمي" : (cityKey === 'nizwa' ? "سوق تقليدي" : "فوهات مائية") },
-            { name: cityKey === 'muscat' ? "سوق مطرح" : (cityKey === 'nizwa' ? "الجبل الأخضر" : "أرض اللبان"), desc: cityKey === 'muscat' ? "سوق تقليدي عريق" : (cityKey === 'nizwa' ? "جبال خضراء" : "موقع تراث عالمي") },
-            { name: cityKey === 'muscat' ? "متحف عُمان" : (cityKey === 'nizwa' ? "فلج دارس" : "سوق الحافة"), desc: cityKey === 'muscat' ? "يروي تاريخ عُمان" : (cityKey === 'nizwa' ? "موقع تراث عالمي" : "سوق شعبي") },
-            { name: cityKey === 'muscat' ? "كورنيش مطرح" : (cityKey === 'nizwa' ? "حصن بيت الرديدة" : "جبل صمرحان"), desc: cityKey === 'muscat' ? "إطلالة رائعة" : (cityKey === 'nizwa' ? "حصن تاريخي" : "إطلالات رائعة") }
-        ];
+        const cityData = {
+            name: t.cities?.[cityKey]?.name || (cityKey === 'muscat' ? "مسقط" : (cityKey === 'nizwa' ? "نزوى" : "صلالة")),
+            desc: t.cities?.[cityKey]?.desc || ""
+        };
+        
+        const specialData = {
+            title: cityKey === 'muscat' ? (t.special?.muscat?.title || "🎭 مهرجان مسقط") : (cityKey === 'nizwa' ? (t.special?.nizwa?.title || "🌹 موسم الورد") : (t.special?.salalah?.title || "🌧️ خريف صلالة")),
+            desc: cityKey === 'muscat' ? (t.special?.muscat?.desc || "مهرجان ثقافي سنوي في يناير وفبراير.") : (cityKey === 'nizwa' ? (t.special?.nizwa?.desc || "من مارس إلى مايو في الجبل الأخضر.") : (t.special?.salalah?.desc || "موسم الضباب والأمطار من يونيو إلى سبتمبر.")),
+            details: cityKey === 'muscat' ? (t.special?.muscat?.details || ["ألعاب نارية", "عروض موسيقية", "أكشاك طعام", "فعاليات عائلية", "معارض حرف"]) :
+                     (cityKey === 'nizwa' ? (t.special?.nizwa?.details || ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"]) :
+                     (t.special?.salalah?.details || ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"]))
+        };
+        
+        const restaurants = t.restaurants?.[cityKey] || [];
+        
+        const landmarksList = cityKey === 'muscat' ? 
+            [{ name: "الجامع الكبير", desc: "تحفة معمارية إسلامية" }, { name: "دار الأوبرا السلطانية", desc: "صرح ثقافي عالمي" }, { name: "سوق مطرح", desc: "سوق تقليدي عريق" }, { name: "متحف عُمان", desc: "يروي تاريخ عُمان" }, { name: "كورنيش مطرح", desc: "إطلالة رائعة" }] :
+            (cityKey === 'nizwa' ? 
+            [{ name: "قلعة نزوى", desc: "قلعة تاريخية ببرج دائري" }, { name: "سوق نزوى", desc: "سوق تقليدي للخناجر" }, { name: "الجبل الأخضر", desc: "جبال خضراء ورد" }, { name: "فلج دارس", desc: "موقع تراث عالمي" }, { name: "حصن بيت الرديدة", desc: "حصن تاريخي" }] :
+            [{ name: "وادي دربات", desc: "شلالات موسمية" }, { name: "شاطئ المغسيل", desc: "فوهات مائية" }, { name: "أرض اللبان", desc: "موقع تراث عالمي" }, { name: "سوق الحافة", desc: "سوق شعبي" }, { name: "جبل صمرحان", desc: "إطلالات رائعة" }]);
         
         const foodList = cityKey === 'muscat' ? ["الشواء العُماني", "المجبوس", "الخبيصة", "البلاليط", "الحلوى العُمانية"] :
                          (cityKey === 'nizwa' ? ["الحلوى العُمانية", "الشواء العُماني", "القبولي", "الهريس", "العرسية"] :
@@ -737,7 +793,7 @@
                 <button class="back-btn" onclick="backHome()">🔙 ${t.backHome}</button>
                 <div class="city-header"><h2>${cityData.name}</h2></div>
                 
-                <div class="section special-section"><h3>✨ ${specialData.title} <span class="animated-icon">${specialData.icon || (cityKey === 'muscat' ? '🎭' : (cityKey === 'nizwa' ? '🌹' : '🌧️'))}</span></h3><p>${specialData.desc}</p>
+                <div class="section special-section"><h3>✨ ${specialData.title} <span class="animated-icon">${cityKey === 'muscat' ? '🎭' : (cityKey === 'nizwa' ? '🌹' : '🌧️')}</span></h3><p>${specialData.desc}</p>
                     <div class="items-grid">${specialData.details.map(d => `<div class="item-card"><h4>${d}</h4></div>`).join('')}</div>
                 </div>
                 
@@ -799,6 +855,59 @@
         } else { 
             renderHome(); 
         }
+    }
+
+    // City data fallback
+    if (!translations.ar.cities) {
+        translations.ar.cities = {
+            muscat: { name: "مسقط", desc: "عاصمة عُمان النابضة بالحياة", highlights: ["الجامع الكبير", "دار الأوبرا", "سوق مطرح"] },
+            nizwa: { name: "نزوى", desc: "مدينة التراث العريق وقلعتها الشهيرة", highlights: ["قلعة نزوى", "سوق نزوى", "الجبل الأخضر"] },
+            salalah: { name: "صلالة", desc: "جنة الخريف الساحرة، أرض اللبان", highlights: ["خريف صلالة", "وادي دربات", "شاطئ المغسيل"] }
+        };
+        translations.ar.special = {
+            muscat: { title: "🎭 مهرجان مسقط", desc: "مهرجان ثقافي سنوي في يناير وفبراير.", details: ["ألعاب نارية", "عروض موسيقية", "أكشاك طعام", "فعاليات عائلية", "معارض حرف"] },
+            nizwa: { title: "🌹 موسم الورد", desc: "من مارس إلى مايو في الجبل الأخضر.", details: ["قطف الورد", "تقطير ماء الورد", "مهرجان ربيع الورد", "منتجات الورد", "عطور طبيعية"] },
+            salalah: { title: "🌧️ خريف صلالة", desc: "موسم الضباب والأمطار من يونيو إلى سبتمبر.", details: ["ضباب وأمطار", "طبيعة خضراء", "مهرجانات", "شلالات", "أجواء باردة"] }
+        };
+        translations.ar.restaurants = {
+            muscat: [{ name: "P.F. Chang's", location: "Avenues Mall، مسقط", rating: 4.5, cuisine: "صيني", price: "متوسط" }],
+            nizwa: [{ name: "Great Wall Hot Pot", location: "نزوى", rating: 4.9, cuisine: "صيني", price: "متوسط" }],
+            salalah: [{ name: "China Palace", location: "صلالة", rating: 4.2, cuisine: "صيني", price: "متوسط" }]
+        };
+    }
+    if (!translations.en.cities) {
+        translations.en.cities = {
+            muscat: { name: "Muscat", desc: "The vibrant capital of Oman", highlights: ["Grand Mosque", "Royal Opera House", "Mutrah Souq"] },
+            nizwa: { name: "Nizwa", desc: "City of rich heritage", highlights: ["Nizwa Fort", "Nizwa Souq", "Jebel Akhdar"] },
+            salalah: { name: "Salalah", desc: "Magical Khareef paradise", highlights: ["Khareef Season", "Wadi Darbat", "Mughsail Beach"] }
+        };
+        translations.en.special = {
+            muscat: { title: "🎭 Muscat Festival", desc: "Annual cultural festival in Jan-Feb.", details: ["Fireworks", "Music shows", "Food stalls", "Family activities", "Handicrafts"] },
+            nizwa: { title: "🌹 Rose Season", desc: "March to May in Jebel Akhdar.", details: ["Rose picking", "Rose water", "Spring Rose Festival", "Rose products", "Natural perfumes"] },
+            salalah: { title: "🌧️ Khareef Salalah", desc: "Monsoon season from June to September.", details: ["Fog and rain", "Green nature", "Festivals", "Waterfalls", "Cool weather"] }
+        };
+        translations.en.restaurants = {
+            muscat: [{ name: "P.F. Chang's", location: "Avenues Mall, Muscat", rating: 4.5, cuisine: "Chinese", price: "Medium" }],
+            nizwa: [{ name: "Great Wall Hot Pot", location: "Nizwa", rating: 4.9, cuisine: "Chinese", price: "Medium" }],
+            salalah: [{ name: "China Palace", location: "Salalah", rating: 4.2, cuisine: "Chinese", price: "Medium" }]
+        };
+    }
+    if (!translations.zh.cities) {
+        translations.zh.cities = {
+            muscat: { name: "马斯喀特", desc: "充满活力的阿曼首都", highlights: ["大清真寺", "皇家歌剧院", "马托拉集市"] },
+            nizwa: { name: "尼兹瓦", desc: "拥有丰富遗产的城市", highlights: ["尼兹瓦堡", "尼兹瓦集市", "绿色山脈"] },
+            salalah: { name: "塞拉莱", desc: "神奇的季风天堂", highlights: ["季风季节", "达尔巴特干河", "穆格赛尔海滩"] }
+        };
+        translations.zh.special = {
+            muscat: { title: "🎭 马斯喀特节", desc: "一月至二月的年度文化节。", details: ["烟花", "音乐表演", "美食摊位", "家庭活动", "手工艺品"] },
+            nizwa: { title: "🌹 玫瑰季节", desc: "三月至五月。", details: ["采摘玫瑰", "玫瑰水蒸馏", "春季玫瑰节", "玫瑰产品", "天然香水"] },
+            salalah: { title: "🌧️ 塞拉莱雨季", desc: "六月至九月的季风季节。", details: ["雾和雨", "绿色自然", "节日", "瀑布", "凉爽天气"] }
+        };
+        translations.zh.restaurants = {
+            muscat: [{ name: "P.F. Chang's", location: "马斯喀特Avenues Mall", rating: 4.5, cuisine: "中餐", price: "中等" }],
+            nizwa: [{ name: "Great Wall Hot Pot", location: "尼兹瓦", rating: 4.9, cuisine: "中餐", price: "中等" }],
+            salalah: [{ name: "China Palace", location: "塞拉莱", rating: 4.2, cuisine: "中餐", price: "中等" }]
+        };
     }
 
     renderHome();
